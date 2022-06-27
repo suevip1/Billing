@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ad4b79ac-3274-43a2-9195-4e31b4402228" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smb-fee-api/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/smb-fee-api/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smb-fee-common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/smb-fee-common/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smb-fee-dal/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/smb-fee-dal/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smb-fee-server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/smb-fee-server/pom.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="enabledProfiles">
+      <list>
+        <option value="test2-b2b-cn" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="2AvqaQzgr4psajUEyMdDkY65tN7" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/smb-fee-server/src/main/resources" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="reactor" />
+  </component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/smb-fee-server/src/main/resources" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/smb-fee-server/src/main/java/com/pingpongx/smb/fee/server/job" />
+      <recent name="$PROJECT_DIR$/smb-fee-server/src/main/java/com/pingpongx/smb/fee/server/utils" />
+      <recent name="$PROJECT_DIR$/smb-fee-server/src/main/java/com/pingpongx/smb/fee/server/service" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.pingpongx.smb.fee.server.controller" />
+      <recent name="com.pingpongx.smb.fee.server" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="smb-fee-server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.pingpongx.smb.fee.server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.pingpongx.smb.fee.server.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.Application" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ad4b79ac-3274-43a2-9195-4e31b4402228" name="Changes" comment="" />
+      <created>1655900469637</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1655900469637</updated>
+      <workItem from="1655900472311" duration="472000" />
+      <workItem from="1656038018253" duration="8090000" />
+      <workItem from="1656052672612" duration="5432000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$MAVEN_REPOSITORY$/com/pingpongx/flowmore/cloud/flowmore-base-server/10.0.16-SNAPSHOT/flowmore-base-server-10.0.16-SNAPSHOT-sources.jar!/com/pingpongx/flowmore/cloud/base/server/initialization/EnvironmentWithAfterConfigCenterInitializer.java</url>
+          <line>52</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="SpringBootApplicationConfigurationType">
+        <watch expression="ppxDatacenters + &quot;.&quot; + AUTH_PUBLIC_KEY" language="JAVA" />
+        <watch expression="environment.getProperty(&quot;flowmore-base.auth.publicKey&quot;)" language="JAVA" />
+        <watch expression="environment.getProperty(AUTH_APP_SECRET)" language="JAVA" />
+        <watch expression="environment.getProperty(ppxDatacenters + &quot;.&quot; + AUTH_PUBLIC_KEY)" language="JAVA" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

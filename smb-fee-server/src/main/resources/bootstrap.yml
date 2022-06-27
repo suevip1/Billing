@@ -1,0 +1,7 @@
+ppx:
+  name: flowmore-risk-control
+  environment: @ppx.environment@
+  datacenters: flowmore-base
+  config:
+    publicGroups: mysql, redis, job, flowmore-base
+    overrideLocal: false
