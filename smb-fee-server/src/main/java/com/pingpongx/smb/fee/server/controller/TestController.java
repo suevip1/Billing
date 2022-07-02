@@ -1,6 +1,7 @@
 package com.pingpongx.smb.fee.server.controller;
 
 import com.pingpongx.flowmore.cloud.base.commom.constants.VoidResponse;
+import com.pingpongx.flowmore.cloud.base.server.annotation.NoAuth;
 import com.pingpongx.flowmore.cloud.base.server.constants.RoleRegister;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.security.RolesAllowed;
 
-import static com.pingpongx.smb.fee.common.constants.TemplateConstants.BASE_PATH;
+import static com.pingpongx.smb.fee.common.constants.FeeConstants.BASE_PATH;
 
 
 @Api(tags = "测试查询")
@@ -28,6 +29,7 @@ public class TestController {
             @ApiImplicitParam(name = "Authorization", value = "Bearer <access_token>", required = true, paramType = "header"),
     })
     @PostMapping("/v1")
+    @NoAuth
     @RolesAllowed(RoleRegister.ROLE_COMMON_SERVICE)
     public VoidResponse valid_a(@RequestParam String clientId) {
         return new VoidResponse();

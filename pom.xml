@@ -19,9 +19,11 @@
     </properties>
 
 
-<modules>  <module>smb-fee-api</module>
+<modules>
+    <module>smb-fee-api</module>
     <module>smb-fee-common</module>
     <module>smb-fee-dal</module>
     <module>smb-fee-server</module>
-  </modules>
+    <module>smb-fee-dependency</module>
+</modules>
 </project>

@@ -1,0 +1,25 @@
+ppx:
+  DS: ${mysql.smb_fee}
+
+ali-yun:
+  ons:
+    producer:
+      properties:
+        GROUP_ID: GID-risk-control
+        AccessKey: ${middleware.ons.access-key}
+        SecretKey: ${middleware.ons.secret-key}
+        NAMESRV_ADDR: ${middleware.ons.nameserver}
+    consumer:
+      properties:
+        GROUP_ID: GID-risk-control
+        AccessKey: ${middleware.ons.access-key}
+        SecretKey: ${middleware.ons.secret-key}
+        NAMESRV_ADDR: ${middleware.ons.nameserver}
+
+job:
+  executor:
+    app-name: ${ppx.name}
+    logRetentionDays: ${job.fm.executor.log-retention-days}
+  accessToken: ${job.fm.access-token}
+  admin:
+    addresses: ${job.fm.admin.addresses}
