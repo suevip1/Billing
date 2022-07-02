@@ -21,15 +21,15 @@ public class FeeConfig extends BaseDO {
 
     private String scope;
 
+    private String bu;
+
+    private String orderType;
+
     private Integer configType;
 
     private String originCurrency;
 
     private String targetCurrency;
-
-    private String payChannel;
-
-    private String business;
 
     private BigDecimal feeRate;
 
@@ -46,6 +46,8 @@ public class FeeConfig extends BaseDO {
     private String operator;
 
     private String remark;
+
+    private String extraInfo;
 
 
 }

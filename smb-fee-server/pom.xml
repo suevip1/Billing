@@ -27,6 +27,11 @@
         </dependency>
         <dependency>
             <groupId>com.pingpongx.smb</groupId>
+            <artifactId>smb-fee-api</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.pingpongx.smb</groupId>
             <artifactId>smb-fee-dal</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
@@ -34,11 +39,27 @@
             <groupId>com.pingpongx.passwordcallback</groupId>
             <artifactId>passwordcallback</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.pingpongx.passwordcallback</groupId>
+            <artifactId>passwordcallback</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.pingpongx.business</groupId>
+            <artifactId>mq-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.pingpongx.business</groupId>
+            <artifactId>dubbo-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
 
     </dependencies>
 
     <build>
-        <finalName>smb-template-server</finalName>
+        <finalName>smb-fee-server</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

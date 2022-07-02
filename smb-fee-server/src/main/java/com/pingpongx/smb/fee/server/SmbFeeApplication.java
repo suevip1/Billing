@@ -14,7 +14,7 @@ import springfox.documentation.service.ApiInfo;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@ComponentScan("com.pingpongx.smb")
+@ComponentScan(basePackages = {"com.pingpongx.smb.fee", "com.pingpongx.passwordcallback"})
 @EnableFeignClients(basePackages = {"com.pingpongx.smb.fee"} )
 public class SmbFeeApplication implements BaseApplicationDocable {
 

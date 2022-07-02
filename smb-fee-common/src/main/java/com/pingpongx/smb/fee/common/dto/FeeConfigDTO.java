@@ -60,4 +60,7 @@ public class FeeConfigDTO implements Serializable {
     @ApiModelProperty(example = "备注")
     private String remark;
 
+    @ApiModelProperty(example = "额外信息(预留字段)")
+    private String extraInfo;
+
 }

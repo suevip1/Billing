@@ -1,9 +1,8 @@
 ppx:
   name: smb-fee
   environment: @ppx.environment@
-  datacenters: flowmore-base
   config:
-    publicGroups: mysql, redis, job, flowmore-base
+    publicGroups: mysql, redis, job, flowmore-base, middleware
     overrideLocal: false
 auth:
   appId: test@flowmore-risk-control

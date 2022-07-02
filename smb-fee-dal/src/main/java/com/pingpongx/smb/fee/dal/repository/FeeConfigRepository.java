@@ -35,10 +35,10 @@ public class FeeConfigRepository extends BaseRepository<FeeConfigMapper, FeeConf
         return this.page(page, queryWrapper);
     }
 
-    public List<FeeConfig> getFeeConfigList(OrderInfoDTO dto){
-      return   this.list(new QueryWrapper<FeeConfig>()
+    public List<FeeConfig> getFeeConfigList(OrderInfoDTO dto) {
+        return this.list(new QueryWrapper<FeeConfig>()
                 .eq("orderType", dto.getOrderType())
-                .in("scope", Arrays.asList(ALL,dto.getLocation().toUpperCase(), dto.getClientId())));
+                .in("scope", Arrays.asList(ALL, dto.getClientId())));
     }
 
 }

@@ -1,11 +1,9 @@
 package com.pingpongx.smb.fee.server.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.pingpongx.business.common.constant.OrderType;
 import com.pingpongx.business.common.dto.Money;
-import com.pingpongx.business.common.dto.OrderDTO;
-import com.pingpongx.business.common.dto.ServiceCharge;
 import com.pingpongx.business.common.exception.Assert;
 import com.pingpongx.smb.fee.common.constants.FeeConfigConstants;
 import com.pingpongx.smb.fee.common.constants.FeeConfigTypeEnum;
@@ -54,6 +52,7 @@ public class FeeConfigServiceImpl implements FeeConfigService {
         Assert.warnIsTrue(dto.getMaxFee() == null || dto.getMaxFee().getAmount().compareTo(BigDecimal.ZERO) >= 0, "MaxFee【" + dto.getMaxFee() + "】must be equal or greater than 0");
 
         FeeConfig feeConfig = BeanUtils.convert(dto, FeeConfig.class);
+        List<FeeConfig> list = feeConfigRepository.list();
         FeeConfig findFeeConfig = feeConfigRepository.getOne(new QueryWrapper<FeeConfig>().eq("scope", dto.getScope()).eq("orderType", dto.getOrderType()).eq("originCurrency", dto.getOriginCurrency()).eq("targetCurrency", dto
                 .getTargetCurrency()).orderByDesc("modified").last("limit 1"));
         if (Objects.nonNull(findFeeConfig)) {
@@ -166,11 +165,11 @@ public class FeeConfigServiceImpl implements FeeConfigService {
 //        if (originMoney.getAmount().compareTo(bestMatchFeeConfig.getMinPayout().getAmount()) >= 0) {
 //            serviceCharge.getLessThanMinPayoutFee().setAmount(BigDecimal.ZERO);
 //        }
+        Money fixFee = JSONObject.parseObject(bestMatchFeeConfig.getFixFee(), Money.class);
 
         BigDecimal subtract = feeConfigResponse.getRateFee().getAmount()
-                .add(feeConfigResponse.getFixFee().getAmount())
-                .subtract(feeConfigResponse.getCutFee().getAmount())
-                .subtract(feeConfigResponse.getCouponFee().getAmount());
+                .add(fixFee.getAmount())
+                .subtract(bestMatchFeeConfig.getCutFeeRate());
 
         // 最终手续费
         Money finalFee = Money.builder()
@@ -178,24 +177,24 @@ public class FeeConfigServiceImpl implements FeeConfigService {
                 .amount(subtract)
                 .build();
 
-        Money rateFee = Money.builder()
-                .currency(currency)
-                .amount(feeConfigResponse.getRateFee().getAmount().subtract(feeConfigResponse.getCutFee().getAmount()))
-                .build();
-        feeConfigResponse.setRateFee(rateFee);
+//        Money rateFee = Money.builder()
+//                .currency(currency)
+//                .amount(feeConfigResponse.getRateFee().getAmount().subtract(feeConfigResponse.getCutFee().getAmount()))
+//                .build();
+//        feeConfigResponse.setRateFee(rateFee);
 
         if (finalFee.getAmount().compareTo(BigDecimal.ZERO) < 0) {
             log.info("手续费小于0，手续费 : {}", finalFee.getAmount());
             finalFee.setAmount(BigDecimal.ZERO);
         }
         //后台设置了最大手续费 再去比较
-        if (feeConfigResponse.getMaxFee().getAmount().compareTo(BigDecimal.ZERO) > 0
-                && finalFee.getAmount().compareTo(feeConfigResponse.getMaxFee().getAmount()) > 0) {
-            Money cutFee = feeConfigResponse.getCutFee();
-            cutFee.setAmount(cutFee.getAmount().add(finalFee.getAmount().subtract(feeConfigResponse.getMaxFee().getAmount())));
-
-            finalFee = finalFee.copyOnWrite(feeConfigResponse.getMaxFee().getAmount());
-        }
+//        if (bestMatchFeeConfig.getMaxFee().getAmount().compareTo(BigDecimal.ZERO) > 0
+//                && finalFee.getAmount().compareTo(feeConfigResponse.getMaxFee().getAmount()) > 0) {
+//            Money cutFee = feeConfigResponse.getCutFee();
+//            cutFee.setAmount(cutFee.getAmount().add(finalFee.getAmount().subtract(feeConfigResponse.getMaxFee().getAmount())));
+//
+//            finalFee = finalFee.copyOnWrite(feeConfigResponse.getMaxFee().getAmount());
+//        }
 
         feeConfigResponse.setFinalFee(finalFee);
         return feeConfigResponse;

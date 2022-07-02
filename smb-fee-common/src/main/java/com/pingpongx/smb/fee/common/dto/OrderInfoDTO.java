@@ -25,10 +25,6 @@ public class OrderInfoDTO implements Serializable {
      */
     private String bu;
     /**
-     * 支付金额信息
-     */
-    private Money payMoney;
-    /**
      * 原始金额信息
      */
     private Money originMoney;
@@ -44,10 +40,6 @@ public class OrderInfoDTO implements Serializable {
      * 订单类型
      */
     private String orderType;
-    /**
-     * 业务
-     */
-    private String business;
     /**
      * 地区
      */
