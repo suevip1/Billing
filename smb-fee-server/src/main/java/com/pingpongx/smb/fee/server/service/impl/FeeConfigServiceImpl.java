@@ -52,7 +52,6 @@ public class FeeConfigServiceImpl implements FeeConfigService {
         Assert.warnIsTrue(dto.getMaxFee() == null || dto.getMaxFee().getAmount().compareTo(BigDecimal.ZERO) >= 0, "MaxFee【" + dto.getMaxFee() + "】must be equal or greater than 0");
 
         FeeConfig feeConfig = BeanUtils.convert(dto, FeeConfig.class);
-        List<FeeConfig> list = feeConfigRepository.list();
         FeeConfig findFeeConfig = feeConfigRepository.getOne(new QueryWrapper<FeeConfig>().eq("scope", dto.getScope()).eq("orderType", dto.getOrderType()).eq("originCurrency", dto.getOriginCurrency()).eq("targetCurrency", dto
                 .getTargetCurrency()).orderByDesc("modified").last("limit 1"));
         if (Objects.nonNull(findFeeConfig)) {
