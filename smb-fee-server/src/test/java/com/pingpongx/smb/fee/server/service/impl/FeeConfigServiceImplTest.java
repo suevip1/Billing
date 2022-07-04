@@ -38,13 +38,14 @@ public class FeeConfigServiceImplTest extends BaseTest {
         dto.setBu("FLOWMORE");
         dto.setScope("ALL");
         dto.setConfigType(0);
-        dto.setOriginCurrency("CNY");
+        dto.setOriginCurrency("USD");
         dto.setTargetCurrency("CNY");
         dto.setOrderType("WITHDRAW");
         dto.setFeeRate(new BigDecimal("0.01"));
         dto.setCutFeeRate(new BigDecimal("0.01"));
-        dto.setFixFee(Money.builder().amount(new BigDecimal("2")).currency("CNY").build());
+        dto.setFixFee(Money.builder().amount(new BigDecimal("3")).currency("CNY").build());
         dto.setExtraInfo("orangeTest");
+
 
         feeConfigService.addFeeConfig(dto);
     }

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Description TODO
  * @createTime 2022年07月02日 16:34:00
  */
-@Api(tags = "RPC端-入账流水")
+@Api(tags = "RPC端-费率服务")
 @RestController
 @RequestMapping(value = FeeServiceFeignService.BASE_PATH)
 public class FeeOrderFeignServiceImpl implements FeeServiceFeignService {

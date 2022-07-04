@@ -165,16 +165,17 @@ public class FeeConfigServiceImpl implements FeeConfigService {
 //        if (originMoney.getAmount().compareTo(bestMatchFeeConfig.getMinPayout().getAmount()) >= 0) {
 //            serviceCharge.getLessThanMinPayoutFee().setAmount(BigDecimal.ZERO);
 //        }
-        Money fixFee = JSONObject.parseObject(bestMatchFeeConfig.getFixFee(), Money.class);
+        Money fixFeeMoney = JSONObject.parseObject(bestMatchFeeConfig.getFixFee(), Money.class);
 
-        BigDecimal subtract = feeConfigResponse.getRateFee().getAmount()
-                .add(fixFee.getAmount())
-                .subtract(bestMatchFeeConfig.getCutFeeRate());
+        BigDecimal finalAmount = feeConfigResponse.getRateFee().getAmount();
+        if(fixFeeMoney.getCurrency().equals(currency)){
+            finalAmount = finalAmount.add(fixFeeMoney.getAmount());
+        }
 
         // 最终手续费
         Money finalFee = Money.builder()
                 .currency(currency)
-                .amount(subtract)
+                .amount(finalAmount)
                 .build();
 
 //        Money rateFee = Money.builder()
