@@ -33,7 +33,7 @@ public class FxClient {
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
 
-    private final static String FX_GUIDE_PRICE_EXCHANGE_KEY = "fx_guide_price_exchange_key";
+    private final static String FX_GUIDE_PRICE_EXCHANGE_KEY = "fee:fx:guidePriceExchange";
 
 
     private Map<String, Object> buildRequestMap() {
