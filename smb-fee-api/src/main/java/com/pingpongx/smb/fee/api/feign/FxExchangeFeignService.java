@@ -1,12 +1,10 @@
 package com.pingpongx.smb.fee.api.feign;
 
 import com.pingpongx.smb.fee.common.constants.FeeConstants;
-import com.pingpongx.smb.fee.common.resp.ExchangeRateResponse;
-import com.pingpongx.smb.fee.common.resp.FeeConfigResponse;
+import com.pingpongx.smb.fee.common.resp.FinalExchangeRateResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.List;
 
 /**
  * @author wangcheng
@@ -23,5 +21,5 @@ public interface FxExchangeFeignService {
      * @return
      */
     @PostMapping("/get/amountEstimate/exchangeRate")
-    List<ExchangeRateResponse> getAmountEstimateExchangeRate();
+    FinalExchangeRateResponse getAmountEstimateExchangeRate();
 }

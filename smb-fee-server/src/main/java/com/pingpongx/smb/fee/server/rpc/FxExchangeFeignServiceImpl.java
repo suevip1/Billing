@@ -1,9 +1,8 @@
 package com.pingpongx.smb.fee.server.rpc;
 
 import com.pingpongx.flowmore.cloud.base.server.annotation.Internal;
-import com.pingpongx.smb.fee.api.feign.FeeServiceFeignService;
 import com.pingpongx.smb.fee.api.feign.FxExchangeFeignService;
-import com.pingpongx.smb.fee.common.resp.ExchangeRateResponse;
+import com.pingpongx.smb.fee.common.resp.FinalExchangeRateResponse;
 import com.pingpongx.smb.fee.server.service.FxExchangeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -11,8 +10,6 @@ import io.swagger.annotations.ApiImplicitParams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 /**
  * @author wangcheng
@@ -34,7 +31,7 @@ public class FxExchangeFeignServiceImpl implements FxExchangeFeignService {
             @ApiImplicitParam(name = "Authorization", value = "smb-fee", required = false, paramType = "header"),
             @ApiImplicitParam(name = "appId", value = "smb-fee", required = false, paramType = "header"),
     })
-    public List<ExchangeRateResponse> getAmountEstimateExchangeRate() {
-        return fxExchangeService.getAmountEstimateExchangeRate();
+    public FinalExchangeRateResponse getAmountEstimateExchangeRate() {
+        return FinalExchangeRateResponse.builder().data(fxExchangeService.getAmountEstimateExchangeRate()).build();
     }
 }
