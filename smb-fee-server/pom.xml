@@ -63,7 +63,7 @@
     </dependencies>
 
     <build>
-        <finalName>smb-fee-server</finalName>
+        <finalName>smb-fee</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
