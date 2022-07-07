@@ -165,7 +165,7 @@ public class FeeConfigServiceImpl implements FeeConfigService {
 //            serviceCharge.getLessThanMinPayoutFee().setAmount(BigDecimal.ZERO);
 //        }
         Money fixFeeMoney = JSONObject.parseObject(bestMatchFeeConfig.getFixFee(), Money.class);
-
+        feeConfigResponse.setFixFee(fixFeeMoney);
         BigDecimal finalAmount = feeConfigResponse.getRateFee().getAmount();
         if(fixFeeMoney.getCurrency().equals(currency)){
             finalAmount = finalAmount.add(fixFeeMoney.getAmount());
