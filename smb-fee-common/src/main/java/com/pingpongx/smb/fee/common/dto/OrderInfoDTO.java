@@ -27,6 +27,10 @@ public class OrderInfoDTO implements Serializable {
     /**
      * 原始金额信息
      */
+    private Money money;
+    /**
+     * 原始金额信息
+     */
     private Money originMoney;
     /**
      * 目标金额信息

@@ -94,7 +94,7 @@ public class FeeConfigServiceImpl implements FeeConfigService {
         Assert.errorNotEmpty(bestMatchFeeConfig, "没有找到匹配的费率配置," + orderInfo.getOrderId());
         // 4 计算费率
         FeeConfigResponse feeConfigResponse = calculateFeeInfo(orderInfo, bestMatchFeeConfig);
-        log.info("最终计算费率:{}",feeConfigResponse);
+        log.info("最终计算费率:{}", feeConfigResponse);
         return feeConfigResponse;
     }
 
@@ -108,6 +108,7 @@ public class FeeConfigServiceImpl implements FeeConfigService {
         Assert.warnNotEmpty(dto.getClientId(), "用户id不能为空");
         Assert.warnNotEmpty(dto.getBu(), "bu不能为空");
         Assert.warnNotEmpty(dto.getOrderType(), "orderType不能为空");
+        Assert.warnIsTrue(Objects.nonNull(dto.getMoney()) && StringUtils.isNotBlank(dto.getMoney().getCurrency()) && Objects.nonNull(dto.getMoney().getAmount()), "money不能为空");
         Assert.warnIsTrue(Objects.nonNull(dto.getOriginMoney()) && StringUtils.isNotBlank(dto.getOriginMoney().getCurrency()), "originMoney不能为空");
         Assert.warnIsTrue(Objects.nonNull(dto.getTargetMoney()) && StringUtils.isNotBlank(dto.getTargetMoney().getCurrency()), "targetMoney不能为空");
     }
@@ -152,10 +153,10 @@ public class FeeConfigServiceImpl implements FeeConfigService {
     private FeeConfigResponse calculateFeeInfo(OrderInfoDTO orderInfo, FeeConfig bestMatchFeeConfig) {
         FeeConfigResponse feeConfigResponse = new FeeConfigResponse();
 
-        Money originMoney = orderInfo.getOriginMoney();
+        Money money = orderInfo.getMoney();
 
-        String currency = originMoney.getCurrency();
-        BigDecimal amount = originMoney.getAmount();
+        String currency = money.getCurrency();
+        BigDecimal amount = money.getAmount();
 
         feeConfigResponse.setRateFee(Money.builder().currency(currency).amount(amount.multiply(bestMatchFeeConfig.getFeeRate())).build().decimalDeal());
         feeConfigResponse.setCutFee(Money.builder().currency(currency).amount(amount.multiply(bestMatchFeeConfig.getCutFeeRate())).build().decimalDeal());
@@ -167,7 +168,7 @@ public class FeeConfigServiceImpl implements FeeConfigService {
         Money fixFeeMoney = JSONObject.parseObject(bestMatchFeeConfig.getFixFee(), Money.class);
         feeConfigResponse.setFixFee(fixFeeMoney);
         BigDecimal finalAmount = feeConfigResponse.getRateFee().getAmount();
-        if(fixFeeMoney.getCurrency().equals(currency)){
+        if (fixFeeMoney.getCurrency().equals(currency)) {
             finalAmount = finalAmount.add(fixFeeMoney.getAmount());
         }
 
