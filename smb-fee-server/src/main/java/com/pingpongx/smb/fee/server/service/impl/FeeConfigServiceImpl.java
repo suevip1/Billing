@@ -153,6 +153,8 @@ public class FeeConfigServiceImpl implements FeeConfigService {
     private FeeConfigResponse calculateFeeInfo(OrderInfoDTO orderInfo, FeeConfig bestMatchFeeConfig) {
         FeeConfigResponse feeConfigResponse = new FeeConfigResponse();
 
+        feeConfigResponse.setFeeRate(bestMatchFeeConfig.getFeeRate());
+
         Money money = orderInfo.getMoney();
 
         String currency = money.getCurrency();

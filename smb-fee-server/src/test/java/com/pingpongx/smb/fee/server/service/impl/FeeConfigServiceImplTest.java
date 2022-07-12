@@ -71,6 +71,8 @@ public class FeeConfigServiceImplTest extends BaseTest {
         orderInfoDTO.setOriginMoney(Money.builder().amount(new BigDecimal("20000")).currency("CNY").build());
         orderInfoDTO.setTargetMoney(Money.builder().currency("CNY").build());
         orderInfoDTO.setOrderType("WITHDRAW");
+        orderInfoDTO.setMoney(Money.builder().amount(new BigDecimal("20000")).currency("CNY").build());
+
 
         feeConfigService.getOrderFee(orderInfoDTO);
 

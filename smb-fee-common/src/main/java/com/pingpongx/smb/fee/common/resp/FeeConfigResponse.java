@@ -3,6 +3,7 @@ package com.pingpongx.smb.fee.common.resp;
 import com.pingpongx.business.common.dto.Money;
 import lombok.Data;
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 
 /**
@@ -20,6 +21,7 @@ public class FeeConfigResponse implements Serializable {
     private Money finalFee;
     private Money fixFee;
     private Money maxFee;
+    private BigDecimal feeRate;
 
 
 }
