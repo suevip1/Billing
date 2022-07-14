@@ -153,21 +153,25 @@ public class FeeConfigServiceImpl implements FeeConfigService {
     private FeeConfigResponse calculateFeeInfo(OrderInfoDTO orderInfo, FeeConfig bestMatchFeeConfig) {
         FeeConfigResponse feeConfigResponse = new FeeConfigResponse();
 
+        // 基本费率
         feeConfigResponse.setFeeRate(bestMatchFeeConfig.getFeeRate());
 
         Money money = orderInfo.getMoney();
-
         String currency = money.getCurrency();
         BigDecimal amount = money.getAmount();
 
+        // 基本费率计算
         feeConfigResponse.setRateFee(Money.builder().currency(currency).amount(amount.multiply(bestMatchFeeConfig.getFeeRate())).build().decimalDeal());
+        // cut费率计算
         feeConfigResponse.setCutFee(Money.builder().currency(currency).amount(amount.multiply(bestMatchFeeConfig.getCutFeeRate())).build().decimalDeal());
 
         //提现金额低于起提金额
 //        if (originMoney.getAmount().compareTo(bestMatchFeeConfig.getMinPayout().getAmount()) >= 0) {
 //            serviceCharge.getLessThanMinPayoutFee().setAmount(BigDecimal.ZERO);
 //        }
+        // 固定费率计算
         Money fixFeeMoney = JSONObject.parseObject(bestMatchFeeConfig.getFixFee(), Money.class);
+        fixFeeMoney.setCurrency("currency");
         feeConfigResponse.setFixFee(fixFeeMoney);
         BigDecimal finalAmount = feeConfigResponse.getRateFee().getAmount();
         if (fixFeeMoney.getCurrency().equals(currency)) {
