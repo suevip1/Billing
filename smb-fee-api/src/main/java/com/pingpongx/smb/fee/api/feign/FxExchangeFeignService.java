@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
  * @Description TODO
  * @createTime 2022年07月05日 11:38:00
  */
-@FeignClient(value = FeeConstants.APP_NAME, path = FxExchangeFeignService.BASE_PATH)
+@FeignClient(value = FeeConstants.APP_NAME, path = FeeConstants.RPC_PATH_V1)
 public interface FxExchangeFeignService {
 
-    String BASE_PATH = FeeConstants.RPC_PATH_V1 + "/smb-fee";
+    String BASE_PATH = FeeConstants.RPC_PATH_V1;
 
     /**
      * 获取汇率列表
