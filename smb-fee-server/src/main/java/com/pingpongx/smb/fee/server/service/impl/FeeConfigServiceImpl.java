@@ -171,7 +171,7 @@ public class FeeConfigServiceImpl implements FeeConfigService {
 //        }
         // 固定费率计算
         Money fixFeeMoney = JSONObject.parseObject(bestMatchFeeConfig.getFixFee(), Money.class);
-        fixFeeMoney.setCurrency("currency");
+        fixFeeMoney.setCurrency("CNY");
         feeConfigResponse.setFixFee(fixFeeMoney);
         BigDecimal finalAmount = feeConfigResponse.getRateFee().getAmount();
         if (fixFeeMoney.getCurrency().equals(currency)) {
