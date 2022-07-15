@@ -42,6 +42,7 @@ public class FxExchangeServiceImpl implements FxExchangeService {
                     .exchangeRate(divide)
                     .originCurrency(originCurrency)
                     .targetCurrency(targetCurrency)
+                    .updateTime(g.getModified())
                     .build();
         }).collect(Collectors.toList());
 

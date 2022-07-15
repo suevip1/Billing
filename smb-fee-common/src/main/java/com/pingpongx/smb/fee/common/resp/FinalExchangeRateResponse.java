@@ -17,4 +17,6 @@ public class FinalExchangeRateResponse implements Serializable {
     private static final long serialVersionUID = 4089216582279181521L;
 
     private List<ExchangeRateResponse> data;
+
+    private Long updateTime;
 }

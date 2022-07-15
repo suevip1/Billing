@@ -19,7 +19,7 @@ public class FxGuidePriceExchangeDTO implements Serializable {
 
     private String id;
 
-    private String modified;
+    private Long modified;
 
     private String name;
 

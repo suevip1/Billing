@@ -1,7 +1,10 @@
 package com.pingpongx.smb.fee.server.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.pingpongx.flowmore.cloud.base.server.app.BaseApplicationRun;
 import com.pingpongx.flowmore.cloud.base.server.app.BaseTest;
+import com.pingpongx.smb.fee.api.feign.FxExchangeFeignService;
+import com.pingpongx.smb.fee.common.resp.FinalExchangeRateResponse;
 import com.pingpongx.smb.fee.server.SmbFeeApplication;
 import com.pingpongx.smb.fee.server.service.FxExchangeService;
 import lombok.extern.slf4j.Slf4j;
@@ -26,8 +29,17 @@ public class FxExchangeServiceImplTest extends BaseTest {
     @Autowired
     private FxExchangeService fxExchangeService;
 
+    @Autowired
+    private FxExchangeFeignService fxExchangeFeignService;
+
     @Test
     public void getAmountEstimateExchangeRate() {
         fxExchangeService.getAmountEstimateExchangeRate();
+    }
+
+    @Test
+    public void test2() {
+        FinalExchangeRateResponse amountEstimateExchangeRate = fxExchangeFeignService.getAmountEstimateExchangeRate();
+        System.out.println(JSONObject.toJSONString(amountEstimateExchangeRate));
     }
 }

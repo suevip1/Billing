@@ -31,5 +31,10 @@ public class ExchangeRateResponse implements Serializable {
      */
     private String targetCurrency;
 
+    /**
+     * 更新时间
+     */
+    private Long updateTime;
+
 
 }
