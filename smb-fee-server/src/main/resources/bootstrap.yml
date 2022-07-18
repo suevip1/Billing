@@ -5,6 +5,4 @@ ppx:
     publicGroups: mysql, redis, job, flowmore-base, middleware
     overrideLocal: false
 auth:
-  appId: smb-fee
-  appSecret: smb-fee
   group: smb
