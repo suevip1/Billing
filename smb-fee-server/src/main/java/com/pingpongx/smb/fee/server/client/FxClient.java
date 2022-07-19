@@ -64,8 +64,10 @@ public class FxClient {
 
             long start = System.currentTimeMillis();
 
-            log.info("福鑫汇率地址查询请求，content = {}", JSONObject.toJSONString(map));
-            String response = HttpUtil.get(map, exchangeRatePair.getKey(), fxConfig.getFxGuidePriceUrl());
+
+            String fxGuidePriceUrl = fxConfig.getFxGuidePriceUrl();
+            log.info("福鑫汇率地址查询请求，content = {},url = {}", JSONObject.toJSONString(map),fxGuidePriceUrl);
+            String response = HttpUtil.get(map, exchangeRatePair.getKey(), fxGuidePriceUrl);
             log.info("福鑫接口耗时:{}ms, 请求福鑫获取汇率返回[{}]|入参情况,key:{}|userId:{}", System.currentTimeMillis() - start, response, exchangeRatePair.getKey(), exchangeRatePair.getUserId());
 
             JSONObject result = JSON.parseObject(response);

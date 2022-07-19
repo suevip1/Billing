@@ -37,6 +37,7 @@ public class FeeConfigRepository extends BaseRepository<FeeConfigMapper, FeeConf
 
     public List<FeeConfig> getFeeConfigList(OrderInfoDTO dto) {
         return this.list(new QueryWrapper<FeeConfig>()
+                .eq("bu", dto.getBu())
                 .eq("orderType", dto.getOrderType())
                 .in("scope", Arrays.asList(ALL, dto.getClientId())));
     }
