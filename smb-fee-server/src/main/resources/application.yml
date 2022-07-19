@@ -8,19 +8,19 @@ ali-yun:
         GROUP_ID: GID-risk-control
         AccessKey: ${middleware.ons.access-key}
         SecretKey: ${middleware.ons.secret-key}
-        NAMESRV_ADDR: ${middleware.ons.nameserver}
+        NAMESRV_ADDR: ${middleware.ons.smb.nameserver}
     consumer:
       properties:
         GROUP_ID: GID-risk-control
         AccessKey: ${middleware.ons.access-key}
         SecretKey: ${middleware.ons.secret-key}
-        NAMESRV_ADDR: ${middleware.ons.nameserver}
+        NAMESRV_ADDR: ${middleware.ons.smb.nameserver}
 
 # dubbo配置
 dubbo:
   application:
-    name: smb-trade
-    owner: tzx
+    name: smb-fee
+    owner: wangc
   config-center:
     address: zookeeper://${middleware.zk.address}
     group: coordination
