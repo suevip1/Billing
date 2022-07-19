@@ -66,7 +66,7 @@ public class FeeConfigServiceImplTest extends BaseTest {
     public void getOrderFee() {
 
         OrderInfoDTO orderInfoDTO = new OrderInfoDTO();
-        orderInfoDTO.setBu("FLOWMORE");
+        orderInfoDTO.setBu("MPT");
         orderInfoDTO.setClientId("1111");
         orderInfoDTO.setOriginMoney(Money.builder().amount(new BigDecimal("20000")).currency("CNY").build());
         orderInfoDTO.setTargetMoney(Money.builder().currency("CNY").build());
