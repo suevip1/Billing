@@ -1,6 +1,7 @@
 package com.pingpongx.smb.fee.server.rpc;
 
 import com.pingpongx.flowmore.cloud.base.server.annotation.Internal;
+import com.pingpongx.flowmore.cloud.base.server.annotation.NoAuth;
 import com.pingpongx.flowmore.cloud.base.server.constants.RoleRegister;
 import com.pingpongx.smb.fee.api.feign.FeeServiceFeignService;
 import com.pingpongx.smb.fee.common.dto.OrderInfoDTO;
@@ -28,7 +29,7 @@ public class FeeOrderFeignServiceImpl implements FeeServiceFeignService {
     @Autowired
     private FeeConfigService feeConfigService;
 
-    @RolesAllowed(RoleRegister.ROLE_COMMON_SERVICE)
+    @NoAuth
     @Override
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", value = "service smb-fee@test", required = false, paramType = "header"),

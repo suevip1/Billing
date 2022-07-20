@@ -1,6 +1,7 @@
 package com.pingpongx.smb.fee.server.rpc;
 
 import com.pingpongx.flowmore.cloud.base.server.annotation.Internal;
+import com.pingpongx.flowmore.cloud.base.server.annotation.NoAuth;
 import com.pingpongx.flowmore.cloud.base.server.constants.RoleRegister;
 import com.pingpongx.smb.fee.api.feign.FxExchangeFeignService;
 import com.pingpongx.smb.fee.common.resp.ExchangeRateResponse;
@@ -32,7 +33,7 @@ public class FxExchangeFeignServiceImpl implements FxExchangeFeignService {
     @Autowired
     private FxExchangeService fxExchangeService;
 
-    @RolesAllowed(RoleRegister.ROLE_COMMON_SERVICE)
+    @NoAuth
     @Override
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", value = "smb-fee", required = false, paramType = "header"),
