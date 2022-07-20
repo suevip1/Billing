@@ -34,8 +34,8 @@ public class FeeConfigController {
             @ApiImplicitParam(name = "Authorization", value = "Bearer <access_token>", required = false, paramType = "header"),
     })
     @PostMapping("/add")
-    @NoAuth
-//    @RolesAllowed(RoleRegister.ROLE_COMMON_SERVICE)
+    @RolesAllowed(RoleRegister.ROLE_COMMON_SERVICE)
+    @Internal
     public void addFeeConfig(FeeConfigDTO dto) {
         feeConfigService.addFeeConfig(dto);
     }
@@ -45,8 +45,8 @@ public class FeeConfigController {
 //            @ApiImplicitParam(name = "Authorization", value = "Bearer <access_token>", required = true, paramType = "header"),
 //    })
     @PostMapping("/update")
-    @NoAuth
-//    @RolesAllowed(RoleRegister.ROLE_COMMON_SERVICE)
+    @RolesAllowed(RoleRegister.ROLE_COMMON_SERVICE)
+    @Internal
     public void updateFeeConfig(FeeConfigDTO dto) {
         feeConfigService.updateFeeConfig(dto);
     }
@@ -56,8 +56,8 @@ public class FeeConfigController {
 //            @ApiImplicitParam(name = "Authorization", value = "Bearer <access_token>", required = true, paramType = "header"),
 //    })
     @PostMapping("/delete")
-    @NoAuth
-//    @RolesAllowed(RoleRegister.ROLE_COMMON_SERVICE)
+    @RolesAllowed(RoleRegister.ROLE_COMMON_SERVICE)
+    @Internal
     public void deleteFeeConfig(Integer id) {
         feeConfigService.deleteFeeConfig(id);
     }
@@ -68,8 +68,8 @@ public class FeeConfigController {
 //            @ApiImplicitParam(name = "Authorization", value = "Bearer <access_token>", required = true, paramType = "header"),
 //    })
     @GetMapping("/page")
-    @NoAuth
-//    @RolesAllowed(RoleRegister.ROLE_COMMON_SERVICE)
+    @RolesAllowed(RoleRegister.ROLE_COMMON_SERVICE)
+    @Internal
     public Object getFeeConfigPage(FeeConfigRequest request) {
         return feeConfigService.getFeeConfigPage(request);
     }
