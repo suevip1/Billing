@@ -29,7 +29,8 @@ public class FeeOrderFeignServiceImpl implements FeeServiceFeignService {
     @Autowired
     private FeeConfigService feeConfigService;
 
-    @NoAuth
+    @Internal
+    @RolesAllowed(RoleRegister.ROLE_COMMON_SERVICE)
     @Override
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", value = "service smb-fee@test", required = false, paramType = "header"),
