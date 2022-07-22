@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,6 +28,8 @@ public class FxExchangeServiceImpl implements FxExchangeService {
     @Autowired
     private FxClient fxClient;
 
+    private static final String USD = "USD";
+
     @Override
     public List<ExchangeRateResponse> getAmountEstimateExchangeRate() {
         List<FxGuidePriceExchangeDTO> guidePriceExchangeList = fxClient.getGuidePriceExchangeCache();
@@ -34,18 +37,28 @@ public class FxExchangeServiceImpl implements FxExchangeService {
             log.info("获取汇率为空");
             return Lists.emptyList();
         }
-        List<ExchangeRateResponse> responseList = guidePriceExchangeList.stream().map(g -> {
-            BigDecimal divide = g.getBuy().add(g.getOffer()).divide(new BigDecimal("2"));
+        List<ExchangeRateResponse> responseList = new ArrayList<>();
+        for (FxGuidePriceExchangeDTO g : guidePriceExchangeList) {
             String originCurrency = g.getSymbol().substring(0, 3);
             String targetCurrency = g.getSymbol().substring(3);
-            return ExchangeRateResponse.builder()
-                    .exchangeRate(divide)
-                    .originCurrency(originCurrency)
-                    .targetCurrency(targetCurrency)
+            BigDecimal divide = g.getBuy().add(g.getOffer()).divide(new BigDecimal("2"));
+            ExchangeRateResponse exchangeRateResponse = ExchangeRateResponse.builder()
                     .updateTime(g.getModified())
                     .build();
-        }).collect(Collectors.toList());
-
+            if (USD.equals(originCurrency)) {
+                exchangeRateResponse.setOriginCurrency(targetCurrency);
+                exchangeRateResponse.setTargetCurrency(USD);
+                BigDecimal decimal = new BigDecimal("1").divide(divide, 4, BigDecimal.ROUND_HALF_UP);
+                exchangeRateResponse.setExchangeRate(decimal);
+                responseList.add(exchangeRateResponse);
+            }
+            if (USD.equals(targetCurrency)) {
+                exchangeRateResponse.setOriginCurrency(originCurrency);
+                exchangeRateResponse.setTargetCurrency(USD);
+                exchangeRateResponse.setExchangeRate(divide);
+                responseList.add(exchangeRateResponse);
+            }
+        }
         log.info("最终返回的资产预估汇率{}", JSONObject.toJSONString(responseList));
         return responseList;
     }
