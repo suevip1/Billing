@@ -39,7 +39,8 @@ public class FeeConfigRepository extends BaseRepository<FeeConfigMapper, FeeConf
         return this.list(new QueryWrapper<FeeConfig>()
                 .eq("bu", dto.getBu())
                 .eq("orderType", dto.getOrderType())
-                .in("scope", Arrays.asList(ALL, dto.getClientId())));
+                .in("scope", Arrays.asList(ALL, dto.getClientId()))
+                .orderByDesc("modified"));
     }
 
 }
