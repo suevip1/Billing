@@ -43,34 +43,43 @@ public class FxExchangeServiceImpl implements FxExchangeService {
             String originCurrency = g.getSymbol().substring(0, 3);
             String targetCurrency = g.getSymbol().substring(3);
             BigDecimal divide = g.getBuy().add(g.getOffer()).divide(new BigDecimal("2"));
-            ExchangeRateResponse exchangeRateResponse = ExchangeRateResponse.builder()
-                    .updateTime(g.getModified())
-                    .build();
+
+            // USD汇率对
             if (USD.equals(originCurrency)) {
-                exchangeRateResponse.setOriginCurrency(targetCurrency);
-                exchangeRateResponse.setTargetCurrency(USD);
+                ExchangeRateResponse exchangeRateResponse = ExchangeRateResponse.builder()
+                        .updateTime(g.getModified())
+                        .originCurrency(targetCurrency)
+                        .targetCurrency(USD)
+                        .build();
                 BigDecimal decimal = new BigDecimal("1").divide(divide, 4, BigDecimal.ROUND_HALF_UP);
                 exchangeRateResponse.setExchangeRate(decimal);
                 responseList.add(exchangeRateResponse);
+            } else if (USD.equals(targetCurrency)) {
+                responseList.add(ExchangeRateResponse.builder()
+                        .updateTime(g.getModified())
+                        .originCurrency(originCurrency)
+                        .targetCurrency(USD)
+                        .exchangeRate(divide)
+                        .build());
             }
-            if (USD.equals(targetCurrency)) {
-                exchangeRateResponse.setOriginCurrency(originCurrency);
-                exchangeRateResponse.setTargetCurrency(USD);
-                exchangeRateResponse.setExchangeRate(divide);
-                responseList.add(exchangeRateResponse);
-            }
+
+            // CNY汇率对
             if (CNY.equals(originCurrency)) {
-                exchangeRateResponse.setOriginCurrency(targetCurrency);
-                exchangeRateResponse.setTargetCurrency(CNY);
+                ExchangeRateResponse exchangeRateResponse = ExchangeRateResponse.builder()
+                        .updateTime(g.getModified())
+                        .originCurrency(targetCurrency)
+                        .targetCurrency(CNY)
+                        .build();
                 BigDecimal decimal = new BigDecimal("1").divide(divide, 4, BigDecimal.ROUND_HALF_UP);
                 exchangeRateResponse.setExchangeRate(decimal);
                 responseList.add(exchangeRateResponse);
-            }
-            if (CNY.equals(targetCurrency)) {
-                exchangeRateResponse.setOriginCurrency(originCurrency);
-                exchangeRateResponse.setTargetCurrency(CNY);
-                exchangeRateResponse.setExchangeRate(divide);
-                responseList.add(exchangeRateResponse);
+            } else if (CNY.equals(targetCurrency)) {
+                responseList.add(ExchangeRateResponse.builder()
+                        .updateTime(g.getModified())
+                        .originCurrency(originCurrency)
+                        .targetCurrency(CNY)
+                        .exchangeRate(divide)
+                        .build());
             }
 
         }
