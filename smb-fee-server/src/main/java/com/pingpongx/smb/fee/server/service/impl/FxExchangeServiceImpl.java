@@ -29,6 +29,7 @@ public class FxExchangeServiceImpl implements FxExchangeService {
     private FxClient fxClient;
 
     private static final String USD = "USD";
+    private static final String CNY = "CNY";
 
     @Override
     public List<ExchangeRateResponse> getAmountEstimateExchangeRate() {
@@ -58,6 +59,20 @@ public class FxExchangeServiceImpl implements FxExchangeService {
                 exchangeRateResponse.setExchangeRate(divide);
                 responseList.add(exchangeRateResponse);
             }
+            if (CNY.equals(originCurrency)) {
+                exchangeRateResponse.setOriginCurrency(targetCurrency);
+                exchangeRateResponse.setTargetCurrency(CNY);
+                BigDecimal decimal = new BigDecimal("1").divide(divide, 4, BigDecimal.ROUND_HALF_UP);
+                exchangeRateResponse.setExchangeRate(decimal);
+                responseList.add(exchangeRateResponse);
+            }
+            if (CNY.equals(targetCurrency)) {
+                exchangeRateResponse.setOriginCurrency(originCurrency);
+                exchangeRateResponse.setTargetCurrency(CNY);
+                exchangeRateResponse.setExchangeRate(divide);
+                responseList.add(exchangeRateResponse);
+            }
+
         }
         log.info("最终返回的资产预估汇率{}", JSONObject.toJSONString(responseList));
         return responseList;
