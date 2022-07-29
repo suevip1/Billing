@@ -87,8 +87,8 @@ public class FxClient {
         String s = redisTemplate.opsForValue().get(FX_GUIDE_PRICE_EXCHANGE_KEY);
         if (StringUtils.isBlank(s)) {
             List<FxGuidePriceExchangeDTO> fxGuidePriceExchange = getFxGuidePriceExchange();
-            // 缓存一个小时
-            redisTemplate.opsForValue().set(FX_GUIDE_PRICE_EXCHANGE_KEY, JSONObject.toJSONString(fxGuidePriceExchange), 60L, TimeUnit.MINUTES);
+            // 缓存24个小时
+            redisTemplate.opsForValue().set(FX_GUIDE_PRICE_EXCHANGE_KEY, JSONObject.toJSONString(fxGuidePriceExchange), 24L, TimeUnit.HOURS);
             return fxGuidePriceExchange;
         }
         return JSONObject.parseArray(s, FxGuidePriceExchangeDTO.class);
