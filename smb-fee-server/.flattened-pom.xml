@@ -3,11 +3,11 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.pingpong.smb</groupId>
+    <groupId>com.pingpongx.smb</groupId>
     <artifactId>smb-fee</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
-  <groupId>com.pingpong.smb</groupId>
+  <groupId>com.pingpongx.smb</groupId>
   <artifactId>smb-fee-server</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <licenses>
@@ -27,9 +27,9 @@
       <artifactId>flowmore-base-server</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.pingpong.smb</groupId>
+      <groupId>com.pingpongx.smb</groupId>
       <artifactId>smb-fee-common</artifactId>
-      <version>${project.version}</version>
+      <version>1.0.0-SNAPSHOT</version>
     </dependency>
   </dependencies>
   <build>
@@ -51,7 +51,6 @@
         </includes>
       </resource>
       <resource>
-        <filtering>false</filtering>
         <directory>src/main/resources</directory>
         <includes>
           <include>**/*.properties</include>
@@ -62,7 +61,7 @@
         </includes>
       </resource>
     </resources>
-    <finalName>smb-fee-server</finalName>
+    <finalName>smb-template-server</finalName>
     <plugins>
       <plugin>
         <artifactId>maven-deploy-plugin</artifactId>

@@ -5,11 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ad4b79ac-3274-43a2-9195-4e31b4402228" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.flattened-pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.flattened-pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smb-fee-api/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/smb-fee-api/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smb-fee-common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/smb-fee-common/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smb-fee-dal/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/smb-fee-dal/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smb-fee-server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/smb-fee-server/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smb-fee-api/.flattened-pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/smb-fee-api/.flattened-pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smb-fee-common/.flattened-pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/smb-fee-common/.flattened-pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smb-fee-dal/.flattened-pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/smb-fee-dal/.flattened-pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smb-fee-server/.flattened-pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/smb-fee-server/.flattened-pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +30,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitSEFilterConfiguration">
@@ -34,11 +45,22 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="KubernetesApiPersistence">
+    <option name="context" value="docker-desktop" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="MavenImportPreferences">
-    <option name="enabledProfiles">
-      <list>
-        <option value="test2-b2b-cn" />
-      </list>
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="alwaysUpdateSnapshots" value="true" />
+        <option name="localRepository" value="$USER_HOME$/repository" />
+        <option name="mavenHome" value="/opt/homebrew/Cellar/maven/3.8.6/libexec" />
+        <option name="printErrorStackTraces" value="true" />
+        <option name="usePluginRegistry" value="true" />
+        <option name="userSettingsFile" value="$USER_HOME$/.m2/settings.xml" />
+      </MavenGeneralSettings>
     </option>
   </component>
   <component name="ProjectId" id="2AvqaQzgr4psajUEyMdDkY65tN7" />
@@ -49,18 +71,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RequestMappingsPanelOrder0" value="0" />
-    <property name="RequestMappingsPanelOrder1" value="1" />
-    <property name="RequestMappingsPanelWidth0" value="75" />
-    <property name="RequestMappingsPanelWidth1" value="75" />
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/smb-fee-server/src/main/resources" />
-    <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="reactor" />
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "WebServerToolWindowFactoryState": "false",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "MavenSettings",
+    "spring.configuration.checksum": "169e5f345bb6284311c809a9cd394ab2"
+  }
+}]]></component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
@@ -80,13 +101,13 @@
   <component name="RunManager">
     <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="smb-fee-server" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.pingpongx.smb.fee.server.Application" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.pingpongx.smb.fee.server.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.pingpongx.smb.fee.server.Application" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -108,6 +129,8 @@
       <workItem from="1655900472311" duration="472000" />
       <workItem from="1656038018253" duration="8090000" />
       <workItem from="1656052672612" duration="5432000" />
+      <workItem from="1663686374075" duration="1342000" />
+      <workItem from="1666147043812" duration="1012000" />
     </task>
     <servers />
   </component>

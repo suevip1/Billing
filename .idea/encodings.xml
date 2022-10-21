@@ -5,5 +5,8 @@
     <file url="file://$PROJECT_DIR$/smb-fee-common/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/smb-fee-dal/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/smb-fee-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+    <file url="file://$USER_HOME$/repository/org/springframework/boot/spring-boot-starter-parent/2.2.5.RELEASE/src/main/resources" charset="UTF-8" />
   </component>
 </project>
