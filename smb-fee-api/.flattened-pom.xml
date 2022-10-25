@@ -3,11 +3,11 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.pingpong.smb</groupId>
+    <groupId>com.pingpongx.smb</groupId>
     <artifactId>smb-fee</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
-  <groupId>com.pingpong.smb</groupId>
+  <groupId>com.pingpongx.smb</groupId>
   <artifactId>smb-fee-api</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <licenses>
