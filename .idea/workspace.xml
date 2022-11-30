@@ -5,17 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ad4b79ac-3274-43a2-9195-4e31b4402228" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.flattened-pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.flattened-pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smb-fee-api/.flattened-pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/smb-fee-api/.flattened-pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smb-fee-common/.flattened-pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/smb-fee-common/.flattened-pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smb-fee-dal/.flattened-pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/smb-fee-dal/.flattened-pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smb-fee-server/.flattened-pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/smb-fee-server/.flattened-pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +66,10 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/jianggm/git/smb/smb-fee",
     "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
@@ -131,6 +127,7 @@
       <workItem from="1656052672612" duration="5432000" />
       <workItem from="1663686374075" duration="1342000" />
       <workItem from="1666147043812" duration="1012000" />
+      <workItem from="1669776522163" duration="20000" />
     </task>
     <servers />
   </component>
