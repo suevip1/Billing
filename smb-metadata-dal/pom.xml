@@ -28,7 +28,7 @@
         </dependency>
         <dependency>
             <groupId>com.pingpongx.smb</groupId>
-            <artifactId>smb-fee-common</artifactId>
+            <artifactId>smb-metadata-api</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
