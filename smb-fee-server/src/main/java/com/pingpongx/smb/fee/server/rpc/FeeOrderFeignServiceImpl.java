@@ -1,9 +1,8 @@
 package com.pingpongx.smb.fee.server.rpc;
 
 import com.pingpongx.flowmore.cloud.base.server.annotation.Internal;
-import com.pingpongx.flowmore.cloud.base.server.annotation.NoAuth;
 import com.pingpongx.flowmore.cloud.base.server.constants.RoleRegister;
-import com.pingpongx.smb.fee.api.feign.FeeServiceFeignService;
+import com.pingpongx.smb.fee.domain.FeeServiceFeignService;
 import com.pingpongx.smb.fee.common.dto.OrderInfoDTO;
 import com.pingpongx.smb.fee.common.resp.FeeConfigResponse;
 import com.pingpongx.smb.fee.server.service.FeeConfigService;

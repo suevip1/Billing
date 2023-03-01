@@ -1,4 +1,4 @@
-package com.pingpongx.smb.fee.domain.feign;
+package com.pingpongx.smb.fee.domain;
 
 import com.pingpongx.smb.fee.common.constants.FeeConstants;
 import com.pingpongx.smb.fee.common.resp.FinalExchangeRateResponse;

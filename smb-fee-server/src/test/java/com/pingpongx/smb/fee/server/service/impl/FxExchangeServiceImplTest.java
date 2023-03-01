@@ -3,7 +3,7 @@ package com.pingpongx.smb.fee.server.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.pingpongx.flowmore.cloud.base.server.app.BaseApplicationRun;
 import com.pingpongx.flowmore.cloud.base.server.app.BaseTest;
-import com.pingpongx.smb.fee.api.feign.FxExchangeFeignService;
+import com.pingpongx.smb.fee.domain.FxExchangeFeignService;
 import com.pingpongx.smb.fee.common.resp.FinalExchangeRateResponse;
 import com.pingpongx.smb.fee.server.SmbFeeApplication;
 import com.pingpongx.smb.fee.server.service.FxExchangeService;
@@ -13,8 +13,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import static org.junit.Assert.*;
 
 /**
  * @author wangcheng

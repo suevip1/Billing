@@ -1,4 +1,4 @@
-package com.pingpongx.smb.fee.domain.feign;
+package com.pingpongx.smb.fee.domain;
 
 import com.pingpongx.smb.fee.common.constants.FeeConstants;
 import com.pingpongx.smb.fee.common.dto.OrderInfoDTO;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @Description TODO
  * @createTime 2022年07月02日 10:14:00
  */
-@FeignClient(value = FeeConstants.APP_NAME, path = FeeServiceFeignService.BASE_PATH)
+@FeignClient(value = FeeConstants.APP_NAME, path = com.pingpongx.smb.fee.domain.FeeServiceFeignService.BASE_PATH)
 public interface FeeServiceFeignService {
 
     String BASE_PATH = FeeConstants.RPC_PATH_V1 + "/smb-fee";
