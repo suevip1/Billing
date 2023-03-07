@@ -1,7 +1,7 @@
-package com.pingpongx.smb.fee.server.acquire;
+package com.pingpongx.smb.fee.server.controller;
 
 import com.pingpongx.flowmore.cloud.base.commom.constants.VoidResponse;
-import com.pingpongx.flowmore.cloud.base.server.annotation.NoAuth;
+import com.pingpongx.flowmore.cloud.base.server.annotation.Internal;
 import com.pingpongx.flowmore.cloud.base.server.constants.RoleRegister;
 import com.pingpongx.smb.fee.api.dtos.cmd.BillingRequest;
 import io.swagger.annotations.Api;
@@ -25,14 +25,26 @@ import static com.pingpongx.smb.fee.common.constants.FeeConstants.BASE_PATH;
 @Slf4j
 public class BillingController {
 
-    @ApiOperation("计费收单")
+    @ApiOperation("试算")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", value = "Bearer <access_token>", required = true, paramType = "header"),
     })
-    @PostMapping("/v1")
-    @NoAuth
+    @PostMapping("/charge")
     @RolesAllowed(RoleRegister.ROLE_COMMON_SERVICE)
+    @Internal
     public VoidResponse billing(@RequestParam BillingRequest request) {
+
+        return new VoidResponse();
+    }
+
+    @ApiOperation("计费")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", value = "Bearer <access_token>", required = true, paramType = "header"),
+    })
+    @PostMapping("/trial")
+    @RolesAllowed(RoleRegister.ROLE_COMMON_SERVICE)
+    @Internal
+    public VoidResponse trial(@RequestParam BillingRequest request) {
 
         return new VoidResponse();
     }
