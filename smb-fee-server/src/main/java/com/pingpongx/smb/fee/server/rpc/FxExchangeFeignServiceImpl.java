@@ -1,7 +1,6 @@
 package com.pingpongx.smb.fee.server.rpc;
 
 import com.pingpongx.flowmore.cloud.base.server.annotation.NoAuth;
-import com.pingpongx.smb.fee.domain.FxExchangeFeignService;
 import com.pingpongx.smb.fee.common.resp.ExchangeRateResponse;
 import com.pingpongx.smb.fee.common.resp.FinalExchangeRateResponse;
 import com.pingpongx.smb.fee.server.service.FxExchangeService;

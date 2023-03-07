@@ -2,8 +2,8 @@ package com.pingpongx.smb.metadata.properties;
 
 import com.pingpongx.smb.metadata.Extractor;
 import com.pingpongx.smb.metadata.VariableDef;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.ReflectionUtils;
+import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Field;
 
@@ -27,7 +27,7 @@ public class JavaReflectionExtractor implements Extractor {
         Object current = source;
         for (int i = 0 ; i<paths.length ; i++){
             String attr = paths[i];
-            if (StringUtils.isBlank(attr)){
+            if (StringUtils.isEmpty(attr)){
                 continue;
             }
             current = getAttr(current,attr);
