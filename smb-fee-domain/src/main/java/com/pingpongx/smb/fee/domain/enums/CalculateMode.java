@@ -1,5 +1,5 @@
 package com.pingpongx.smb.fee.domain.enums;
 
-public enum ItemMode {
+public enum CalculateMode {
     FIX,AXpB
 }

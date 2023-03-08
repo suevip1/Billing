@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-public class BillingRequest extends BaseDO {
+public class BillingRequestDo extends FeeBaseDo {
 
     private static final long serialVersionUID = 8061568762858026972L;
 

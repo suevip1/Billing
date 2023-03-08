@@ -1,12 +1,18 @@
 package com.pingpongx.smb.fee.api.dtos.cmd;
 
+import com.pingpongx.smb.export.module.Identified;
 import io.vavr.collection.Tree;
+import lombok.Builder;
+import lombok.Data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
-public class BillingRequest {
+@Data
+public class BillingRequest implements Serializable {
     /***
      * 计费时间
      */
@@ -26,7 +32,7 @@ public class BillingRequest {
     /**
      * 用于幂等
      */
-    Map<String, BigDecimal> fxRateId;
+    Long fxRateId;
     OrderInfo order;
     /**
      * 来源系统 B2B FM Dispatch Common
@@ -40,5 +46,16 @@ public class BillingRequest {
      * 优惠券
      */
     List<CouponInfo> couponList;
+
+    public String repeatKey(){
+        String split = ":";
+        StringBuilder builder = new StringBuilder();
+        builder.append(order.getBizOrderType()).append(split);
+        builder.append(order.getBizOrderId()).append(split);
+        builder.append(fxRateId).append(split);
+        String couponRepeat = couponList.stream().map(couponInfo -> couponInfo.repeatKey()).collect(Collectors.joining(","));
+        builder.append(couponRepeat);
+        return builder.toString();
+    }
 
 }
