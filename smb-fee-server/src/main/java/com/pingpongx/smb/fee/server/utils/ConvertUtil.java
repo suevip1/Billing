@@ -1,9 +1,12 @@
 package com.pingpongx.smb.fee.server.utils;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pingpongx.flowmore.cloud.base.server.filter.ActionContext;
 import com.pingpongx.smb.fee.dal.dataobject.FeeBaseDo;
 import org.springframework.beans.BeanUtils;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -83,6 +86,26 @@ public class ConvertUtil {
             throw new RuntimeException(e);
         } catch (Exception e) {
             throw new RuntimeException(e);
+        }
+    }
+
+
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+
+    public static <T> T parse(String jsonString, Class<T> clazz) {
+        try {
+            return OBJECT_MAPPER.readValue(jsonString, clazz);
+        } catch (IOException var3) {
+            throw new RuntimeException(var3);
+        }
+    }
+
+
+    public static String toJSONString(Object obj) {
+        try {
+            return OBJECT_MAPPER.writeValueAsString(obj);
+        } catch (JsonProcessingException var2) {
+            throw new RuntimeException(var2);
         }
     }
 

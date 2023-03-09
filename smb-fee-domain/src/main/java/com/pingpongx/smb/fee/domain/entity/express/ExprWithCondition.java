@@ -6,4 +6,5 @@ import com.pingpongx.smb.export.module.Rule;
 public interface ExprWithCondition {
     Rule getCondition();
     Expr getExpress();
+    String getExprIdentify();
 }

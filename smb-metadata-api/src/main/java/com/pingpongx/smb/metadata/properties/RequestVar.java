@@ -11,4 +11,9 @@ public class RequestVar extends AbstractVariable {
     public void setSourceType(String sourceType) {
         this.sourceType = sourceType;
     }
+
+    @Override
+    public String identify() {
+        return getCode();
+    }
 }

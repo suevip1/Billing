@@ -6,6 +6,9 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author wangcheng
@@ -19,35 +22,43 @@ public class BillingRequestDo extends FeeBaseDo {
 
     private static final long serialVersionUID = 8061568762858026972L;
 
-    private String scope;
+    /***
+     * 计费时间
+     */
+    Long billingTime;
+    /***
+     * Did buClientId 具体数据
+     */
+    String subject;
+    /***
+     * Did / accid / Nid / buClientId
+     */
+    String subjectType;
+    /***
+     * 汇率列表，目标货种：原币种  目标币种：美元  原币种：美元
+     */
+    Map<String, BigDecimal> fxRate;
+    /**
+     * 用于幂等
+     */
+    Long fxRateId;
+    String order;
 
-    private String bu;
+    String bizOrderId;
 
-    private String orderType;
+    String bizOrderType;
+    /**
+     * 来源系统 B2B FM Dispatch Common
+     */
+    String bizLine;
+    /**
+     * 来源应用
+     */
+    String sourceApp;
+    /**
+     * 优惠券
+     */
+    String couponList;
 
-    private Integer configType;
-
-    private String originCurrency;
-
-    private String targetCurrency;
-
-    private BigDecimal feeRate;
-
-    private BigDecimal cutFeeRate;
-
-    private String fixFee;
-
-    private String minPayout;
-
-    private String lessThanMinPayoutFee;
-
-    private String maxFee;
-
-    private String operator;
-
-    private String remark;
-
-    private String extraInfo;
-
-
+    String repeat;
 }

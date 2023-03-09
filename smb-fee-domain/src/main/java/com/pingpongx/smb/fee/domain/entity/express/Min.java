@@ -1,26 +1,41 @@
 package com.pingpongx.smb.fee.domain.entity.express;
 
+import com.pingpongx.smb.fee.domain.runtime.BillingContext;
 import org.joda.money.Money;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Min implements ExprCollection{
+public class Min implements ExprCollection,Calculator{
     List<Expr> list = new ArrayList<>();
 
-//    @Override
-//    public Money getCalculateResult() {
-//        return list.stream().map(expr -> expr.getCalculateResult()).min(Money::compareTo)
-//                .orElseThrow(()-> new RuntimeException("Min value calculate error. list is empty."));
-//    }
 
     @Override
-    public String identity() {
+    public String identify() {
         return this.getClass().getSimpleName();
+    }
+
+    @Override
+    public Calculator getCalculator() {
+        return this;
     }
 
     @Override
     public List<Expr> asList() {
         return list;
     }
+
+    @Override
+    public BigDecimal getCalculateResult(BillingContext context) {
+        BigDecimal ret = context.getCache().get(this.identify());
+        if (ret !=null ){
+            return ret;
+        }
+        ret = list.stream().map(expr -> expr.getCalculator().getCalculateResult(context)).min(BigDecimal::compareTo)
+                .orElseThrow(()-> new RuntimeException("Min value calculate error. list is empty."));
+        context.getCache().put(this.identify(),ret);
+        return ret;
+    }
+
 }

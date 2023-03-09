@@ -1,7 +1,9 @@
 package com.pingpongx.smb.fee.dal.repository;
 
 import com.pingpongx.smb.fee.dal.dataobject.BillingRequestDo;
+import com.pingpongx.smb.fee.dal.dataobject.CouponResultDo;
 import com.pingpongx.smb.fee.dal.mapper.BillingRequestMapper;
+import com.pingpongx.smb.fee.dal.mapper.CouponResultMapper;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -10,11 +12,8 @@ import org.springframework.stereotype.Repository;
  * @createTime 2022年06月28日 14:47:00
  */
 @Repository
-public class BillingRequestRepository extends FeeBaseRepository<BillingRequestMapper, BillingRequestDo> {
+public class CouponResultRepository extends FeeBaseRepository<CouponResultMapper, CouponResultDo> {
 
     public static final String ALL = "ALL";
 
-    public BillingRequestDo findByRepeatKey(String repeatKey){
-        return this.getOne(this.lambdaQuery().eq(BillingRequestDo::getRepeat,repeatKey).getWrapper());
-    }
 }

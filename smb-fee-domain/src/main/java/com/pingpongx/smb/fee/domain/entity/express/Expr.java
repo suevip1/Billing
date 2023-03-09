@@ -1,8 +1,8 @@
 package com.pingpongx.smb.fee.domain.entity.express;
 
-import org.joda.money.Money;
+import com.pingpongx.smb.metadata.Identified;
 
-public interface Expr {
-    String identity();
+public interface Expr extends Identified {
+    Calculator getCalculator();
 
 }

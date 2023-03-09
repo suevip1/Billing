@@ -1,6 +1,6 @@
 package com.pingpongx.smb.metadata;
 
-public interface VariableDef {
+public interface VariableDef extends Identified{
     String getPath();
     String getCode();
     boolean isNum();

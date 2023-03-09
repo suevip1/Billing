@@ -1,8 +1,6 @@
 package com.pingpongx.smb.fee.api.dtos.cmd;
 
-import com.pingpongx.smb.export.module.Identified;
-import io.vavr.collection.Tree;
-import lombok.Builder;
+import com.pingpongx.smb.metadata.Identified;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -12,7 +10,10 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Data
-public class BillingRequest implements Serializable {
+public class BillingRequest implements Serializable, Identified {
+
+    private static final long serialVersionUID = 8061568762858026972L;
+
     /***
      * 计费时间
      */
@@ -47,13 +48,13 @@ public class BillingRequest implements Serializable {
      */
     List<CouponInfo> couponList;
 
-    public String repeatKey(){
+    public String identify(){
         String split = ":";
         StringBuilder builder = new StringBuilder();
         builder.append(order.getBizOrderType()).append(split);
         builder.append(order.getBizOrderId()).append(split);
         builder.append(fxRateId).append(split);
-        String couponRepeat = couponList.stream().map(couponInfo -> couponInfo.repeatKey()).collect(Collectors.joining(","));
+        String couponRepeat = couponList.stream().map(couponInfo -> couponInfo.identify()).collect(Collectors.joining(","));
         builder.append(couponRepeat);
         return builder.toString();
     }

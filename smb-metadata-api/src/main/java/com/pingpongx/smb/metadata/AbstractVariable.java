@@ -37,4 +37,9 @@ public abstract class AbstractVariable implements VariableDef {
     public void setNamespace(String namespace) {
         this.namespace = namespace;
     }
+
+    @Override
+    public String identify() {
+        return getCode();
+    }
 }

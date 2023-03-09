@@ -4,11 +4,14 @@ import com.pingpongx.smb.payment.api.req.ApplyPayRequest;
 import lombok.Data;
 import org.joda.money.Money;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Map;
 
 @Data
-public class OrderInfo {
+public class OrderInfo implements Serializable {
+    private static final long serialVersionUID = 8061568762580326972L;
+
     /**
      * 计费节点
      */
