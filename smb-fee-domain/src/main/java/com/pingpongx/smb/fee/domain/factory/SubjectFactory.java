@@ -1,6 +1,6 @@
 package com.pingpongx.smb.fee.domain.factory;
 
-import com.pingpongx.smb.fee.domain.entity.Subject;
+import com.pingpongx.smb.fee.domain.module.Subject;
 
 public class SubjectFactory {
 

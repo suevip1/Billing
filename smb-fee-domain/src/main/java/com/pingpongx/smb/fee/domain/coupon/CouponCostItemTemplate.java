@@ -1,7 +1,7 @@
 package com.pingpongx.smb.fee.domain.coupon;
 
-import com.pingpongx.smb.fee.domain.entity.CostItem;
-import com.pingpongx.smb.fee.domain.entity.CostNode;
+import com.pingpongx.smb.fee.domain.module.CostItem;
+import com.pingpongx.smb.fee.domain.module.CostNode;
 import com.pingpongx.smb.fee.domain.enums.Direction;
 import com.pingpongx.smb.fee.domain.enums.CalculateMode;
 import lombok.Data;

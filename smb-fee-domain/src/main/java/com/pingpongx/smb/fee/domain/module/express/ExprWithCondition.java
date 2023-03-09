@@ -1,6 +1,5 @@
-package com.pingpongx.smb.fee.domain.entity.express;
+package com.pingpongx.smb.fee.domain.module.express;
 
-import org.joda.money.Money;
 import com.pingpongx.smb.export.module.Rule;
 
 public interface ExprWithCondition {

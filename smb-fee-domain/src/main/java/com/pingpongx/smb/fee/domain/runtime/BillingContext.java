@@ -1,11 +1,14 @@
 package com.pingpongx.smb.fee.domain.runtime;
 
 import com.pingpongx.smb.fee.api.dtos.cmd.BillingRequest;
-import com.pingpongx.smb.fee.domain.entity.CostItem;
+import com.pingpongx.smb.fee.api.dtos.resp.CostItemResult;
+import com.pingpongx.smb.fee.api.dtos.resp.CouponResult;
+import com.pingpongx.smb.fee.domain.module.CostItem;
 import lombok.Data;
-import org.joda.money.Money;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,18 +16,18 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Data
-public class BillingContext {
+public class BillingContext implements Serializable {
     BillingRequest request;
 
-    Map<String , Object> params = new HashMap<>();;
+    Map<String , Object> params = new HashMap<>();
 
-    Map<String,Money> feeResult = new HashMap<>();
+    List<CostItemResult> feeResult = new ArrayList<>();
 
     List<CostItem> matchedCostItem;
     /****
      * 优惠券核销额度 Key : template Id. Value : 核销额度
      */
-    Map<String , BigDecimal> expense = new HashMap<>();;
+    List<CouponResult> expense = new ArrayList<>();
 
     boolean isTrial;
 

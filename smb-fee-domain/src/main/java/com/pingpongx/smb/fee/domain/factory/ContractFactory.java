@@ -1,6 +1,6 @@
 package com.pingpongx.smb.fee.domain.factory;
 
-import com.pingpongx.smb.fee.domain.entity.Contract;
+import com.pingpongx.smb.fee.domain.module.Contract;
 import com.pingpongx.smb.fee.domain.enums.BizLine;
 
 public class ContractFactory {

@@ -1,6 +1,4 @@
-package com.pingpongx.smb.fee.domain.entity;
-
-import com.pingpongx.smb.fee.domain.enums.BizLine;
+package com.pingpongx.smb.fee.domain.module;
 
 public class Subject {
     String code;

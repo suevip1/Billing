@@ -1,4 +1,4 @@
-package com.pingpongx.smb.fee.domain.entity.express;
+package com.pingpongx.smb.fee.domain.module.express;
 
 import com.pingpongx.smb.export.module.Rule;
 

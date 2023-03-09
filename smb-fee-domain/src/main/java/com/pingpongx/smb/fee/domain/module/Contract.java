@@ -1,4 +1,4 @@
-package com.pingpongx.smb.fee.domain.entity;
+package com.pingpongx.smb.fee.domain.module;
 
 import com.pingpongx.smb.fee.domain.enums.BizLine;
 import lombok.Builder;

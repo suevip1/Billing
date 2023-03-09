@@ -1,8 +1,7 @@
-package com.pingpongx.smb.fee.domain.entity.express;
+package com.pingpongx.smb.fee.domain.module.express;
 
 import com.pingpongx.smb.export.module.Rule;
 import com.pingpongx.smb.fee.domain.runtime.BillingContext;
-import org.joda.money.Money;
 
 import java.math.BigDecimal;
 import java.util.*;

@@ -1,9 +1,7 @@
-package com.pingpongx.smb.fee.domain.entity.express;
+package com.pingpongx.smb.fee.domain.module.express;
 
 import com.pingpongx.smb.fee.domain.runtime.BillingContext;
-import com.pingpongx.smb.metadata.VariableDef;
 import lombok.Data;
-import org.joda.money.Money;
 
 import java.math.BigDecimal;
 @Data

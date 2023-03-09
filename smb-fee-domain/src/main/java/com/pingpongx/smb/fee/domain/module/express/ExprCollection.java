@@ -1,6 +1,4 @@
-package com.pingpongx.smb.fee.domain.entity.express;
-
-import org.joda.money.Money;
+package com.pingpongx.smb.fee.domain.module.express;
 
 import java.util.List;
 
