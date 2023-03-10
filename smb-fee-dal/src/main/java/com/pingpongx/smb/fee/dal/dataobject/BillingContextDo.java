@@ -23,12 +23,8 @@ public class BillingContextDo extends FeeBaseDo {
     //Context实际字段
     String request;
     String params;
-    String feeResult;
     String matchedCostItem;
-    /****
-     * 优惠券核销额度 Key : template Id. Value : 核销额度
-     */
-    String expense;
+    String bill;
     /**
      * key：costItemCode ， val：calculateResult
      */

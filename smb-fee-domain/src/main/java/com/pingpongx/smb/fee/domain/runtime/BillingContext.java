@@ -1,6 +1,7 @@
 package com.pingpongx.smb.fee.domain.runtime;
 
 import com.pingpongx.smb.fee.api.dtos.cmd.BillingRequest;
+import com.pingpongx.smb.fee.api.dtos.resp.Bill;
 import com.pingpongx.smb.fee.api.dtos.resp.CostItemResult;
 import com.pingpongx.smb.fee.api.dtos.resp.CouponResult;
 import com.pingpongx.smb.fee.domain.module.CostItem;
@@ -27,12 +28,7 @@ public class BillingContext implements Serializable {
 
     List<CostItem> matchedCostItem;
 
-    List<CostItemResult> feeResult = new ArrayList<>();
-
-    /****
-     * 优惠券核销额度 Key : template Id. Value : 核销额度
-     */
-    List<CouponResult> expense = new ArrayList<>();
+    Bill bill;
 
     boolean isTrial;
 
@@ -48,7 +44,7 @@ public class BillingContext implements Serializable {
         if (matchedCostItem == null){
             return new BillingRequestReceived(this);
         }
-        if (feeResult==null && expense == null){
+        if (bill == null){
             return new MatchCompleted(this);
         }
         return new CalculateCompleted(this);
