@@ -1,4 +1,15 @@
 package com.pingpongx.smb.fee.domain.module.event;
 
-public class MatchCompleted {
+import com.pingpongx.smb.fee.domain.runtime.BillingContext;
+
+public class MatchCompleted extends AbstractStage{
+
+    public MatchCompleted(BillingContext context) {
+        super(context);
+    }
+
+    @Override
+    public int getStagePriority() {
+        return 2;
+    }
 }

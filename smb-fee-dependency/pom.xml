@@ -15,7 +15,18 @@
         <dependency>
             <groupId>com.pingpongx.smb</groupId>
             <artifactId>smb-metadata-api</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.pingpongx.smb</groupId>
+            <artifactId>smb-fee-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.pingpongx.flowmore.cloud</groupId>
+            <artifactId>flowmore-base-server</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.pingpongx.smb</groupId>
+            <artifactId>smb-fee-dal</artifactId>
         </dependency>
     </dependencies>
     <properties>

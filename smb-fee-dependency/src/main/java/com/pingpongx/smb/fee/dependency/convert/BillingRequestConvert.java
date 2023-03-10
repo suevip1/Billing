@@ -1,11 +1,10 @@
-package com.pingpongx.smb.fee.server.utils.convert;
+package com.pingpongx.smb.fee.dependency.convert;
 
-import com.aliyun.openservices.shade.com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSON;
 import com.pingpongx.smb.fee.api.dtos.cmd.BillingRequest;
 import com.pingpongx.smb.fee.api.dtos.cmd.CouponInfo;
 import com.pingpongx.smb.fee.api.dtos.cmd.OrderInfo;
 import com.pingpongx.smb.fee.dal.dataobject.BillingRequestDo;
-import com.pingpongx.smb.fee.server.utils.ConvertUtil;
 
 public class BillingRequestConvert {
     public static BillingRequestDo toDo(BillingRequest request) {

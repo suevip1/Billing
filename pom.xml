@@ -23,9 +23,24 @@
         <dependencies>
             <dependency>
                 <groupId>com.pingpongx.smb</groupId>
+                <artifactId>smb-fee-dependency</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.pingpongx.smb</groupId>
+                <artifactId>smb-fee-api</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.pingpongx.smb</groupId>
                 <artifactId>smb-fee-common</artifactId>
                 <version>${revision}</version>
                 <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.pingpongx.smb</groupId>
+                <artifactId>smb-fee-dal</artifactId>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.pingpongx.smb</groupId>

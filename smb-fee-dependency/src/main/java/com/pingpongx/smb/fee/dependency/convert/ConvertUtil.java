@@ -1,4 +1,4 @@
-package com.pingpongx.smb.fee.server.utils;
+package com.pingpongx.smb.fee.dependency.convert;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

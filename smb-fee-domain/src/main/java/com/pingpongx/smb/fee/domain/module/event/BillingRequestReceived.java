@@ -2,13 +2,11 @@ package com.pingpongx.smb.fee.domain.module.event;
 
 import com.pingpongx.smb.fee.domain.runtime.BillingContext;
 
-public class BillingRequestReceived implements BillingStage {
+public class BillingRequestReceived extends AbstractStage {
 
-    BillingContext context;
 
-    @Override
-    public String getStageCode() {
-        return this.getClass().getSimpleName();
+    public BillingRequestReceived(BillingContext context) {
+        super(context);
     }
 
     @Override
@@ -16,12 +14,5 @@ public class BillingRequestReceived implements BillingStage {
         return 0;
     }
 
-    @Override
-    public BillingContext getContext() {
-        return context;
-    }
 
-    public BillingRequestReceived(BillingContext context){
-        this.context = context;
-    }
 }

@@ -4,14 +4,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ConcurrentHashMap;
-
 /**
  * @author wangcheng
  * @Description TODO
@@ -20,7 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-public class BillingProcessDo extends FeeBaseDo {
+public class BillingContextDo extends FeeBaseDo {
 
     private static final long serialVersionUID = 8061568762858026972L;
     //冗余 定位问题方便搜索

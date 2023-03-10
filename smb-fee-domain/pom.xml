@@ -38,6 +38,10 @@
             <groupId>com.pingpongx.smb</groupId>
             <artifactId>smb-metadata-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.pingpongx.smb</groupId>
+            <artifactId>smb-fee-dal</artifactId>
+        </dependency>
     </dependencies>
 
     <properties>

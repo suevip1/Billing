@@ -5,12 +5,18 @@ import com.pingpongx.flowmore.cloud.base.server.constants.RoleRegister;
 import com.pingpongx.smb.fee.api.dtos.BillingDetail;
 import com.pingpongx.smb.fee.api.dtos.cmd.BillingRequest;
 import com.pingpongx.smb.fee.api.feign.BillingServiceFeign;
+import com.pingpongx.smb.fee.dal.dataobject.BillingContextDo;
 import com.pingpongx.smb.fee.dal.dataobject.BillingRequestDo;
 import com.pingpongx.smb.fee.dal.dataobject.RepeatDo;
+import com.pingpongx.smb.fee.dal.repository.BillingContextRepository;
 import com.pingpongx.smb.fee.dal.repository.BillingRequestRepository;
 import com.pingpongx.smb.fee.dal.repository.RepeatRepository;
+import com.pingpongx.smb.fee.dependency.convert.BillingContextConvert;
+import com.pingpongx.smb.fee.dependency.convert.BillingRequestConvert;
+import com.pingpongx.smb.fee.dependency.convert.ConvertUtil;
+import com.pingpongx.smb.fee.domain.module.event.BillingRequestReceived;
+import com.pingpongx.smb.fee.domain.module.event.BillingStage;
 import com.pingpongx.smb.fee.domain.runtime.BillingContext;
-import com.pingpongx.smb.fee.server.utils.convert.BillingRequestConvert;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -24,7 +30,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.security.RolesAllowed;
-
 import java.util.concurrent.CompletableFuture;
 
 
@@ -33,12 +38,14 @@ import java.util.concurrent.CompletableFuture;
 @RequestMapping(value = BillingServiceFeign.BASE_PATH)
 @Slf4j
 @RequiredArgsConstructor
-public class BillingServiceImpl implements BillingServiceFeign{
+public class BillingServiceImpl implements BillingServiceFeign {
 
     private final RepeatRepository repeatRepository;
     private final BillingRequestRepository billingRequestRepository;
+    private final BillingContextRepository contextRepository;
     private final TransactionTemplate txTemplate;
     private final ApplicationContext springContext;
+
 
     @RolesAllowed(RoleRegister.ROLE_COMMON_SERVICE)
     @Internal
@@ -49,24 +56,24 @@ public class BillingServiceImpl implements BillingServiceFeign{
     public BillingDetail billing(@RequestParam BillingRequest request) {
         RepeatDo repeatDo = RepeatDo.builder().repeatKey(request.identify()).scope(request.getClass().getName()).build();
         BillingRequest billingRequest = new BillingRequest();
-
-        try{
-            txTemplate.executeWithoutResult(transactionStatus -> {
-                repeatRepository.save(repeatDo);
-                billingRequestRepository.save(BillingRequestConvert.toDo(request));
-            });
-        }catch (DuplicateKeyException e){
-            BillingRequestDo ret = billingRequestRepository.findByRepeatKey(request.identify());
-        }
-
-
         BillingContext context = new BillingContext();
         context.setRequest(request);
         context.setTrial(false);
         CompletableFuture<BillingContext> future = new CompletableFuture<>();
-        context.setFuture(future);
-        springContext.publishEvent(context);
 
+        try {
+            txTemplate.executeWithoutResult(transactionStatus -> {
+                repeatRepository.save(repeatDo);
+                billingRequestRepository.save(BillingRequestConvert.toDo(request));
+            });
+        } catch (DuplicateKeyException e) {
+            BillingContextDo retDo = contextRepository.findByRepeatKey(request.identify());
+            context = BillingContextConvert.toContext(retDo);
+        }
+        BillingStage stage = context.resume(future);
+        springContext.publishEvent(stage);
+
+        //处理同步返回
         context = future.join();
         BillingDetail resp = new BillingDetail();
         resp.setFees(context.getFeeResult());
