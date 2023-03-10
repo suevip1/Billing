@@ -5,8 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
- * @author wangcheng
- * @Description TODO
+ * @author xuyq
  * @createTime 2022年06月28日 11:54:00
  */
 @Data
@@ -21,9 +20,21 @@ public class BillingContextDo extends FeeBaseDo {
     String requestRepeatKey;
 
     //Context实际字段
+    /**
+     * 请求体
+     */
     String request;
+    /**
+     * 参数缓存
+     */
     String params;
+    /**
+     * 匹配结果
+     */
     String matchedCostItem;
+    /**
+     * 计算结果
+     */
     String bill;
     /**
      * key：costItemCode ， val：calculateResult
