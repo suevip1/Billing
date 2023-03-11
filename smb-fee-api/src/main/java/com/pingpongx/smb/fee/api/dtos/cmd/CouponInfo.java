@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+
 @Data
 public class CouponInfo implements Serializable, Identified {
 
@@ -25,11 +26,11 @@ public class CouponInfo implements Serializable, Identified {
      */
     String stage;
     /**
-     *  credit 按额度核销 , count 按次数核销
+     * credit 按额度核销 , count 按次数核销
      */
     String writeOffType;
 
-    public String identify(){
+    public String identify() {
         String split = "-";
         StringBuilder builder = new StringBuilder();
         builder.append(couponId).append(split).append(usdCredit);

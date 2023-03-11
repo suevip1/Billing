@@ -48,7 +48,7 @@ public class BillingRequest implements Serializable, Identified {
      */
     List<CouponInfo> couponList;
 
-    public String identify(){
+    public String identify() {
         String split = ":";
         StringBuilder builder = new StringBuilder();
         builder.append(order.getBizOrderType()).append(split);

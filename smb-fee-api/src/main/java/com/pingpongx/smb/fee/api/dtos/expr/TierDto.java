@@ -5,11 +5,12 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Data;
 
 import java.util.List;
+
 @Data
 @JSONType(typeName = "TierDto")
-public class TierDto extends ExprDto{
+public class TierDto extends ExprDto {
 
-    @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type",visible = true)
+    @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type", visible = true)
     List<NodeWithContidionDto> list;
     String type = "Tier";
 }

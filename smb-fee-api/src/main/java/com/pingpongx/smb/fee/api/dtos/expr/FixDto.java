@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @JSONType(typeName = "FixDto")
-public class FixDto extends ExprDto{
+public class FixDto extends ExprDto {
     double fix;
     String type = "Fix";
 

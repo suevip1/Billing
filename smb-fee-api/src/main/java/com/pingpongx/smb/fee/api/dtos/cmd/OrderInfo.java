@@ -1,8 +1,6 @@
 package com.pingpongx.smb.fee.api.dtos.cmd;
 
-import com.pingpongx.smb.payment.api.req.ApplyPayRequest;
 import lombok.Data;
-import org.joda.money.Money;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

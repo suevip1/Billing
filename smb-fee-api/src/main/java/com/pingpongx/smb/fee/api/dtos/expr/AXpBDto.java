@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @JSONType(typeName = "AXpBDto")
-public class AXpBDto extends ExprDto{
+public class AXpBDto extends ExprDto {
     double a;
     double b;
     String varCode;

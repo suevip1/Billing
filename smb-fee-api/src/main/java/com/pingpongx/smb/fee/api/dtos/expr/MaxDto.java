@@ -8,9 +8,9 @@ import java.util.List;
 
 @Data
 @JSONType(typeName = "MaxDto")
-public class MaxDto extends ExprDto{
+public class MaxDto extends ExprDto {
 
-    @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type",visible = true)
+    @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type", visible = true)
     List<ExprDto> list;
     String type = "Max";
 }
