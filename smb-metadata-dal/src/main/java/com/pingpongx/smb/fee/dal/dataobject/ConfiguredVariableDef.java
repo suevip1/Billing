@@ -20,6 +20,9 @@ public class ConfiguredVariableDef extends BaseDO {
     boolean isNum;
     String type;
 
+    /***
+     * java 类型
+     */
     String sourceType;
     String nameSpace;
 }

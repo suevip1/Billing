@@ -2,19 +2,16 @@ package com.pingpongx.smb.fee.server.rpc;
 
 import com.pingpongx.flowmore.cloud.base.server.annotation.Internal;
 import com.pingpongx.flowmore.cloud.base.server.constants.RoleRegister;
-import com.pingpongx.smb.fee.api.dtos.BillingDetail;
 import com.pingpongx.smb.fee.api.dtos.cmd.BillingRequest;
+import com.pingpongx.smb.fee.api.dtos.resp.Bill;
 import com.pingpongx.smb.fee.api.feign.BillingServiceFeign;
 import com.pingpongx.smb.fee.dal.dataobject.BillingContextDo;
-import com.pingpongx.smb.fee.dal.dataobject.BillingRequestDo;
 import com.pingpongx.smb.fee.dal.dataobject.RepeatDo;
 import com.pingpongx.smb.fee.dal.repository.BillingContextRepository;
 import com.pingpongx.smb.fee.dal.repository.BillingRequestRepository;
 import com.pingpongx.smb.fee.dal.repository.RepeatRepository;
-import com.pingpongx.smb.fee.dependency.convert.BillingContextConvert;
 import com.pingpongx.smb.fee.dependency.convert.BillingRequestConvert;
-import com.pingpongx.smb.fee.dependency.convert.ConvertUtil;
-import com.pingpongx.smb.fee.domain.module.event.BillingRequestReceived;
+import com.pingpongx.smb.fee.domain.convert.runtime.BillingContextConvert;
 import com.pingpongx.smb.fee.domain.module.event.BillingStage;
 import com.pingpongx.smb.fee.domain.runtime.BillingContext;
 import io.swagger.annotations.Api;
@@ -53,7 +50,7 @@ public class BillingServiceImpl implements BillingServiceFeign {
             @ApiImplicitParam(name = "Authorization", value = "service smb-fee@test", required = false, paramType = "header"),
             @ApiImplicitParam(name = "appId", value = "test@smb-fee", required = false, paramType = "header"),
     })
-    public BillingDetail billing(@RequestParam BillingRequest request) {
+    public Bill billing(@RequestParam BillingRequest request) {
         RepeatDo repeatDo = RepeatDo.builder().repeatKey(request.identify()).scope(request.getClass().getName()).build();
         BillingRequest billingRequest = new BillingRequest();
         BillingContext context = new BillingContext();
@@ -75,9 +72,7 @@ public class BillingServiceImpl implements BillingServiceFeign {
 
         //处理同步返回
         context = future.join();
-        BillingDetail resp = new BillingDetail();
-        resp.setFees(context.getFeeResult());
-        resp.setExpenses(context.getExpense());
+        Bill resp = context.getBill();
         return resp;
     }
 
@@ -87,7 +82,7 @@ public class BillingServiceImpl implements BillingServiceFeign {
     })
     @RolesAllowed(RoleRegister.ROLE_COMMON_SERVICE)
     @Internal
-    public BillingDetail trial(@RequestParam BillingRequest request) {
+    public Bill trial(@RequestParam BillingRequest request) {
         return null;
     }
 

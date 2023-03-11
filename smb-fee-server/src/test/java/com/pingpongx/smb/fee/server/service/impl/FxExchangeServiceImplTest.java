@@ -1,6 +1,6 @@
 package com.pingpongx.smb.fee.server.service.impl;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.pingpongx.flowmore.cloud.base.server.app.BaseApplicationRun;
 import com.pingpongx.flowmore.cloud.base.server.app.BaseTest;
 import com.pingpongx.smb.fee.api.feign.FxExchangeFeignService;

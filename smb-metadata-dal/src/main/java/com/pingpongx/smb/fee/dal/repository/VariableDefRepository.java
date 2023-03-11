@@ -25,6 +25,12 @@ public class VariableDefRepository extends BaseRepository<VariableDefMapper, Con
         return this.list(queryChainWrapper.getWrapper());
     }
 
+    public ConfiguredVariableDef getByCode(String code) {
+        LambdaQueryChainWrapper queryChainWrapper = this.lambdaQuery()
+                .eq(ConfiguredVariableDef::getCode, code);
+        return this.getOne(queryChainWrapper.getWrapper());
+    }
+
     public List<ConfiguredVariableDef> listAll(ListAll req) {
         LambdaQueryChainWrapper queryChainWrapper = this.lambdaQuery().eq(StringUtils.isEmpty(req.getNamespace()), ConfiguredVariableDef::getNameSpace, req.getNamespace());
         return this.list(queryChainWrapper.getWrapper());

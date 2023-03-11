@@ -1,5 +1,7 @@
 package com.pingpongx.smb.fee.domain.module.express;
 
+import com.pingpongx.smb.fee.api.dtos.expr.ExprDto;
+import com.pingpongx.smb.fee.api.dtos.expr.FixDto;
 import com.pingpongx.smb.fee.domain.runtime.BillingContext;
 import lombok.Data;
 
@@ -18,6 +20,18 @@ public class Fixed implements BasicExpr,Calculator{
     @Override
     public Calculator getCalculator() {
         return  this;
+    }
+
+    @Override
+    public String getType() {
+        return "Fix";
+    }
+
+    @Override
+    public ExprDto toDto() {
+        FixDto dto = new FixDto();
+        dto.setFix(fix.doubleValue());
+        return dto;
     }
 
     @Override

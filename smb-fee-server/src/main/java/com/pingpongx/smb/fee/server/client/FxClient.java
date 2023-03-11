@@ -1,8 +1,8 @@
 package com.pingpongx.smb.fee.server.client;
 
 import com.alibaba.cloud.commons.lang.StringUtils;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
 import com.pingpongx.business.common.exception.BizException;
 import com.pingpongx.business.common.exception.ErrorCode;
 import com.pingpongx.smb.fee.common.dto.FxGuidePriceExchangeDTO;
@@ -75,7 +75,7 @@ public class FxClient {
                 throw new BizException(ErrorCode.BIZ_BREAK, "获取汇率配置结果为空");
             }
 
-            List<FxGuidePriceExchangeDTO> exchangeDTOList = JSONObject.parseArray(result.getString("data"), FxGuidePriceExchangeDTO.class);
+            List<FxGuidePriceExchangeDTO> exchangeDTOList = JSON.parseArray(result.getString("data"), FxGuidePriceExchangeDTO.class);
             return exchangeDTOList;
         } catch (Exception e) {
             log.error("获取福鑫汇率异常", e);
@@ -95,7 +95,7 @@ public class FxClient {
             }
             return fxGuidePriceExchange;
         }
-        return JSONObject.parseArray(s, FxGuidePriceExchangeDTO.class);
+        return JSON.parseArray(s, FxGuidePriceExchangeDTO.class);
     }
 
 

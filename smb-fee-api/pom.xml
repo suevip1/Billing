@@ -43,14 +43,6 @@
             <groupId>com.pingpongx.smb</groupId>
             <artifactId>smb-metadata-api</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.pingpongx.smb</groupId>
-            <artifactId>smb-fee-dependency</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.pingpongx.smb</groupId>
-            <artifactId>smb-fee-dependency</artifactId>
-        </dependency>
     </dependencies>
 
     <properties>

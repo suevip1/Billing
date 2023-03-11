@@ -28,6 +28,10 @@
             <groupId>com.pingpongx.smb</groupId>
             <artifactId>smb-fee-dal</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.alibaba.fastjson2</groupId>
+            <artifactId>fastjson2</artifactId>
+        </dependency>
     </dependencies>
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

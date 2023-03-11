@@ -1,6 +1,6 @@
 package com.pingpongx.smb.fee.server.job;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.pingpongx.job.core.biz.model.ReturnT;
 import com.pingpongx.job.core.handler.IJobHandler;
 import com.pingpongx.job.core.handler.annotation.JobHandler;

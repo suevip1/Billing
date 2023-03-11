@@ -1,6 +1,6 @@
 package com.pingpongx.smb.fee.server.service.impl;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.pingpongx.business.common.dto.Money;

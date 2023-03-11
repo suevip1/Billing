@@ -1,6 +1,9 @@
 package com.pingpongx.smb.fee.domain.module.express;
 
 import com.pingpongx.smb.export.module.Rule;
+import com.pingpongx.smb.fee.api.dtos.expr.ExprDto;
+import com.pingpongx.smb.fee.api.dtos.expr.NodeWithContidionDto;
+import com.pingpongx.smb.fee.api.dtos.expr.TierDto;
 import com.pingpongx.smb.fee.domain.runtime.BillingContext;
 
 import java.math.BigDecimal;
@@ -25,6 +28,20 @@ public class Tier implements ExprMap,Calculator{
     public Calculator getCalculator() {
         //阶梯元素会被入引擎匹配，阶梯集合本身不会入引
         return this;
+    }
+
+    @Override
+    public String getType() {
+        return "Tier";
+    }
+
+    @Override
+    public ExprDto toDto() {
+        TierDto tierDto = new TierDto();
+        List<NodeWithContidionDto> nodeList = list.stream()
+                .map(n->n.toDto()).collect(Collectors.toList());
+        tierDto.setList(nodeList);
+        return tierDto;
     }
 
     @Override

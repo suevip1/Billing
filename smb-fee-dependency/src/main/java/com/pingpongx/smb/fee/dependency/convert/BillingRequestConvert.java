@@ -1,6 +1,6 @@
 package com.pingpongx.smb.fee.dependency.convert;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import com.pingpongx.smb.fee.api.dtos.cmd.BillingRequest;
 import com.pingpongx.smb.fee.api.dtos.cmd.CouponInfo;
 import com.pingpongx.smb.fee.api.dtos.cmd.OrderInfo;
@@ -18,7 +18,7 @@ public class BillingRequestConvert {
     }
 
     public static BillingRequest toRequest(BillingRequestDo request) {
-        return ConvertUtil.toDto(request, BillingRequest.class, (one) -> {
+        return ConvertUtil.to(request, BillingRequest.class, (one) -> {
             one.setOrder(JSON.parseObject(request.getOrder(), OrderInfo.class));
             one.setCouponList(JSON.parseArray(request.getCouponList(), CouponInfo.class));
         });

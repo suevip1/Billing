@@ -15,12 +15,12 @@ import java.util.stream.Collectors;
 
 public class ConvertUtil {
 
-    public static <Do extends FeeBaseDo, Dto extends Serializable> Dto toDto(Do dataObject, Class<Dto> target) {
+    public static <One , Other> Other to(One dataObject, Class<Other> target) {
         ActionContext.getInstance().getContext().getUserId();
         //TODO : ignore properties List;
         List<String> ignore = new ArrayList<>();
         try {
-            Dto ret = target.newInstance();
+            Other ret = target.newInstance();
             BeanUtils.copyProperties(dataObject, ret, ignore.toArray(new String[]{}));
             return ret;
         } catch (InstantiationException e) {
@@ -32,14 +32,14 @@ public class ConvertUtil {
         }
     }
 
-    public static <Do extends FeeBaseDo, Dto extends Serializable> Dto toDto(Do dataObject, Class<Dto> target, Consumer<Dto> dtoConsumer) {
-        Dto dto = toDto(dataObject, target);
+    public static <Do , Dto > Dto to(Do dataObject, Class<Dto> target, Consumer<Dto> dtoConsumer) {
+        Dto dto = to(dataObject, target);
         dtoConsumer.accept(dto);
         return dto;
     }
 
     public static <Do extends FeeBaseDo, Dto extends Serializable> List<Dto> toDtoList(List<Do> dataObjects, Class<Dto> target) {
-        return dataObjects.stream().map(d -> toDto(d, target)).collect(Collectors.toList());
+        return dataObjects.stream().map(d -> to(d, target)).collect(Collectors.toList());
     }
 
     public static <Do extends FeeBaseDo, Dto extends Serializable> List<Do> toDoList(List<Dto> dataObjects, Class<Do> target) {

@@ -1,4 +1,4 @@
-package com.pingpongx.smb.fee.domain.coupon;
+package com.pingpongx.smb.fee.domain.module.coupon;
 
 import com.pingpongx.smb.fee.domain.module.CostItem;
 import com.pingpongx.smb.fee.domain.module.CostNode;

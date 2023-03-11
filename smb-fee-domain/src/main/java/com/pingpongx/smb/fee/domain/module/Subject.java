@@ -1,6 +1,7 @@
 package com.pingpongx.smb.fee.domain.module;
 
 public class Subject {
+    long id;
     String code;
     String displayName;
 

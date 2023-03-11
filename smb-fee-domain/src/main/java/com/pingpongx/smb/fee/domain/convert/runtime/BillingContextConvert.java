@@ -1,11 +1,10 @@
-package com.pingpongx.smb.fee.dependency.convert;
+package com.pingpongx.smb.fee.domain.convert.runtime;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import com.pingpongx.smb.fee.api.dtos.cmd.BillingRequest;
 import com.pingpongx.smb.fee.api.dtos.resp.Bill;
-import com.pingpongx.smb.fee.api.dtos.resp.CostItemResult;
-import com.pingpongx.smb.fee.api.dtos.resp.CouponResult;
 import com.pingpongx.smb.fee.dal.dataobject.BillingContextDo;
+import com.pingpongx.smb.fee.dependency.convert.ConvertUtil;
 import com.pingpongx.smb.fee.domain.module.CostItem;
 import com.pingpongx.smb.fee.domain.runtime.BillingContext;
 import org.apache.commons.lang3.StringUtils;
@@ -37,7 +36,7 @@ public class BillingContextConvert {
     }
 
     public static BillingContext toContext(BillingContextDo dbO) {
-        return ConvertUtil.toDto(dbO, BillingContext.class, (one) -> {
+        return ConvertUtil.to(dbO, BillingContext.class, (one) -> {
             if (!StringUtils.isBlank(dbO.getRequest())) {
                 one.setRequest(JSON.parseObject(dbO.getRequest(), BillingRequest.class));
             }

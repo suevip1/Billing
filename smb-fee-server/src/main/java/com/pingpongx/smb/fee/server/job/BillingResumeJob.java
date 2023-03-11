@@ -1,19 +1,14 @@
 package com.pingpongx.smb.fee.server.job;
 
-import com.alibaba.fastjson.JSONObject;
 import com.pingpongx.job.core.biz.model.ReturnT;
 import com.pingpongx.job.core.handler.IJobHandler;
 import com.pingpongx.job.core.handler.annotation.JobHandler;
-import com.pingpongx.smb.fee.common.dto.FeeConfigDTO;
 import com.pingpongx.smb.fee.dal.dataobject.BillingContextDo;
 import com.pingpongx.smb.fee.dal.repository.BillingContextRepository;
-import com.pingpongx.smb.fee.dependency.convert.BillingContextConvert;
+import com.pingpongx.smb.fee.domain.convert.runtime.BillingContextConvert;
 import com.pingpongx.smb.fee.domain.runtime.BillingContext;
-import com.pingpongx.smb.fee.server.service.FeeConfigService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 

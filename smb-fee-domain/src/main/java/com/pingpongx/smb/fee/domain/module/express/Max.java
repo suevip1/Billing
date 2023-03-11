@@ -1,5 +1,7 @@
 package com.pingpongx.smb.fee.domain.module.express;
 
+import com.pingpongx.smb.fee.api.dtos.expr.ExprDto;
+import com.pingpongx.smb.fee.api.dtos.expr.MaxDto;
 import com.pingpongx.smb.fee.domain.runtime.BillingContext;
 
 import java.math.BigDecimal;
@@ -23,6 +25,19 @@ public class Max implements ExprCollection,Calculator{
     @Override
     public Calculator getCalculator() {
         return this;
+    }
+
+    @Override
+    public String getType() {
+        return "Max";
+    }
+
+    @Override
+    public ExprDto toDto() {
+        MaxDto maxDto = new MaxDto();
+        List<ExprDto> dtoList = list.stream().map(expr -> expr.toDto()).collect(Collectors.toList());
+        maxDto.setList(dtoList);
+        return maxDto;
     }
 
 

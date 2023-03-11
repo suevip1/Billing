@@ -1,6 +1,6 @@
 package com.pingpongx.smb.fee.server.service.impl;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.pingpongx.smb.fee.common.dto.FxGuidePriceExchangeDTO;
 import com.pingpongx.smb.fee.common.resp.ExchangeRateResponse;
 import com.pingpongx.smb.fee.server.client.FxClient;

@@ -1,10 +1,14 @@
 package com.pingpongx.smb.fee.domain.module.express;
 
+import com.pingpongx.smb.fee.api.dtos.expr.ExprDto;
+import com.pingpongx.smb.fee.api.dtos.expr.MaxDto;
+import com.pingpongx.smb.fee.api.dtos.expr.MinDto;
 import com.pingpongx.smb.fee.domain.runtime.BillingContext;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Min implements ExprCollection,Calculator{
     List<Expr> list = new ArrayList<>();
@@ -18,6 +22,19 @@ public class Min implements ExprCollection,Calculator{
     @Override
     public Calculator getCalculator() {
         return this;
+    }
+
+    @Override
+    public String getType() {
+        return "Min";
+    }
+
+    @Override
+    public ExprDto toDto() {
+        MinDto minDto = new MinDto();
+        List<ExprDto> dtoList = list.stream().map(expr -> expr.toDto()).collect(Collectors.toList());
+        minDto.setList(dtoList);
+        return minDto;
     }
 
     @Override

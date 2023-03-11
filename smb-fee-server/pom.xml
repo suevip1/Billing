@@ -60,6 +60,10 @@
             <groupId>com.pingpongx.mid</groupId>
             <artifactId>job-spring-boot-starter</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.pingpongx.smb</groupId>
+            <artifactId>smb-fee-domain</artifactId>
+        </dependency>
 
     </dependencies>
 

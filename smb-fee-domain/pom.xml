@@ -40,7 +40,19 @@
         </dependency>
         <dependency>
             <groupId>com.pingpongx.smb</groupId>
+            <artifactId>smb-metadata-dal</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.pingpongx.smb</groupId>
             <artifactId>smb-fee-dal</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.fastjson2</groupId>
+            <artifactId>fastjson2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.pingpongx.smb</groupId>
+            <artifactId>smb-fee-dependency</artifactId>
         </dependency>
     </dependencies>
 
