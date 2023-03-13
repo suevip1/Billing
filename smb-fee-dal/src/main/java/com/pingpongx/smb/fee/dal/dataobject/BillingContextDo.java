@@ -4,6 +4,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import java.math.BigDecimal;
+import java.util.HashMap;
+
 /**
  * @author xuyq
  * @createTime 2022年06月28日 11:54:00
@@ -39,5 +42,5 @@ public class BillingContextDo extends FeeBaseDo {
     /**
      * key：costItemCode ， val：calculateResult
      */
-    String cache;
+    String calculateResult;
 }

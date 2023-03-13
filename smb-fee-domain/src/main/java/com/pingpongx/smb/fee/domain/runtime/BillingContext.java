@@ -24,7 +24,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class BillingContext implements Serializable {
     BillingRequest request;
 
-    Map<String , Object> params = new HashMap<>();
+    Map<String , String> params = new HashMap<>();
 
     List<CostItem> matchedCostItem;
 
@@ -36,6 +36,8 @@ public class BillingContext implements Serializable {
      * key：costItemCode ， val：calculateResult
      */
     ConcurrentHashMap<String , BigDecimal> cache = new ConcurrentHashMap<>();
+
+    Map<String , BigDecimal> calculateResult = new HashMap<>();
 
     CompletableFuture<BillingContext> future;
 

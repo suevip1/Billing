@@ -31,15 +31,15 @@ public class VariableDefServiceImpl implements VariableDefService {
     }
 
     @Override
-    public List<VariableDefDto> getByCode(GetByCode request) {
+    public List<VariableDefDto> listAll(List<String> request) {
         return repository.getByCode(request).stream()
                 .map(VariableDefAdapter::do2Dto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<VariableDefDto> getByCode(ListAll request) {
-        return repository.listAll(request).stream()
+    public List<VariableDefDto> listAll(String nameSpace) {
+        return repository.listAll(nameSpace).stream()
                 .map(VariableDefAdapter::do2Dto)
                 .collect(Collectors.toList());
     }

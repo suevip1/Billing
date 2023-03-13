@@ -4,6 +4,7 @@ import com.alibaba.fastjson2.JSON;
 import com.pingpongx.smb.export.module.Rule;
 import com.pingpongx.smb.export.module.persistance.RuleDto;
 import com.pingpongx.smb.fee.api.dtos.expr.ExprDto;
+import com.pingpongx.smb.fee.api.dtos.rule.MatchRuleDto;
 import com.pingpongx.smb.fee.dal.dataobject.CostItemDo;
 import com.pingpongx.smb.fee.domain.enums.CalculateMode;
 import com.pingpongx.smb.fee.domain.enums.Direction;
@@ -27,7 +28,8 @@ public class CostItemFactory {
         }
         costItem.setCode(costItemDo.getCode());
         if (!StringUtils.isEmpty(costItemDo.getCalculateExpress())){
-            Rule rule = Codec.buildRule(JSON.parseObject(costItemDo.getMatchRule(), RuleDto.class));
+            MatchRuleDto matchRuleDto = JSON.parseObject(costItemDo.getMatchRule(), MatchRuleDto.class);
+            Rule rule = Codec.buildRule(matchRuleDto.toEngineRule());
             costItem.setMatchRule(rule);
         }
         if (!StringUtils.isEmpty(costItemDo.getMatchVarKeys())){

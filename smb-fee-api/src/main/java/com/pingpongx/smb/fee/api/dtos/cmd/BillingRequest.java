@@ -19,6 +19,10 @@ public class BillingRequest implements Serializable, Identified {
      */
     Long billingTime;
     /***
+     * 计费节点
+     */
+    String costNodeCode;
+    /***
      * Did buClientId 具体数据
      */
     String subject;
@@ -59,4 +63,11 @@ public class BillingRequest implements Serializable, Identified {
         return builder.toString();
     }
 
+
+    public String valid(){
+        if (this.costNodeCode == null){
+            return "cost node code can't be null.";
+        }
+        return null;
+    }
 }

@@ -12,7 +12,9 @@ import com.pingpongx.smb.fee.dal.repository.BillingRequestRepository;
 import com.pingpongx.smb.fee.dal.repository.RepeatRepository;
 import com.pingpongx.smb.fee.dependency.convert.BillingRequestConvert;
 import com.pingpongx.smb.fee.domain.convert.runtime.BillingContextConvert;
+import com.pingpongx.smb.fee.domain.module.event.BillingRequestReceived;
 import com.pingpongx.smb.fee.domain.module.event.BillingStage;
+import com.pingpongx.smb.fee.domain.module.event.CalculateCompleted;
 import com.pingpongx.smb.fee.domain.runtime.BillingContext;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -67,7 +69,7 @@ public class BillingServiceImpl implements BillingServiceFeign {
             BillingContextDo retDo = contextRepository.findByRepeatKey(request.identify());
             context = BillingContextConvert.toContext(retDo);
         }
-        BillingStage stage = context.resume(future);
+        BillingRequestReceived stage = (BillingRequestReceived) context.resume(future);
         springContext.publishEvent(stage);
 
         //处理同步返回

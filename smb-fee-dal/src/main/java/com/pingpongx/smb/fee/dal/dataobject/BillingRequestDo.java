@@ -27,6 +27,10 @@ public class BillingRequestDo extends FeeBaseDo {
      */
     Long billingTime;
     /***
+     * 计费节点
+     */
+    String costNodeCode;
+    /***
      * Did buClientId 具体数据
      */
     String subject;

@@ -1,16 +1,16 @@
 package com.pingpongx.smb.fee.domain.module;
 
-import com.pingpongx.smb.export.module.ConfiguredLeafRule;
 import com.pingpongx.smb.export.module.Rule;
-import com.pingpongx.smb.export.module.operation.RuleOr;
-import com.pingpongx.smb.fee.domain.enums.Direction;
 import com.pingpongx.smb.fee.domain.enums.CalculateMode;
+import com.pingpongx.smb.fee.domain.enums.Direction;
 import com.pingpongx.smb.fee.domain.module.express.Expr;
+import io.swagger.models.auth.In;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
+
 @Data
 public class CostItem implements Serializable {
     private static final long serialVersionUID = -5131494290628937192L;
@@ -27,7 +27,7 @@ public class CostItem implements Serializable {
      * Source , Target
      */
     String currencyType;
-    Long priority;
+    Integer priority;
     Direction inOrOut;
     LocalDateTime startTime;
     LocalDateTime endTime;

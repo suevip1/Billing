@@ -9,6 +9,8 @@ import com.pingpongx.smb.metadata.qry.ListAll;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -20,8 +22,8 @@ public class VariableDefRepository extends BaseRepository<VariableDefMapper, Con
 
     public static final String ALL = "ALL";
 
-    public List<ConfiguredVariableDef> getByCode(GetByCode req) {
-        LambdaQueryChainWrapper queryChainWrapper = this.lambdaQuery().eq(StringUtils.isEmpty(req.getNamespace()), ConfiguredVariableDef::getNameSpace, req.getNamespace()).in(ConfiguredVariableDef::getCode, req.getDefCode());
+    public List<ConfiguredVariableDef> getByCode(Collection<String> req) {
+        LambdaQueryChainWrapper queryChainWrapper = this.lambdaQuery().in(ConfiguredVariableDef::getCode, req);
         return this.list(queryChainWrapper.getWrapper());
     }
 
@@ -31,8 +33,8 @@ public class VariableDefRepository extends BaseRepository<VariableDefMapper, Con
         return this.getOne(queryChainWrapper.getWrapper());
     }
 
-    public List<ConfiguredVariableDef> listAll(ListAll req) {
-        LambdaQueryChainWrapper queryChainWrapper = this.lambdaQuery().eq(StringUtils.isEmpty(req.getNamespace()), ConfiguredVariableDef::getNameSpace, req.getNamespace());
+    public List<ConfiguredVariableDef> listAll(String nameSpace) {
+        LambdaQueryChainWrapper queryChainWrapper = this.lambdaQuery().eq(StringUtils.isEmpty(nameSpace), ConfiguredVariableDef::getNameSpace, nameSpace);
         return this.list(queryChainWrapper.getWrapper());
     }
 
