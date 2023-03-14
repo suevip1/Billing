@@ -9,9 +9,7 @@ import com.pingpongx.smb.fee.domain.module.CostItem;
 import com.pingpongx.smb.fee.domain.runtime.BillingContext;
 import org.apache.commons.lang3.StringUtils;
 
-import java.math.BigDecimal;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class BillingContextConvert {
     public static BillingContextDo toDo(BillingContext context) {
@@ -31,12 +29,6 @@ public class BillingContextConvert {
             if (context.getMatchedCostItem() != null) {
                 one.setMatchedCostItem(JSON.toJSONString(context.getMatchedCostItem()));
             }
-            if (context.getCache() != null) {
-                one.setCalculateResult(JSON.toJSONString(context.getCalculateResult()));
-            }
-            if (context.getFailedReasons() != null) {
-                one.setFailedReasons(JSON.toJSONString(context.getFailedReasons()));
-            }
         });
     }
 
@@ -53,16 +45,6 @@ public class BillingContextConvert {
             }
             if (!StringUtils.isBlank(dbO.getMatchedCostItem())) {
                 one.setMatchedCostItem(JSON.parseArray(dbO.getMatchedCostItem(), CostItem.class));
-            }
-            if (!StringUtils.isBlank(dbO.getCalculateResult())) {
-//                Map<String,String> calculateResult = JSON.parseObject(dbO.getCalculateResult(), Map.class);
-//                Map<String,BigDecimal> result = calculateResult.entrySet().stream().
-//                        collect(Collectors.toMap(stringStringEntry -> stringStringEntry.getKey(),stringStringEntry -> new BigDecimal(stringStringEntry.getValue())));
-//                one.setCalculateResult(result);
-                one.setCalculateResult(JSON.parseObject(dbO.getCalculateResult(), Map.class));
-            }
-            if (!StringUtils.isBlank(dbO.getFailedReasons())) {
-                one.setFailedReasons(JSON.parseObject(dbO.getFailedReasons(), Map.class));
             }
 
         });

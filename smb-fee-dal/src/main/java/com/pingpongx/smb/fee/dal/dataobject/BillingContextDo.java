@@ -1,5 +1,6 @@
 package com.pingpongx.smb.fee.dal.dataobject;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -14,6 +15,7 @@ import java.util.HashMap;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
+@TableName("billing_context")
 public class BillingContextDo extends FeeBaseDo {
 
     private static final long serialVersionUID = 8061568762858026972L;
@@ -39,9 +41,5 @@ public class BillingContextDo extends FeeBaseDo {
      * 计算结果
      */
     String bill;
-    /**
-     * key：costItemCode ， val：calculateResult
-     */
-    String calculateResult;
-    String failedReasons;
+
 }
