@@ -7,6 +7,7 @@ import com.pingpongx.smb.fee.api.dtos.expr.ExprDto;
 import com.pingpongx.smb.fee.api.dtos.rule.MatchRuleDto;
 import com.pingpongx.smb.fee.dal.dataobject.CostItemDo;
 import com.pingpongx.smb.fee.domain.enums.CalculateMode;
+import com.pingpongx.smb.fee.domain.enums.CurrencyType;
 import com.pingpongx.smb.fee.domain.enums.Direction;
 import com.pingpongx.smb.fee.domain.factory.expr.ExprFactory;
 import com.pingpongx.smb.fee.domain.module.CostItem;
@@ -45,7 +46,7 @@ public class CostItemFactory {
             costItem.setMode(mode);
         }
         costItem.setCollectionCode(costItemDo.getCollectionCode());
-        costItem.setCurrencyType(costItemDo.getCurrencyType());
+        costItem.setCurrencyType(CurrencyType.valueOf(costItemDo.getCurrencyType()));
         costItem.setPriority(costItemDo.getPriority());
         if (!StringUtils.isEmpty(costItemDo.getInOrOut())){
             Direction direction = Direction.valueOf(costItemDo.getInOrOut());
