@@ -48,7 +48,7 @@ public class BillingRequestDo extends FeeBaseDo {
      * 用于幂等
      */
     Long fxRateId;
-    String order;
+    String orderInfo;
 
     String bizOrderId;
 

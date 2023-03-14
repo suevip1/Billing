@@ -38,7 +38,7 @@ public class BillingRequest implements Serializable, Identified {
      * 用于幂等
      */
     Long fxRateId;
-    OrderInfo order;
+    OrderInfo orderInfo;
     /**
      * 来源系统 B2B FM Dispatch Common
      */
@@ -55,8 +55,8 @@ public class BillingRequest implements Serializable, Identified {
     public String identify() {
         String split = ":";
         StringBuilder builder = new StringBuilder();
-        builder.append(order.getBizOrderType()).append(split);
-        builder.append(order.getBizOrderId()).append(split);
+        builder.append(orderInfo.getBizOrderType()).append(split);
+        builder.append(orderInfo.getBizOrderId()).append(split);
         builder.append(fxRateId).append(split);
         String couponRepeat = couponList.stream().map(couponInfo -> couponInfo.identify()).collect(Collectors.joining(","));
         builder.append(couponRepeat);
@@ -71,16 +71,16 @@ public class BillingRequest implements Serializable, Identified {
         if (this.billingTime == null){
             return "billingTime can't be null.";
         }
-        if (order==null){
+        if (orderInfo ==null){
             return "order info can't be null.";
         }
-        if (order.getTargetCurrency()==null){
+        if (orderInfo.getTargetCurrency()==null){
             return "target currency can't be null.";
         }
-        if (order.getSourceCurrency()==null){
+        if (orderInfo.getSourceCurrency()==null){
             return "source currency can't be null.";
         }
-        if (fxRateId==null&&!order.getTargetCurrency().equals(order.getSourceCurrency())){
+        if (fxRateId==null&&!orderInfo.getTargetCurrency().equals(orderInfo.getSourceCurrency())){
             return "fxRate is required when target currency not equals source currency.";
         }
         return null;

@@ -14,8 +14,8 @@ import java.util.Map;
 public class BillingContextConvert {
     public static BillingContextDo toDo(BillingContext context) {
         return ConvertUtil.toDo(context, BillingContextDo.class, (one) -> {
-            one.setBizOrderId(context.getRequest().getOrder().getBizOrderId());
-            one.setBizOrderType(context.getRequest().getOrder().getBizOrderType());
+            one.setBizOrderId(context.getRequest().getOrderInfo().getBizOrderId());
+            one.setBizOrderType(context.getRequest().getOrderInfo().getBizOrderType());
             one.setRequestRepeatKey(context.getRequest().identify());
             if (context.getRequest() != null) {
                 one.setRequest(JSON.toJSONString(context.getRequest()));

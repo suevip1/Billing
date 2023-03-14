@@ -9,9 +9,9 @@ import com.pingpongx.smb.fee.dal.dataobject.BillingRequestDo;
 public class BillingRequestConvert {
     public static BillingRequestDo toDo(BillingRequest request) {
         return ConvertUtil.toDo(request, BillingRequestDo.class, (one) -> {
-            one.setBizOrderId(request.getOrder().getBizOrderId());
-            one.setBizOrderType(request.getOrder().getBizOrderType());
-            one.setOrder(JSON.toJSONString(request.getOrder()));
+            one.setBizOrderId(request.getOrderInfo().getBizOrderId());
+            one.setBizOrderType(request.getOrderInfo().getBizOrderType());
+            one.setOrderInfo(JSON.toJSONString(request.getOrderInfo()));
             one.setCouponList(JSON.toJSONString(request.getCouponList()));
             one.setRepeat(request.identify());
         });
@@ -19,7 +19,7 @@ public class BillingRequestConvert {
 
     public static BillingRequest toRequest(BillingRequestDo request) {
         return ConvertUtil.to(request, BillingRequest.class, (one) -> {
-            one.setOrder(JSON.parseObject(request.getOrder(), OrderInfo.class));
+            one.setOrderInfo(JSON.parseObject(request.getOrderInfo(), OrderInfo.class));
             one.setCouponList(JSON.parseArray(request.getCouponList(), CouponInfo.class));
         });
     }
