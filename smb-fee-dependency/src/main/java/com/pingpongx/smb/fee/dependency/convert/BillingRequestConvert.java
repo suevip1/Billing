@@ -13,7 +13,7 @@ public class BillingRequestConvert {
             one.setBizOrderType(request.getOrderInfo().getBizOrderType());
             one.setOrderInfo(JSON.toJSONString(request.getOrderInfo()));
             one.setCouponList(JSON.toJSONString(request.getCouponList()));
-            one.setRepeat(request.identify());
+            one.setRepeatKey(request.identify());
         });
     }
 

@@ -15,6 +15,6 @@ public class BillingRequestRepository extends FeeBaseRepository<BillingRequestMa
     public static final String ALL = "ALL";
 
     public BillingRequestDo findByRepeatKey(String repeatKey){
-        return this.getOne(this.lambdaQuery().eq(BillingRequestDo::getRepeat,repeatKey).getWrapper());
+        return this.getOne(this.lambdaQuery().eq(BillingRequestDo::getRepeatKey,repeatKey).getWrapper());
     }
 }

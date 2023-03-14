@@ -1,15 +1,12 @@
 package com.pingpongx.smb.fee.dal.dataobject;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.pingpongx.business.dal.core.BaseDO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * @author wangcheng
@@ -66,5 +63,5 @@ public class BillingRequestDo extends FeeBaseDo {
      */
     String couponList;
 
-    String repeat;
+    String repeatKey;
 }
