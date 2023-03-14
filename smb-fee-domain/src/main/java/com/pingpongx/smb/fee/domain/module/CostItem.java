@@ -2,6 +2,7 @@ package com.pingpongx.smb.fee.domain.module;
 
 import com.pingpongx.smb.export.module.Rule;
 import com.pingpongx.smb.fee.domain.enums.CalculateMode;
+import com.pingpongx.smb.fee.domain.enums.CurrencyType;
 import com.pingpongx.smb.fee.domain.enums.Direction;
 import com.pingpongx.smb.fee.domain.module.express.Expr;
 import io.swagger.models.auth.In;
@@ -26,7 +27,7 @@ public class CostItem implements Serializable {
      * 原币种  ，目标币种
      * Source , Target
      */
-    String currencyType;
+    CurrencyType currencyType;
     Integer priority;
     Direction inOrOut;
     LocalDateTime startTime;
