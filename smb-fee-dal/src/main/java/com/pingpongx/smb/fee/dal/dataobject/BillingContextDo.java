@@ -43,4 +43,5 @@ public class BillingContextDo extends FeeBaseDo {
      * key：costItemCode ， val：calculateResult
      */
     String calculateResult;
+    String failedReasons;
 }

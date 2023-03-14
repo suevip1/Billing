@@ -34,6 +34,9 @@ public class BillingContextConvert {
             if (context.getCache() != null) {
                 one.setCalculateResult(JSON.toJSONString(context.getCalculateResult()));
             }
+            if (context.getFailedReasons() != null) {
+                one.setFailedReasons(JSON.toJSONString(context.getFailedReasons()));
+            }
         });
     }
 
@@ -58,6 +61,10 @@ public class BillingContextConvert {
 //                one.setCalculateResult(result);
                 one.setCalculateResult(JSON.parseObject(dbO.getCalculateResult(), Map.class));
             }
+            if (!StringUtils.isBlank(dbO.getFailedReasons())) {
+                one.setFailedReasons(JSON.parseObject(dbO.getFailedReasons(), Map.class));
+            }
+
         });
     }
 }

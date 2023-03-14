@@ -24,7 +24,7 @@ public class CostItemDo extends FeeBaseDo {
      * Source , Target
      */
     String currencyType;
-    Long priority;
+    Integer priority;
     String inOrOut;
     LocalDateTime startTime;
     LocalDateTime endTime;

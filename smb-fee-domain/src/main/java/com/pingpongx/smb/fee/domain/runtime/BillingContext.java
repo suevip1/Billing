@@ -38,6 +38,7 @@ public class BillingContext implements Serializable {
     ConcurrentHashMap<String , BigDecimal> cache = new ConcurrentHashMap<>();
 
     Map<String , BigDecimal> calculateResult = new HashMap<>();
+    Map<String , String> failedReasons = new HashMap<>();
 
     CompletableFuture<BillingContext> future;
 
