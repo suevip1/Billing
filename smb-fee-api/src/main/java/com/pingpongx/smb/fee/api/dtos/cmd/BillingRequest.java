@@ -68,6 +68,21 @@ public class BillingRequest implements Serializable, Identified {
         if (this.costNodeCode == null){
             return "cost node code can't be null.";
         }
+        if (this.billingTime == null){
+            return "billingTime can't be null.";
+        }
+        if (order==null){
+            return "order info can't be null.";
+        }
+        if (order.getTargetCurrency()==null){
+            return "target currency can't be null.";
+        }
+        if (order.getSourceCurrency()==null){
+            return "source currency can't be null.";
+        }
+        if (fxRateId==null&&!order.getTargetCurrency().equals(order.getSourceCurrency())){
+            return "fxRate is required when target currency not equals source currency.";
+        }
         return null;
     }
 }
