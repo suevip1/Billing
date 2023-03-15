@@ -54,16 +54,16 @@ public class BillingServiceImpl implements BillingServiceFeign {
     })
     public Bill billing(@RequestParam BillingRequest request) {
         RepeatDo repeatDo = RepeatDo.builder().repeatKey(request.identify()).scope(request.getClass().getName()).build();
-        BillingRequest billingRequest = new BillingRequest();
         BillingContext context = new BillingContext();
         context.setRequest(request);
         context.setTrial(false);
         CompletableFuture<BillingContext> future = new CompletableFuture<>();
-
+        BillingContextDo contextDo = BillingContextConvert.toDo(context);
         try {
             txTemplate.executeWithoutResult(transactionStatus -> {
                 repeatRepository.save(repeatDo);
                 billingRequestRepository.save(BillingRequestConvert.toDo(request));
+                contextRepository.save(contextDo);
             });
         } catch (DuplicateKeyException e) {
             BillingContextDo retDo = contextRepository.findByRepeatKey(request.identify());
@@ -85,7 +85,17 @@ public class BillingServiceImpl implements BillingServiceFeign {
     @RolesAllowed(RoleRegister.ROLE_COMMON_SERVICE)
     @Internal
     public Bill trial(@RequestParam BillingRequest request) {
-        return null;
+        BillingContext context = new BillingContext();
+        context.setRequest(request);
+        context.setTrial(true);
+        CompletableFuture<BillingContext> future = new CompletableFuture<>();
+        BillingRequestReceived stage = (BillingRequestReceived) context.resume(future);
+        springContext.publishEvent(stage);
+        //处理同步返回
+        context = future.join();
+        Bill resp = context.getBill();
+        return resp;
     }
+
 
 }
