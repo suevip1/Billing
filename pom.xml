@@ -82,12 +82,12 @@
 
 
     <modules>
-        <module>smb-fee-api</module>
         <module>smb-metadata-api</module>
+        <module>smb-fee-api</module>
         <module>smb-fee-common</module>
         <module>smb-fee-dependency</module>
-        <module>smb-fee-dal</module>
         <module>smb-metadata-dal</module>
+        <module>smb-fee-dal</module>
         <module>smb-fee-domain</module>
         <module>smb-metadata-web</module>
         <module>smb-fee-server</module>
