@@ -69,11 +69,6 @@
                 <version>1.0.3</version>
             </dependency>
             <dependency>
-                <groupId>org.joda</groupId>
-                <artifactId>joda-money</artifactId>
-                <version>1.0.3</version>
-            </dependency>
-            <dependency>
                 <groupId>com.pingpongx.smb</groupId>
                 <artifactId>smb-rules</artifactId>
                 <version>${RuleEngineVersion}</version>
