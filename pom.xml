@@ -91,5 +91,6 @@
         <module>smb-fee-domain</module>
         <module>smb-metadata-web</module>
         <module>smb-fee-server</module>
+        <module>test</module>
     </modules>
 </project>

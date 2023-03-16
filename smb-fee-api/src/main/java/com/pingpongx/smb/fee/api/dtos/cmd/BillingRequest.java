@@ -37,7 +37,7 @@ public class BillingRequest implements Serializable, Identified {
     /**
      * 用于幂等
      */
-    Long fxRateId;
+    String fxRateId;
     OrderInfo orderInfo;
     /**
      * 来源系统 B2B FM Dispatch Common

@@ -11,11 +11,6 @@ public class OrderInfo implements Serializable {
     private static final long serialVersionUID = 8061568762580326972L;
 
     /**
-     * 计费节点
-     */
-    String nodeCode;
-
-    /**
      * 币种信息
      */
     String sourceCurrency;
