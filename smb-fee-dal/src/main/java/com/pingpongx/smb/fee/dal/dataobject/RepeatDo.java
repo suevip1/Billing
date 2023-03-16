@@ -18,7 +18,7 @@ import java.math.BigDecimal;
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
 @Builder
-@TableName("repeat")
+@TableName("repeatDo")
 public class RepeatDo extends FeeBaseDo {
 
     private static final long serialVersionUID = 8061568762858026972L;
