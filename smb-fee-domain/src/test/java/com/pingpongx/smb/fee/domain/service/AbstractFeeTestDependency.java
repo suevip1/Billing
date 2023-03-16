@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class AbstractTradeTestDependency extends MockedTest {
+public class AbstractFeeTestDependency extends MockedTest {
     public BillingRequest generateBillingRequest() {
         BillingRequest request = new BillingRequest();
         request.setBillingTime(System.currentTimeMillis());
