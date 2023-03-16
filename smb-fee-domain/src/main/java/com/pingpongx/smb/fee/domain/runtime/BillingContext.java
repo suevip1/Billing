@@ -19,6 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Data
 public class BillingContext implements Serializable {
+    Long id;
     BillingRequest request;
 
     Map<String, String> params = new HashMap<>();

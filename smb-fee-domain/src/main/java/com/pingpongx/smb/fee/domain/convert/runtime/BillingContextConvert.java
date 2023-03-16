@@ -14,6 +14,7 @@ import java.util.Map;
 public class BillingContextConvert {
     public static BillingContextDo toDo(BillingContext context) {
         return ConvertUtil.toDo(context, BillingContextDo.class, (one) -> {
+            one.setId(context.getId());
             one.setBizOrderId(context.getRequest().getOrderInfo().getBizOrderId());
             one.setBizOrderType(context.getRequest().getOrderInfo().getBizOrderType());
             one.setRequestRepeatKey(context.getRequest().identify());
@@ -34,6 +35,7 @@ public class BillingContextConvert {
 
     public static BillingContext toContext(BillingContextDo dbO) {
         return ConvertUtil.to(dbO, BillingContext.class, (one) -> {
+            one.setId(dbO.getId());
             if (!StringUtils.isBlank(dbO.getRequest())) {
                 one.setRequest(JSON.parseObject(dbO.getRequest(), BillingRequest.class));
             }
@@ -46,7 +48,6 @@ public class BillingContextConvert {
             if (!StringUtils.isBlank(dbO.getMatchedCostItem())) {
                 one.setMatchedCostItem(JSON.parseArray(dbO.getMatchedCostItem(), CostItem.class));
             }
-
         });
     }
 }

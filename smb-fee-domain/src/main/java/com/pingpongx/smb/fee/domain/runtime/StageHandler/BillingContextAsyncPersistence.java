@@ -23,18 +23,12 @@ import org.springframework.stereotype.Service;
 public class BillingContextAsyncPersistence {
     private final BillingContextRepository repository;
 
-    @EventListener
-    void persistenceRequestReceived(BillingRequestReceived stage) {
-        doUpdate(stage.getContext());
-    }
-
-    @EventListener
-    void persistenceRequestReceived(MatchParamCompleted stage) {
-        doUpdate(stage.getContext());
-    }
 
     @EventListener
     void persistenceRequestReceived(BillingStage stage) {
+        if (stage.getContext().isTrial()){
+            return ;
+        }
         doUpdate(stage.getContext());
     }
 
