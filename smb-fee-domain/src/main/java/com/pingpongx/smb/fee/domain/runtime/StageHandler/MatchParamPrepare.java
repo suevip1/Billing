@@ -20,6 +20,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -43,6 +44,14 @@ public class MatchParamPrepare {
             throw new RuntimeException(request.valid());
         }
         Set<String> vars = engines.variablesToPrepare(request.getCostNodeCode());
+
+        if (vars.isEmpty()){
+            context.setParams(new HashMap<>());
+            MatchParamCompleted matchParamCompleted = new MatchParamCompleted(context);
+            applicationContext.publishEvent(matchParamCompleted);
+            return;
+        }
+
         List<ConfiguredVariableDef> defs = variableDefRepository.getByCode(vars);
         if (defs.size()!=vars.size()){
             Set<String> found = defs.stream().map(def -> def.getCode()).collect(Collectors.toSet());
