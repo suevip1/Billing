@@ -37,6 +37,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.security.RolesAllowed;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
@@ -64,6 +65,10 @@ public class BillingServiceImpl implements BillingServiceFeign {
     })
     public Bill billing(@RequestBody BillingRequest request) {
         RepeatDo repeatDo = RepeatDo.builder().repeatKey(request.identify()).scope(request.getClass().getName()).build();
+        repeatDo.setCreatedBy("SYSTEM");
+        repeatDo.setUpdatedBy("SYSTEM");
+        repeatDo.setCreated(new Date(request.getBillingTime()));
+
         BillingContext context = new BillingContext();
         context.setRequest(request);
         context.setTrial(false);
