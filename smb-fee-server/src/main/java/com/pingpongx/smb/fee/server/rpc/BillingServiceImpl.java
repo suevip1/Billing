@@ -94,7 +94,7 @@ public class BillingServiceImpl implements BillingServiceFeign {
     })
     @RolesAllowed(RoleRegister.ROLE_COMMON_SERVICE)
     @Internal
-    public Bill trial(@RequestParam BillingRequest request) {
+    public Bill trial(@RequestBody BillingRequest request) {
         BillingContext context = new BillingContext();
         context.setRequest(request);
         context.setTrial(true);
