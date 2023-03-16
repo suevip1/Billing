@@ -29,6 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.transaction.support.TransactionTemplate;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -61,7 +62,7 @@ public class BillingServiceImpl implements BillingServiceFeign {
             @ApiImplicitParam(name = "Authorization", value = "service smb-fee@test", required = false, paramType = "header"),
             @ApiImplicitParam(name = "appId", value = "test@smb-fee", required = false, paramType = "header"),
     })
-    public Bill billing(@RequestParam BillingRequest request) {
+    public Bill billing(@RequestBody BillingRequest request) {
         RepeatDo repeatDo = RepeatDo.builder().repeatKey(request.identify()).scope(request.getClass().getName()).build();
         BillingContext context = new BillingContext();
         context.setRequest(request);
