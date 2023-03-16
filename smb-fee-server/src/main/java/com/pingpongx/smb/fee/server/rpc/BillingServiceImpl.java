@@ -11,6 +11,7 @@ import com.pingpongx.smb.fee.api.dtos.cmd.PayerInfo;
 import com.pingpongx.smb.fee.api.dtos.resp.Bill;
 import com.pingpongx.smb.fee.api.feign.BillingServiceFeign;
 import com.pingpongx.smb.fee.dal.dataobject.BillingContextDo;
+import com.pingpongx.smb.fee.dal.dataobject.BillingRequestDo;
 import com.pingpongx.smb.fee.dal.dataobject.RepeatDo;
 import com.pingpongx.smb.fee.dal.repository.BillingContextRepository;
 import com.pingpongx.smb.fee.dal.repository.BillingRequestRepository;
@@ -74,10 +75,11 @@ public class BillingServiceImpl implements BillingServiceFeign {
         context.setTrial(false);
         CompletableFuture<BillingContext> future = new CompletableFuture<>();
         BillingContextDo contextDo = BillingContextConvert.toDo(context);
+        BillingRequestDo requestDo = BillingRequestConvert.toDo(request);
         try {
             txTemplate.executeWithoutResult(transactionStatus -> {
                 repeatRepository.save(repeatDo);
-                billingRequestRepository.save(BillingRequestConvert.toDo(request));
+                billingRequestRepository.save(requestDo);
                 contextRepository.save(contextDo);
             });
         } catch (DuplicateKeyException e) {
