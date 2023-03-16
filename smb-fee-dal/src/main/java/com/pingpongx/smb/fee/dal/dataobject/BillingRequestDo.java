@@ -40,7 +40,7 @@ public class BillingRequestDo extends FeeBaseDo {
     /***
      * 汇率列表，目标货种：原币种  目标币种：美元  原币种：美元
      */
-    Map<String, BigDecimal> fxRate;
+    String fxRate;
     /**
      * 用于幂等
      */

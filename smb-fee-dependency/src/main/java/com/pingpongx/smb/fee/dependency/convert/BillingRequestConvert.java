@@ -6,6 +6,8 @@ import com.pingpongx.smb.fee.api.dtos.cmd.CouponInfo;
 import com.pingpongx.smb.fee.api.dtos.cmd.OrderInfo;
 import com.pingpongx.smb.fee.dal.dataobject.BillingRequestDo;
 
+import java.util.Map;
+
 public class BillingRequestConvert {
     public static BillingRequestDo toDo(BillingRequest request) {
         return ConvertUtil.toDo(request, BillingRequestDo.class, (one) -> {
@@ -13,6 +15,7 @@ public class BillingRequestConvert {
             one.setBizOrderType(request.getOrderInfo().getBizOrderType());
             one.setOrderInfo(JSON.toJSONString(request.getOrderInfo()));
             one.setCouponList(JSON.toJSONString(request.getCouponList()));
+            one.setFxRate(JSON.toJSONString(request.getFxRate()));
             one.setRepeatKey(request.identify());
         });
     }
@@ -21,6 +24,7 @@ public class BillingRequestConvert {
         return ConvertUtil.to(request, BillingRequest.class, (one) -> {
             one.setOrderInfo(JSON.parseObject(request.getOrderInfo(), OrderInfo.class));
             one.setCouponList(JSON.parseArray(request.getCouponList(), CouponInfo.class));
+            one.setFxRate(JSON.parseObject(request.getFxRate(), Map.class));
         });
     }
 }
