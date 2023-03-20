@@ -3,7 +3,7 @@ package com.pingpongx.smb.metadata.dto;
 public class VariableDefDto {
     String path;
     String code;
-    boolean isNum;
+    Boolean isNum;
     String type;
 
     String sourceType;
@@ -25,7 +25,7 @@ public class VariableDefDto {
         this.code = code;
     }
 
-    public boolean isNum() {
+    public Boolean isNum() {
         return isNum;
     }
 

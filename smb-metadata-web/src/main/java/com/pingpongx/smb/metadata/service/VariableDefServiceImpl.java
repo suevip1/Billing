@@ -25,7 +25,7 @@ public class VariableDefServiceImpl implements VariableDefService {
         def.setPath(dto.getPath());
         def.setNameSpace(dto.getNameSpace());
         def.setSourceType(dto.getSourceType());
-        def.setNum(dto.isNum());
+        def.setIsNum(dto.isNum().toString());
         def.setType(dto.getType());
         return repository.saveOrUpdate(def);
     }
