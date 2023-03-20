@@ -1,5 +1,6 @@
 package com.pingpongx.smb.fee.domain.module;
 
+import com.pingpongx.smb.export.module.ConfiguredRule;
 import com.pingpongx.smb.export.module.Rule;
 import com.pingpongx.smb.fee.domain.enums.CalculateMode;
 import com.pingpongx.smb.fee.domain.enums.CurrencyType;

@@ -13,18 +13,22 @@ import com.pingpongx.smb.fee.domain.factory.expr.ExprFactory;
 import com.pingpongx.smb.fee.domain.module.CostItem;
 import com.pingpongx.smb.fee.domain.module.express.Expr;
 import com.pingpongx.smb.store.Codec;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-
+@Component
+@RequiredArgsConstructor
 public class CostItemFactory {
-    public static CostItem load(CostItemDo costItemDo){
+    private  final  ExprFactory exprFactory;
+    public CostItem load(CostItemDo costItemDo){
         //TODO
         CostItem costItem = new CostItem();
         costItem.setCostNodeCode(costItemDo.getCostNodeCode());
         if (!StringUtils.isEmpty(costItemDo.getCalculateExpress())){
-            Expr expr = ExprFactory.load(JSON.parseObject(costItemDo.getCalculateExpress(), ExprDto.class));
+            Expr expr = exprFactory.load(JSON.parseObject(costItemDo.getCalculateExpress(), ExprDto.class));
             costItem.setCalculateExpress(expr);
         }
         costItem.setCode(costItemDo.getCode());

@@ -2,31 +2,26 @@ package com.pingpongx.smb.fee.domain.factory.expr;
 
 import com.pingpongx.smb.fee.api.dtos.expr.AXpBDto;
 import com.pingpongx.smb.fee.api.dtos.expr.ExprDto;
+import com.pingpongx.smb.fee.api.dtos.expr.FixDto;
 import com.pingpongx.smb.fee.dal.dataobject.ConfiguredVariableDef;
 import com.pingpongx.smb.fee.dal.repository.VariableDefRepository;
 import com.pingpongx.smb.fee.domain.factory.variable.VariableFactory;
 import com.pingpongx.smb.fee.domain.module.express.AXpB;
 import com.pingpongx.smb.fee.domain.module.express.Expr;
+import com.pingpongx.smb.fee.domain.module.express.Fixed;
 import com.pingpongx.smb.metadata.VariableDef;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 
 @Component
-@RequiredArgsConstructor
-public class AXpBFactory implements IExprFactory {
-    private final VariableDefRepository variableDefRepository;
+public class FixFactory implements IExprFactory{
 
     @Override
-    public Expr load(ExprDto d) {
-        AXpBDto dto = (AXpBDto) d;
-        AXpB aXpB = new AXpB();
-        aXpB.setA(new BigDecimal(dto.getA()));
-        aXpB.setB(new BigDecimal(dto.getB()));
-        ConfiguredVariableDef def = variableDefRepository.getByCode(dto.getVarCode());
-        VariableDef defDomain = VariableFactory.load(def);
-        aXpB.setX(defDomain);
-        return aXpB;
+    public Expr load(ExprDto dto) {
+        FixDto fixDto = (FixDto)dto;
+        Fixed fix = new Fixed();
+        fix.setFix(new BigDecimal(fixDto.getFix()));
+        return fix;
     }
 }

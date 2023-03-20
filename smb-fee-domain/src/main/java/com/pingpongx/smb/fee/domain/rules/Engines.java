@@ -38,6 +38,7 @@ public class Engines {
     private static final Map<String, Set<String>> variables = new ConcurrentHashMap<>();
     private final CostNodeRepository nodeRepository;
     private final CostItemRepository itemRepository;
+    private final CostItemFactory costItemFactory;
 
     private static void putEngine(CostNode node, Engine engine) {
         if (engine == null || node == null) {
@@ -116,7 +117,7 @@ public class Engines {
     }
 
     private Tuple2<CostItem, Rule> tuple(CostItemDo costItemDo) {
-        CostItem costItem = CostItemFactory.load(costItemDo);
+        CostItem costItem = costItemFactory.load(costItemDo);
         return Tuple.of(costItem, toRuleOr(costItemDo.getMatchRule()));
     }
 }

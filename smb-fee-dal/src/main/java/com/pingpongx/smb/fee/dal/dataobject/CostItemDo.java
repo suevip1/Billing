@@ -31,6 +31,10 @@ public class CostItemDo extends FeeBaseDo {
     Long startTime;
     Long endTime;
 
+    //定位问题更直观，不做时区处理，业务禁用
+    LocalDateTime startTimeDisplay;
+    LocalDateTime endTimeDisplay;
+
     String displayName;
 
     String contractCode;
