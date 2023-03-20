@@ -8,7 +8,7 @@ public class VariableDefAdapter implements Adapter{
         VariableDefDto dto = new VariableDefDto();
         dto.setCode(dataObject.getCode());
         dto.setNameSpace(dataObject.getNameSpace());
-        dto.setNum(dataObject.isNum());
+        dto.setNum(Boolean.parseBoolean(dataObject.getIsNum()));
         dto.setPath(dataObject.getPath());
         dto.setType(dataObject.getType());
         dto.setSourceType(dataObject.getSourceType());
