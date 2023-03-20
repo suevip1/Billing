@@ -88,7 +88,6 @@ public class BillingServiceImpl implements BillingServiceFeign {
         }
         BillingRequestReceived stage = (BillingRequestReceived) context.resume(future);
         springContext.publishEvent(stage);
-
         //处理同步返回
         context = future.join();
         Bill resp = context.getBill();

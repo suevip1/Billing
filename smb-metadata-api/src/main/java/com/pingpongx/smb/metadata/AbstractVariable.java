@@ -3,7 +3,7 @@ package com.pingpongx.smb.metadata;
 public abstract class AbstractVariable implements VariableDef {
     String path;
     String code;
-    boolean isNum;
+    String isNum;
     String namespace;
 
     public String getPath() {
@@ -23,11 +23,11 @@ public abstract class AbstractVariable implements VariableDef {
     }
 
     public boolean isNum() {
-        return isNum;
+        return Boolean.valueOf(isNum);
     }
 
-    public void setIsNum(boolean isNum) {
-        this.isNum = isNum;
+    public void setIsNum(Boolean isNum) {
+        this.isNum = isNum.toString();
     }
 
     public String getNamespace() {

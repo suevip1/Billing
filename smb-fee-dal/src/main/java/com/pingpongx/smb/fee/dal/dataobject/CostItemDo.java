@@ -1,5 +1,6 @@
 package com.pingpongx.smb.fee.dal.dataobject;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -9,6 +10,7 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
+@TableName("cost_item")
 public class CostItemDo extends FeeBaseDo {
 
     private static final long serialVersionUID = 8036156681328806972L;
@@ -26,8 +28,8 @@ public class CostItemDo extends FeeBaseDo {
     String currencyType;
     Integer priority;
     String inOrOut;
-    LocalDateTime startTime;
-    LocalDateTime endTime;
+    Long startTime;
+    Long endTime;
 
     String displayName;
 

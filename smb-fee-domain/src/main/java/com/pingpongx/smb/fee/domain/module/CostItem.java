@@ -30,8 +30,8 @@ public class CostItem implements Serializable {
     CurrencyType currencyType;
     Integer priority;
     Direction inOrOut;
-    LocalDateTime startTime;
-    LocalDateTime endTime;
+    Long startTime;
+    Long endTime;
 
     String displayName;
     String contractCode;

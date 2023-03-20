@@ -1,5 +1,6 @@
 package com.pingpongx.smb.fee.dal.dataobject;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.pingpongx.business.dal.core.BaseDO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -12,12 +13,13 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
+@TableName("configured_var_def")
 public class ConfiguredVariableDef extends BaseDO {
 
     private static final long serialVersionUID = 8061568762858026972L;
     String path;
     String code;
-    boolean isNum;
+    String isNum;
     String type;
 
     /***
