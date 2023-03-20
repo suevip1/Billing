@@ -15,7 +15,6 @@ import com.pingpongx.smb.fee.dal.repository.CostNodeRepository;
 import com.pingpongx.smb.fee.domain.factory.CostItemFactory;
 import com.pingpongx.smb.fee.domain.module.CostItem;
 import com.pingpongx.smb.fee.domain.module.CostNode;
-import com.pingpongx.smb.metadata.properties.JavaReflectionExtractor;
 import com.pingpongx.smb.rule.routers.operatiors.NumRangeIn;
 import com.pingpongx.smb.store.Codec;
 import io.vavr.Tuple;
@@ -81,10 +80,10 @@ public class Engines {
         items.stream().map(this::tuple).forEach(t -> {
             ConfiguredRangeRule rule = new ConfiguredRangeRule();
             Range range = new Range();
-            if (t._1().getStartTime()==null){
+            if (t._1().getStartTime() == null) {
                 t._1().setStartTime(0L);
             }
-            if (t._1().getEndTime()==null){
+            if (t._1().getEndTime() == null) {
                 t._1().setEndTime(Range.MAX.longValue());
             }
             range.setRangeStart(t._1().getStartTime().toString());

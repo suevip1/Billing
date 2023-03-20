@@ -7,7 +7,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-@JSONType(typeName = "TierDto")
+@JSONType(typeName = "Tier",typeKey = "type")
 public class TierDto extends ExprDto {
 
     @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type", visible = true)

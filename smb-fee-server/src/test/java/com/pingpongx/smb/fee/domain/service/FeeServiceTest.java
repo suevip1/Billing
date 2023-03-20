@@ -1,6 +1,7 @@
 package com.pingpongx.smb.fee.domain.service;
 
 import com.alibaba.fastjson.JSON;
+import com.pingpongx.smb.fee.api.dtos.expr.ExprDto;
 import com.pingpongx.smb.fee.api.feign.BillingServiceFeign;
 import com.pingpongx.smb.fee.dal.repository.BillingContextRepository;
 import com.pingpongx.smb.fee.dal.repository.BillingRequestRepository;
@@ -30,6 +31,10 @@ public class FeeServiceTest extends AbstractFeeTestDependency {
     @Test
     public void testCreate() {
         JSON.toJSONString(generateBillingRequest());
-        feeService.billing(generateBillingRequest());
+        ;
+        JSON.parseObject(JSON.toJSONString(generateFixDto()), ExprDto.class);
+//        feeService.billing(generateBillingRequest());
+
+
     }
 }

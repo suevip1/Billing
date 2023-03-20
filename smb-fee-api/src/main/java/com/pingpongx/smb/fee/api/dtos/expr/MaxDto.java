@@ -7,7 +7,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-@JSONType(typeName = "MaxDto")
+@JSONType(typeName = "Max",typeKey = "type")
 public class MaxDto extends ExprDto {
 
     @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type", visible = true)

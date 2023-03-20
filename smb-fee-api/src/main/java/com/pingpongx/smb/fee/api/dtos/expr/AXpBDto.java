@@ -4,7 +4,7 @@ import com.alibaba.fastjson2.annotation.JSONType;
 import lombok.Data;
 
 @Data
-@JSONType(typeName = "AXpBDto")
+@JSONType(typeName = "AXpB",typeKey = "type")
 public class AXpBDto extends ExprDto {
     double a;
     double b;

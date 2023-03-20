@@ -6,6 +6,8 @@ import com.pingpongx.smb.fee.api.dtos.cmd.BillingRequest;
 import com.pingpongx.smb.fee.api.dtos.cmd.OrderInfo;
 import com.pingpongx.smb.fee.api.dtos.cmd.PayeeInfo;
 import com.pingpongx.smb.fee.api.dtos.cmd.PayerInfo;
+import com.pingpongx.smb.fee.api.dtos.expr.FixDto;
+import com.pingpongx.smb.fee.dal.dataobject.CostItemDo;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -61,5 +63,11 @@ public class AbstractFeeTestDependency extends MockedTest {
         BillingRequest parsed = JSON.parseObject(jsonStr, BillingRequest.class);
 //{"billingTime":1678930994261,"bizLine":"FM","costNodeCode":"ClientTransferStart","couponList":[],"fxRate":{"CNY_USD":0.6999999999999999555910790149937383830547332763671875},"fxRateId":"FX213123123","orderInfo":{"amount":11111,"bizOrderId":"T0192091203121","bizOrderType":"Transfer","feePayer":"Payee","payeeInfo":{"bankName":"硅谷破产银行","clientId":"D1230912380912830","clientIdType":"DID","payeeAccountNo":"X1000101010100101","payeeName":"被付款方名"},"payerInfo":{"certificateNumber":"大壮","clientId":"D12038901283102938","clientIdType":"DID","payerName":"付款方名","reservedPhone":"15015011501"},"sourceCurrency":"USD","subject":"D12038901283102938","subjectType":"DID","targetCurrency":"CNY"},"sourceApp":"FMPayout","subject":"D12038901283102938","subjectType":"DID"}
         return request;
+    }
+
+    FixDto generateFixDto(){
+        FixDto fixDto = new FixDto();
+        fixDto.setFix(1);
+        return fixDto;
     }
 }

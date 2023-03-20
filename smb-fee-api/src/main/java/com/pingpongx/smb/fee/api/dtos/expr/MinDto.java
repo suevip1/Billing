@@ -7,8 +7,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-
-@JSONType(typeName = "MinDto")
+@JSONType(typeName = "Min",typeKey = "type")
 public class MinDto extends ExprDto {
 
     @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type", visible = true)
