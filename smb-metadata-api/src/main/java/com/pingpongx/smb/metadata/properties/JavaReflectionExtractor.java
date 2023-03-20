@@ -6,6 +6,7 @@ import org.springframework.util.ReflectionUtils;
 import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Field;
+import java.util.Map;
 
 public class JavaReflectionExtractor implements Extractor {
 
@@ -38,7 +39,13 @@ public class JavaReflectionExtractor implements Extractor {
         return current;
     }
 
-    private Object getAttr(Object data,String attr){
+    protected Object getAttr(Object data,String attr){
+        if (data == null){
+            return null;
+        }
+        if (data instanceof Map){
+            return ((Map<?, ?>) data).get(attr);
+        }
         Field f = ReflectionUtils.findField(data.getClass(), attr);
         if (f == null){
             return null;

@@ -15,6 +15,7 @@ import com.pingpongx.smb.fee.dal.repository.CostNodeRepository;
 import com.pingpongx.smb.fee.domain.factory.CostItemFactory;
 import com.pingpongx.smb.fee.domain.module.CostItem;
 import com.pingpongx.smb.fee.domain.module.CostNode;
+import com.pingpongx.smb.metadata.properties.JavaReflectionExtractor;
 import com.pingpongx.smb.rule.routers.operatiors.NumRangeIn;
 import com.pingpongx.smb.store.Codec;
 import io.vavr.Tuple;
@@ -74,7 +75,7 @@ public class Engines {
         Engine engine = new Engine();
         Set<String> vars = new HashSet<>();
         //TODO  map extractor.
-        engine.extractor = engine.extractor;
+        engine.extractor = new EngineExtractorAdapt();
         List<CostItemDo> items = itemRepository.listByNodeCode(costNode.getCode());
         items.stream().map(this::tuple).forEach(t -> {
             ConfiguredRangeRule rule = new ConfiguredRangeRule();
