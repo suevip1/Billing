@@ -80,6 +80,12 @@ public class Engines {
         items.stream().map(this::tuple).forEach(t -> {
             ConfiguredRangeRule rule = new ConfiguredRangeRule();
             Range range = new Range();
+            if (t._1().getStartTime()==null){
+                t._1().setStartTime(0L);
+            }
+            if (t._1().getEndTime()==null){
+                t._1().setEndTime(Range.MAX.longValue());
+            }
             range.setRangeStart(t._1().getStartTime().toString());
             range.setRangeEnd(t._1().getEndTime().toString());
             range.setRangeType(RangeType.LCRC.toString());
