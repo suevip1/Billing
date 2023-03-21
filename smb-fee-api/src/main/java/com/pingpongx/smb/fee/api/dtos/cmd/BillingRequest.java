@@ -55,6 +55,7 @@ public class BillingRequest implements Serializable, Identified {
     public String identify() {
         String split = ":";
         StringBuilder builder = new StringBuilder();
+        builder.append(costNodeCode).append(split);
         builder.append(orderInfo.getBizOrderType()).append(split);
         builder.append(orderInfo.getBizOrderId()).append(split);
         builder.append(fxRateId).append(split);
