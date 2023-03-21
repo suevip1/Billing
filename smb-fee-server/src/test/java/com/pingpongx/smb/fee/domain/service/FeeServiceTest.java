@@ -31,7 +31,7 @@ public class FeeServiceTest extends AbstractFeeTestDependency {
     @Test
     public void testCreate() {
         JSON.toJSONString(generateBillingRequest());
-        ;
+
         JSON.parseObject(JSON.toJSONString(generateFixDto()), ExprDto.class);
 //        feeService.billing(generateBillingRequest());
 
