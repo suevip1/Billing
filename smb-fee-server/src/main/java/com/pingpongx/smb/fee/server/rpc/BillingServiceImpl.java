@@ -77,11 +77,13 @@ public class BillingServiceImpl implements BillingServiceFeign {
         BillingContextDo contextDo = BillingContextConvert.toDo(context);
         BillingRequestDo requestDo = BillingRequestConvert.toDo(request);
         try {
-            txTemplate.executeWithoutResult(transactionStatus -> {
+            Long id = txTemplate.execute(transactionStatus -> {
                 repeatRepository.save(repeatDo);
                 billingRequestRepository.save(requestDo);
                 contextRepository.save(contextDo);
+                return contextDo.getId();
             });
+            context.setId(id);
         } catch (DuplicateKeyException e) {
             BillingContextDo retDo = contextRepository.findByRepeatKey(request.identify());
             context = BillingContextConvert.toContext(retDo);
