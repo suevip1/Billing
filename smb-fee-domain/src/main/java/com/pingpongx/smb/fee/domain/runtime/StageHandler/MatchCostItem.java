@@ -10,6 +10,7 @@ import com.pingpongx.smb.fee.domain.module.event.MatchCompleted;
 import com.pingpongx.smb.fee.domain.module.event.MatchParamCompleted;
 import com.pingpongx.smb.fee.domain.rules.CostItemHolder;
 import com.pingpongx.smb.fee.domain.rules.Engines;
+import com.pingpongx.smb.fee.domain.rules.MatchContext;
 import com.pingpongx.smb.fee.domain.runtime.BillingContext;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -41,7 +42,7 @@ public class MatchCostItem extends BizFlowNode{
                 applicationContext.publishEvent(event);
                 return;
             }
-            MatchResult result = engine.match(BillingContext.class.getSimpleName(), context);
+            MatchResult result = engine.match(MatchContext.class.getSimpleName(), context.getParams());
             List<CostItem> costItemList = result.getMatchedData().stream().map(ruleHandler -> (CostItemHolder) ruleHandler).map(costItemHolder -> costItemHolder.getCostItem()).collect(Collectors.toList());
             context.setMatchedCostItem(costItemList);
             MatchCompleted event = new MatchCompleted(context);

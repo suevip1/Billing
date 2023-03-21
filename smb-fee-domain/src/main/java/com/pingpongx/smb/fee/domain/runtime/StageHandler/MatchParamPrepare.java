@@ -44,9 +44,10 @@ public class MatchParamPrepare extends BizFlowNode{
                 throw new RuntimeException(request.valid());
             }
             Set<String> vars = engines.variablesToPrepare(request.getCostNodeCode());
+            Map<String,String> params = context.getParams();
+            params.put("billingTime",context.getRequest().getBillingTime().toString());
 
             if (vars.isEmpty()){
-                context.setParams(new HashMap<>());
                 MatchParamCompleted matchParamCompleted = new MatchParamCompleted(context);
                 applicationContext.publishEvent(matchParamCompleted);
                 return;
@@ -60,11 +61,10 @@ public class MatchParamPrepare extends BizFlowNode{
                 throw new RuntimeException("configuration error. variables at bellow can't be found.\n"+notFound);
             }
 
-            Map<String,String> params = defs.stream().map(def -> VariableFactory.load(def))
+            Map<String,String> p = defs.stream().map(def -> VariableFactory.load(def))
                     .map(v-> Tuple.of(v.getCode(),v.extractor().doExtract(v,request).toString()))
                     .collect(Collectors.toMap(Tuple2::_1,Tuple2::_2));
-            context.setParams(params);
-
+            params.putAll(p);
             MatchParamCompleted matchParamCompleted = new MatchParamCompleted(context);
             applicationContext.publishEvent(matchParamCompleted);
         }catch (Exception e){
