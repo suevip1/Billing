@@ -93,7 +93,7 @@ public class Engines {
             rule.setNot(false);
             rule.setAttr("billingTime");
             rule.setType(MatchContext.class.getSimpleName());
-            rule.setOperation(NumRangeIn.getInstance());
+            rule.setOperation(NumRangeIn.getInstance(rule.getType(),rule.getAttr()));
 
             if (t._2() == null) {
                 engine.put(rule, CostItemHolder.of(t._1()));
