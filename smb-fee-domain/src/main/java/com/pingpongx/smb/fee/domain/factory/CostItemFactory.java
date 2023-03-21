@@ -32,7 +32,7 @@ public class CostItemFactory {
             costItem.setCalculateExpress(expr);
         }
         costItem.setCode(costItemDo.getCode());
-        if (!StringUtils.isEmpty(costItemDo.getCalculateExpress())){
+        if (!StringUtils.isEmpty(costItemDo.getMatchRule())){
             MatchRuleDto matchRuleDto = JSON.parseObject(costItemDo.getMatchRule(), MatchRuleDto.class);
             Rule rule = Codec.buildRule(matchRuleDto.toEngineRule());
             costItem.setMatchRule(rule);
