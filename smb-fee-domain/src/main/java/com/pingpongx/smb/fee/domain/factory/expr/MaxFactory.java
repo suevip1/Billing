@@ -7,6 +7,7 @@ import com.pingpongx.smb.fee.domain.module.express.Expr;
 import com.pingpongx.smb.fee.domain.module.express.Max;
 import com.pingpongx.smb.fee.domain.module.express.Min;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
 @Component("Max")
 public class MaxFactory implements IExprFactory{
     @Autowired
+    @Lazy
     ExprFactory exprFactory;
     @Override
     public Expr load(ExprDto dto) {

@@ -7,6 +7,7 @@ import com.pingpongx.smb.fee.api.dtos.expr.TierDto;
 import com.pingpongx.smb.fee.domain.module.express.*;
 import com.pingpongx.smb.store.Codec;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
 @Component("Tier")
 public class TierFactory implements IExprFactory{
     @Autowired
+    @Lazy
     ExprFactory exprFactory;
 
     @Override

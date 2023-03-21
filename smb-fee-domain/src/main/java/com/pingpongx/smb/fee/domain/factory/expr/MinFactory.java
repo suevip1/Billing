@@ -7,6 +7,7 @@ import com.pingpongx.smb.fee.domain.module.express.Expr;
 import com.pingpongx.smb.fee.domain.module.express.Fixed;
 import com.pingpongx.smb.fee.domain.module.express.Min;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 @Component("Min")
 public class MinFactory implements IExprFactory{
     @Autowired
+    @Lazy
     ExprFactory exprFactory;
     @Override
     public Expr load(ExprDto dto) {
