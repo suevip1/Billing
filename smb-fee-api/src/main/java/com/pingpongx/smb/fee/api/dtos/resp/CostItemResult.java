@@ -13,9 +13,9 @@ import java.util.stream.Collectors;
 public class CostItemResult implements Serializable {
 
     private static final long serialVersionUID = 8061568762858026972L;
-
+    Boolean success;
     String itemCode;
     String itemName;
     Money fee;
-
+    String failedReason;
 }

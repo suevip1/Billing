@@ -22,9 +22,9 @@ public class Bill implements Serializable {
      */
     List<CouponResult> expense = new ArrayList<>();
 
+
     /***
      * 失败原因
      */
     Map<String , String> failedReasons = new HashMap<>();
-
 }

@@ -86,7 +86,7 @@ public class BillingServiceImpl implements BillingServiceFeign {
             BillingContextDo retDo = contextRepository.findByRepeatKey(request.identify());
             context = BillingContextConvert.toContext(retDo);
         }
-        BillingRequestReceived stage = (BillingRequestReceived) context.resume(future);
+        BillingStage stage = context.resume(future);
         springContext.publishEvent(stage);
         //处理同步返回
         context = future.join();

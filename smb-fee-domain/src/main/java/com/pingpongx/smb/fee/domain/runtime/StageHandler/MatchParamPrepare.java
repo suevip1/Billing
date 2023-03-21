@@ -29,43 +29,47 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class MatchParamPrepare {
+public class MatchParamPrepare extends BizFlowNode{
     private final Engines engines;
     private final BillingContextRepository billingContextRepository;
     private final VariableDefRepository variableDefRepository;
-    private final ApplicationContext applicationContext;
 
     @EventListener
     void paramPrepare(BillingRequestReceived requestReceived) {
         BillingContext context = requestReceived.getContext();
         BillingRequest request = context.getRequest();
         log.info("param prepare start. input:" + JSON.toJSONString(request));
-        if (request.valid() != null){
-            throw new RuntimeException(request.valid());
-        }
-        Set<String> vars = engines.variablesToPrepare(request.getCostNodeCode());
+        try{
+            if (request.valid() != null){
+                throw new RuntimeException(request.valid());
+            }
+            Set<String> vars = engines.variablesToPrepare(request.getCostNodeCode());
 
-        if (vars.isEmpty()){
-            context.setParams(new HashMap<>());
+            if (vars.isEmpty()){
+                context.setParams(new HashMap<>());
+                MatchParamCompleted matchParamCompleted = new MatchParamCompleted(context);
+                applicationContext.publishEvent(matchParamCompleted);
+                return;
+            }
+
+            List<ConfiguredVariableDef> defs = variableDefRepository.getByCode(vars);
+            if (defs.size()!=vars.size()){
+                Set<String> found = defs.stream().map(def -> def.getCode()).collect(Collectors.toSet());
+                vars.removeAll(found);
+                String notFound = vars.stream().collect(Collectors.joining(","));
+                throw new RuntimeException("configuration error. variables at bellow can't be found.\n"+notFound);
+            }
+
+            Map<String,String> params = defs.stream().map(def -> VariableFactory.load(def))
+                    .map(v-> Tuple.of(v.getCode(),v.extractor().doExtract(v,request).toString()))
+                    .collect(Collectors.toMap(Tuple2::_1,Tuple2::_2));
+            context.setParams(params);
+
             MatchParamCompleted matchParamCompleted = new MatchParamCompleted(context);
             applicationContext.publishEvent(matchParamCompleted);
-            return;
+        }catch (Exception e){
+            handleException(context,e);
         }
 
-        List<ConfiguredVariableDef> defs = variableDefRepository.getByCode(vars);
-        if (defs.size()!=vars.size()){
-            Set<String> found = defs.stream().map(def -> def.getCode()).collect(Collectors.toSet());
-            vars.removeAll(found);
-            String notFound = vars.stream().collect(Collectors.joining(","));
-            throw new RuntimeException("configuration error. variables at bellow can't be found.\n"+notFound);
-        }
-
-        Map<String,String> params = defs.stream().map(def -> VariableFactory.load(def))
-                .map(v-> Tuple.of(v.getCode(),v.extractor().doExtract(v,request).toString()))
-                .collect(Collectors.toMap(Tuple2::_1,Tuple2::_2));
-        context.setParams(params);
-
-        MatchParamCompleted matchParamCompleted = new MatchParamCompleted(context);
-        applicationContext.publishEvent(matchParamCompleted);
     }
 }
