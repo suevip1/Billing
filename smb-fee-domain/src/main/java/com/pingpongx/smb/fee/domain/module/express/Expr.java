@@ -4,7 +4,7 @@ import com.pingpongx.smb.fee.api.dtos.expr.ExprDto;
 import com.pingpongx.smb.metadata.Identified;
 
 public interface Expr extends Identified {
-    Calculator getCalculator();
+    Calculator fetchCalculator();
     String getType();
 
     ExprDto toDto();

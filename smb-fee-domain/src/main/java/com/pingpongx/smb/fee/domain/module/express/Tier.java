@@ -25,7 +25,7 @@ public class Tier implements ExprMap,Calculator{
     }
 
     @Override
-    public Calculator getCalculator() {
+    public Calculator fetchCalculator() {
         //阶梯元素会被入引擎匹配，阶梯集合本身不会入引
         return this;
     }

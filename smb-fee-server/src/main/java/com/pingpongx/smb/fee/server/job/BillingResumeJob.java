@@ -25,6 +25,7 @@ import java.util.List;
 public class BillingResumeJob extends IJobHandler {
     private final BillingContextRepository contextRepository;
     private final ApplicationContext applicationContext;
+    private final BillingContextConvert billingContextConvert;
 
     @Override
     public ReturnT<String> execute(String repeatKey) throws Exception {
@@ -39,7 +40,7 @@ public class BillingResumeJob extends IJobHandler {
     }
 
     private void resumeOne(BillingContextDo dbo){
-        BillingContext context = BillingContextConvert.toContext(dbo);
+        BillingContext context = billingContextConvert.toContext(dbo);
         applicationContext.publishEvent(context.resume(null));
     }
 }

@@ -18,7 +18,7 @@ public class Fixed implements BasicExpr,Calculator{
         return builder.toString();
     }
     @Override
-    public Calculator getCalculator() {
+    public Calculator fetchCalculator() {
         return  this;
     }
 

@@ -20,5 +20,8 @@ public class CostItemRepository extends FeeBaseRepository<CostItemMapper, CostIt
         AbstractWrapper wrapper = this.lambdaQuery().eq(CostItemDo::getCostNodeCode,costNodeCode).getWrapper();
         return this.list(wrapper);
     }
-
+    public List<CostItemDo> listByCodeList(List<String> codeList){
+        AbstractWrapper wrapper = this.lambdaQuery().in(CostItemDo::getCode,codeList).getWrapper();
+        return this.list(wrapper);
+    }
 }

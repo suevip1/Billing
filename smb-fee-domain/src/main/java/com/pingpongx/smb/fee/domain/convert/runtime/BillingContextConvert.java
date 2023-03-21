@@ -4,15 +4,25 @@ import com.alibaba.fastjson2.JSON;
 import com.pingpongx.smb.fee.api.dtos.cmd.BillingRequest;
 import com.pingpongx.smb.fee.api.dtos.resp.Bill;
 import com.pingpongx.smb.fee.dal.dataobject.BillingContextDo;
+import com.pingpongx.smb.fee.dal.dataobject.CostItemDo;
+import com.pingpongx.smb.fee.dal.repository.CostItemRepository;
 import com.pingpongx.smb.fee.dependency.convert.ConvertUtil;
+import com.pingpongx.smb.fee.domain.factory.CostItemFactory;
 import com.pingpongx.smb.fee.domain.module.CostItem;
 import com.pingpongx.smb.fee.domain.runtime.BillingContext;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Map;
-
+import java.util.stream.Collectors;
+@Component
+@RequiredArgsConstructor
 public class BillingContextConvert {
-    public static BillingContextDo toDo(BillingContext context) {
+    private final CostItemRepository costItemRepository;
+    private final CostItemFactory factory;
+    public  BillingContextDo toDo(BillingContext context) {
         return ConvertUtil.toDo(context, BillingContextDo.class, (one) -> {
             one.setId(context.getId());
             one.setBizOrderId(context.getRequest().getOrderInfo().getBizOrderId());
@@ -28,12 +38,13 @@ public class BillingContextConvert {
                 one.setBill(JSON.toJSONString(context.getBill()));
             }
             if (context.getMatchedCostItem() != null) {
-                one.setMatchedCostItem(JSON.toJSONString(context.getMatchedCostItem()));
+                List<String> itemCodeList = context.getMatchedCostItem().stream().map(item->item.getCode()).collect(Collectors.toList());
+                one.setMatchedCostItem(JSON.toJSONString(itemCodeList));
             }
         });
     }
 
-    public static BillingContext toContext(BillingContextDo dbO) {
+    public  BillingContext toContext(BillingContextDo dbO) {
         return ConvertUtil.to(dbO, BillingContext.class, (one) -> {
             one.setId(dbO.getId());
             if (!StringUtils.isBlank(dbO.getRequest())) {
@@ -46,7 +57,10 @@ public class BillingContextConvert {
                 one.setBill(JSON.parseObject(dbO.getBill(), Bill.class));
             }
             if (!StringUtils.isBlank(dbO.getMatchedCostItem())) {
-                one.setMatchedCostItem(JSON.parseArray(dbO.getMatchedCostItem(), CostItem.class));
+                List<String> itemCodeList = JSON.parseArray(dbO.getMatchedCostItem(), String.class);
+                List<CostItemDo> dos = costItemRepository.listByCodeList(itemCodeList);
+                List<CostItem> costItemList = dos.stream().map(d->factory.load(d)).collect(Collectors.toList());
+                one.setMatchedCostItem(costItemList);
             }
         });
     }

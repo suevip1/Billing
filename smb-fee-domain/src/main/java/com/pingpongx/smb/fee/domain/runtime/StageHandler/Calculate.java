@@ -5,14 +5,10 @@ import com.pingpongx.smb.fee.api.dtos.resp.CostItemResult;
 import com.pingpongx.smb.fee.domain.enums.CurrencyType;
 import com.pingpongx.smb.fee.domain.module.CostItem;
 import com.pingpongx.smb.fee.domain.module.event.CalculateCompleted;
-import com.pingpongx.smb.fee.domain.module.event.CalculateFailed;
 import com.pingpongx.smb.fee.domain.module.event.CouponParamUpdated;
-import com.pingpongx.smb.fee.domain.module.event.MatchCompleted;
 import com.pingpongx.smb.fee.domain.runtime.BillingContext;
-import lombok.RequiredArgsConstructor;
 import org.joda.money.CurrencyUnit;
 import org.joda.money.Money;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
@@ -46,7 +42,7 @@ public class Calculate extends BizFlowNode{
         costItemResult.setItemCode(item.getCode());
         costItemResult.setItemName(item.getDisplayName());
         try{
-            BigDecimal bigDecimal = item.getCalculateExpress().getCalculator().getCalculateResult(context);
+            BigDecimal bigDecimal = item.getCalculateExpress().fetchCalculator().getCalculateResult(context);
             String sourceCurrencyCode = context.getRequest().getOrderInfo().getSourceCurrency();
             String targetCurrencyCode = context.getRequest().getOrderInfo().getTargetCurrency();
             String fxKey = sourceCurrencyCode + "_" + targetCurrencyCode;

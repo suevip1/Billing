@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class BillingContextAsyncPersistence {
     private final BillingContextRepository repository;
-
+    private final BillingContextConvert billingContextConvert;
 
     @EventListener
     void persistenceRequestReceived(BillingStage stage) {
@@ -33,7 +33,7 @@ public class BillingContextAsyncPersistence {
     }
 
     private void doUpdate(BillingContext context){
-        BillingContextDo dos = BillingContextConvert.toDo(context);
+        BillingContextDo dos = billingContextConvert.toDo(context);
         repository.saveOrUpdate(dos);
     }
 }

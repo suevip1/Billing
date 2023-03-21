@@ -23,7 +23,7 @@ public class Max implements ExprCollection,Calculator{
     }
 
     @Override
-    public Calculator getCalculator() {
+    public Calculator fetchCalculator() {
         return this;
     }
 
@@ -47,7 +47,7 @@ public class Max implements ExprCollection,Calculator{
         if (ret !=null ){
             return ret;
         }
-        ret = list.stream().map(expr -> expr.getCalculator().getCalculateResult(context)).max(BigDecimal::compareTo)
+        ret = list.stream().map(expr -> expr.fetchCalculator().getCalculateResult(context)).max(BigDecimal::compareTo)
                 .orElseThrow(()-> new RuntimeException("Min value calculate error. list is empty."));
         context.getCache().put(this.identify(),ret);
         return ret;

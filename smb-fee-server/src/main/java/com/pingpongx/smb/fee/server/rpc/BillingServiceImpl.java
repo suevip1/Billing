@@ -56,6 +56,7 @@ public class BillingServiceImpl implements BillingServiceFeign {
     private final BillingContextRepository contextRepository;
     private final TransactionTemplate txTemplate;
     private final ApplicationContext springContext;
+    private final BillingContextConvert billingContextConvert;
 
 
     @RolesAllowed(RoleRegister.ROLE_COMMON_SERVICE)
@@ -74,7 +75,7 @@ public class BillingServiceImpl implements BillingServiceFeign {
         context.setRequest(request);
         context.setTrial(false);
         CompletableFuture<BillingContext> future = new CompletableFuture<>();
-        BillingContextDo contextDo = BillingContextConvert.toDo(context);
+        BillingContextDo contextDo = billingContextConvert.toDo(context);
         BillingRequestDo requestDo = BillingRequestConvert.toDo(request);
         try {
             Long id = txTemplate.execute(transactionStatus -> {
@@ -86,7 +87,7 @@ public class BillingServiceImpl implements BillingServiceFeign {
             context.setId(id);
         } catch (DuplicateKeyException e) {
             BillingContextDo retDo = contextRepository.findByRepeatKey(request.identify());
-            context = BillingContextConvert.toContext(retDo);
+            context = billingContextConvert.toContext(retDo);
         }
         BillingStage stage = context.resume(future);
         springContext.publishEvent(stage);
