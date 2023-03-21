@@ -94,12 +94,12 @@ public class Engines {
             rule.setAttr("billingTime");
             rule.setType(MatchContext.class.getSimpleName());
             rule.setOperation(NumRangeIn.getInstance(rule.getType(),rule.getAttr()));
-
             if (t._2() == null) {
                 engine.put(rule, CostItemHolder.of(t._1()));
-                vars.addAll(t._1().getMatchVarKeys());
             } else {
                 engine.put(t._2().and(rule), CostItemHolder.of(t._1()));
+            }
+            if (t._1().getMatchVarKeys()!=null){
                 vars.addAll(t._1().getMatchVarKeys());
             }
         });
