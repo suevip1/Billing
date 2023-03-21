@@ -16,6 +16,7 @@ public class CostItemResult implements Serializable {
     Boolean success;
     String itemCode;
     String itemName;
-    Money fee;
+    String currency;
+    String amount;
     String failedReason;
 }

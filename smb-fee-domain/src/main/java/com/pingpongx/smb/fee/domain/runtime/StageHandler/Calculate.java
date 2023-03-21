@@ -48,12 +48,14 @@ public class Calculate extends BizFlowNode{
             String fxKey = sourceCurrencyCode + "_" + targetCurrencyCode;
             Money fee;
             if (CurrencyType.Source.equals(item.getCurrencyType())) {
-                fee = Money.of(CurrencyUnit.of(sourceCurrencyCode), bigDecimal);
+//                fee = Money.of(CurrencyUnit.of(sourceCurrencyCode), bigDecimal);
+                costItemResult.setCurrency(sourceCurrencyCode);
             } else {
                 bigDecimal = bigDecimal.multiply(context.getRequest().getFxRate().get(fxKey));
-                fee = Money.of(CurrencyUnit.of(targetCurrencyCode), bigDecimal);
+//                fee = Money.of(CurrencyUnit.of(targetCurrencyCode), bigDecimal);
+                costItemResult.setCurrency(targetCurrencyCode);
             }
-            costItemResult.setFee(fee);
+            costItemResult.setAmount(bigDecimal.toString());
             costItemResult.setSuccess(true);
         }catch (Exception e){
             costItemResult.setSuccess(false);
