@@ -31,4 +31,16 @@ public class TierNode implements ExprWithCondition{
         dto.setExpr(expr.toDto());
         return dto;
     }
+
+    public void setCondition(Rule condition) {
+        this.condition = condition;
+    }
+
+    public Expr getExpr() {
+        return expr;
+    }
+
+    public void setExpr(Expr expr) {
+        this.expr = expr;
+    }
 }

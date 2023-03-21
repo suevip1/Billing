@@ -54,4 +54,7 @@ public class Min implements ExprCollection,Calculator{
         return ret;
     }
 
+    public void setList(List<Expr> list) {
+        this.list = list;
+    }
 }

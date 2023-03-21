@@ -52,5 +52,8 @@ public class Max implements ExprCollection,Calculator{
         context.getCache().put(this.identify(),ret);
         return ret;
     }
-    
+
+    public void setList(List<Expr> list) {
+        this.list = list;
+    }
 }

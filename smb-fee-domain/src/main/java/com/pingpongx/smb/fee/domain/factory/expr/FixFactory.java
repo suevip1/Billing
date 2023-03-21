@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 
-@Component
+@Component("Fix")
 public class FixFactory implements IExprFactory{
 
     @Override

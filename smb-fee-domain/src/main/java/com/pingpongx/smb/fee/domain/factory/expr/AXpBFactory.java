@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 
-@Component
+@Component("AXpB")
 @RequiredArgsConstructor
 public class AXpBFactory implements IExprFactory {
     private final VariableDefRepository variableDefRepository;

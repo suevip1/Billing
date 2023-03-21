@@ -54,4 +54,8 @@ public class Tier implements ExprMap,Calculator{
                 .findFirst()
                 .orElseThrow(()->new RuntimeException("Tier must calculate at end of other calculator,pls modify the collection priority."));
     }
+
+    public void setList(List<ExprWithCondition> list) {
+        this.list = list;
+    }
 }
