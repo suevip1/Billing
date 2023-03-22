@@ -14,7 +14,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
 @TableName("configured_var_def")
-public class ConfiguredVariableDef extends BaseDO {
+public class ConfiguredVariableDef extends MetaBaseDo {
 
     private static final long serialVersionUID = 8061568762858026972L;
     String path;

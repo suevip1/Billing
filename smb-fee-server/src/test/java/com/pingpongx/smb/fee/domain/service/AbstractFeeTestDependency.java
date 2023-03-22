@@ -1,13 +1,16 @@
 package com.pingpongx.smb.fee.domain.service;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONWriter;
+import com.pingpongx.smb.export.RuleConstant;
+import com.pingpongx.smb.export.module.persistance.LeafRuleConf;
+import com.pingpongx.smb.export.module.persistance.RuleDto;
 import com.pingpongx.smb.fee.MockedTest;
 import com.pingpongx.smb.fee.api.dtos.cmd.BillingRequest;
 import com.pingpongx.smb.fee.api.dtos.cmd.OrderInfo;
 import com.pingpongx.smb.fee.api.dtos.cmd.PayeeInfo;
 import com.pingpongx.smb.fee.api.dtos.cmd.PayerInfo;
 import com.pingpongx.smb.fee.api.dtos.expr.FixDto;
-import com.pingpongx.smb.fee.dal.dataobject.CostItemDo;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -56,6 +59,8 @@ public class AbstractFeeTestDependency extends MockedTest {
         orderInfo.setFeePayer("Payee");
         orderInfo.setBizOrderType("Transfer");
         orderInfo.setBizOrderId("T0192091203121");
+        orderInfo.setExtraInfo(new HashMap<>());
+        orderInfo.getExtraInfo().put("isUrgent", "true");
         request.setOrderInfo(orderInfo);
         request.setSubject(orderInfo.getSubject());
         request.setSubjectType(orderInfo.getSubjectType());
@@ -65,9 +70,24 @@ public class AbstractFeeTestDependency extends MockedTest {
         return request;
     }
 
-    FixDto generateFixDto(){
+    FixDto generateFixDto() {
         FixDto fixDto = new FixDto();
         fixDto.setFix(1);
         return fixDto;
+    }
+
+    RuleDto generateMatchRule() {
+
+        LeafRuleConf leafRuleConf = new LeafRuleConf();
+        leafRuleConf.setAttr("isUrgent");
+        leafRuleConf.setType("BillingContext");
+        leafRuleConf.setNot(false);
+        leafRuleConf.setOperation(RuleConstant.Operations.StrEquals.getSimpleName());
+        leafRuleConf.setExpected("true");
+        String test = JSON.toJSONString(leafRuleConf, JSONWriter.Feature.WriteClassName);
+        JSON.parseObject(test, RuleDto.class);
+
+
+        return leafRuleConf;
     }
 }

@@ -3,6 +3,7 @@ package com.pingpongx.smb.fee.dal.repository;
 import com.baomidou.mybatisplus.extension.service.additional.query.impl.LambdaQueryChainWrapper;
 import com.pingpongx.business.dal.core.BaseRepository;
 import com.pingpongx.smb.fee.dal.dataobject.ConfiguredVariableDef;
+import com.pingpongx.smb.fee.dal.dataobject.MetaBaseDo;
 import com.pingpongx.smb.fee.dal.mapper.VariableDefMapper;
 import com.pingpongx.smb.metadata.qry.GetByCode;
 import com.pingpongx.smb.metadata.qry.ListAll;
@@ -18,7 +19,7 @@ import java.util.List;
  * @createTime 2022年06月28日 14:47:00
  */
 @Repository
-public class VariableDefRepository extends BaseRepository<VariableDefMapper, ConfiguredVariableDef> {
+public class VariableDefRepository extends MetaBaseRepository<VariableDefMapper, ConfiguredVariableDef> {
 
     public static final String ALL = "ALL";
 

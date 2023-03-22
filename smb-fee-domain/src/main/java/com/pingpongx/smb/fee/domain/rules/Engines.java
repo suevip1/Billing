@@ -107,17 +107,9 @@ public class Engines {
         variables.put(costNode.getCode(), vars);
     }
 
-    private RuleOr toRuleOr(String ruleStr) {
-        if (ruleStr == null) {
-            return null;
-        }
-        Or or = JSON.parseObject(ruleStr, Or.class);
-        return Codec.buildRule(or);
-    }
-
     private Tuple2<CostItem, Rule> tuple(CostItemDo costItemDo) {
         CostItem costItem = costItemFactory.load(costItemDo);
-        return Tuple.of(costItem, toRuleOr(costItemDo.getMatchRule()));
+        return Tuple.of(costItem, costItem.getMatchRule());
     }
 }
 

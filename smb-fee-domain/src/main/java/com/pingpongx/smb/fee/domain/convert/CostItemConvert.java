@@ -1,6 +1,7 @@
 package com.pingpongx.smb.fee.domain.convert;
 
 import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONWriter;
 import com.pingpongx.smb.export.module.Rule;
 import com.pingpongx.smb.fee.api.dtos.cmd.BillingRequest;
 import com.pingpongx.smb.fee.api.dtos.resp.Bill;
@@ -27,9 +28,9 @@ public class CostItemConvert {
     public static CostItemDo toDo(CostItem item) {
         return ConvertUtil.toDo(item, CostItemDo.class, (one) -> {
             one.setCalculateExpress(JSON.toJSONString(item.getCalculateExpress()));
-            one.setMatchRule(JSON.toJSONString(item.getMatchRule().toDto()));
+            one.setMatchRule(JSON.toJSONString(item.getMatchRule().toDto(), JSONWriter.Feature.WriteClassName));
             one.setMatchVarKeys(JSON.toJSONString(item.getMatchVarKeys()));
-            one.setCalculateExpress(JSON.toJSONString(item.getCalculateExpress().toDto()));
+            one.setCalculateExpress(JSON.toJSONString(item.getCalculateExpress().toDto(), JSONWriter.Feature.WriteClassName));
             one.setCalculateVarKeys(JSON.toJSONString(item.getCalculateVarKeys()));
             one.setMode(item.getMode().name());
             one.setCurrencyType(item.getCurrencyType().name());
