@@ -81,6 +81,15 @@ public class BillingRequest implements Serializable, Identified {
         if (orderInfo.getSourceCurrency()==null){
             return "source currency can't be null.";
         }
+        if (orderInfo.getAmount()==null){
+            return "order amount can't be null.";
+        }
+        if (orderInfo.getBizOrderId()==null){
+            return "bizOrderId can't be null.";
+        }
+        if (orderInfo.getBizOrderType()==null){
+            return "bizOrderType can't be null.";
+        }
         if (fxRateId==null&&!orderInfo.getTargetCurrency().equals(orderInfo.getSourceCurrency())){
             return "fxRate is required when target currency not equals source currency.";
         }

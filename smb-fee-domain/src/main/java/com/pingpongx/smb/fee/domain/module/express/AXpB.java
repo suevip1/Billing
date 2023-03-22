@@ -38,8 +38,8 @@ public class AXpB implements BasicExpr, Calculator, Identified {
     @Override
     public ExprDto toDto() {
         AXpBDto dto = new AXpBDto();
-        dto.setA(a.doubleValue());
-        dto.setB(b.doubleValue());
+        dto.setA(a.toString());
+        dto.setB(b.toString());
         dto.setVarCode(x.getCode());
         return dto;
     }
@@ -51,7 +51,7 @@ public class AXpB implements BasicExpr, Calculator, Identified {
         if (ret != null) {
             return ret;
         }
-        BigDecimal xVal = new BigDecimal(x.extractor().doExtract(x, context));
+        BigDecimal xVal = new BigDecimal(x.extractor().doExtract(x, context.getRequest()));
         log.info("variable x is " + xVal);
         ret = xVal.multiply(a).add(b);
         log.info("result : " + ret);

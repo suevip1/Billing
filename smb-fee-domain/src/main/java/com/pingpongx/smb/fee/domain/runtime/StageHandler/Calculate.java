@@ -59,7 +59,7 @@ public class Calculate extends BizFlowNode{
             costItemResult.setSuccess(true);
         }catch (Exception e){
             costItemResult.setSuccess(false);
-            costItemResult.setFailedReason(e.getMessage());
+            costItemResult.setFailedReason(e.toString());
         }
         return costItemResult;
     }
