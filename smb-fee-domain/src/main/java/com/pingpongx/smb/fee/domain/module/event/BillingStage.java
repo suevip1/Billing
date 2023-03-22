@@ -6,4 +6,6 @@ public interface BillingStage {
     String getStageCode();
     int getStagePriority();
     BillingContext getContext();
+
+    boolean isImportant();
 }

@@ -10,6 +10,11 @@ public class CalculateParamCompleted extends AbstractStage{
     }
 
     @Override
+    public boolean isImportant() {
+        return true;
+    }
+
+    @Override
     public int getStagePriority() {
         return 3;
     }

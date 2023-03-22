@@ -9,6 +9,11 @@ public class CalculateFailed extends AbstractStage {
     }
 
     @Override
+    public boolean isImportant() {
+        return true;
+    }
+
+    @Override
     public int getStagePriority() {
         return 10000;
     }

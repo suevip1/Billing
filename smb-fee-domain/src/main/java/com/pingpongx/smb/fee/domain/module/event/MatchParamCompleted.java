@@ -9,6 +9,11 @@ public class MatchParamCompleted extends AbstractStage{
     }
 
     @Override
+    public boolean isImportant() {
+        return false;
+    }
+
+    @Override
     public int getStagePriority() {
         return 1;
     }

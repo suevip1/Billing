@@ -26,7 +26,7 @@ public class BillingContextAsyncPersistence {
 
     @EventListener
     void persistenceRequestReceived(BillingStage stage) {
-        if (stage.getContext().isTrial()){
+        if (stage.getContext().isTrial()||!stage.isImportant()){
             return ;
         }
         doUpdate(stage.getContext());

@@ -10,6 +10,11 @@ public class BillingRequestReceived extends AbstractStage {
     }
 
     @Override
+    public boolean isImportant() {
+        return false;
+    }
+
+    @Override
     public int getStagePriority() {
         return 0;
     }
