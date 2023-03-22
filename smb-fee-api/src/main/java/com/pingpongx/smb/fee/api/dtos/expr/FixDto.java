@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 @JSONType(typeName = "Fix",typeKey = "type")
 public class FixDto extends ExprDto {
-    double fix;
+    String fix;
     String type = "Fix";
 }

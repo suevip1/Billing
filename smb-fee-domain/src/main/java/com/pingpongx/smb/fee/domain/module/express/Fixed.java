@@ -30,7 +30,7 @@ public class Fixed implements BasicExpr,Calculator{
     @Override
     public ExprDto toDto() {
         FixDto dto = new FixDto();
-        dto.setFix(fix.doubleValue());
+        dto.setFix(fix.toString());
         return dto;
     }
 

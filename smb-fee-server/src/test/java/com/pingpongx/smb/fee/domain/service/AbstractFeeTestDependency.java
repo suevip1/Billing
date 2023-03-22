@@ -73,14 +73,14 @@ public class AbstractFeeTestDependency extends MockedTest {
 
     FixDto generateFixDto() {
         FixDto fixDto = new FixDto();
-        fixDto.setFix(1);
+        fixDto.setFix("1");
         return fixDto;
     }
 
     AXpBDto generateAXpBDto() {
         AXpBDto aXpBDto = new AXpBDto();
-        aXpBDto.setA(0.01);
-        aXpBDto.setB(0);
+        aXpBDto.setA("0.01");
+        aXpBDto.setB("0");
         aXpBDto.setVarCode("amount");
         return aXpBDto;
     }
