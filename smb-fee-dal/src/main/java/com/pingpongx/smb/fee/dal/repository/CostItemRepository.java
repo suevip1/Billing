@@ -7,6 +7,7 @@ import com.pingpongx.smb.fee.dal.mapper.CostItemMapper;
 import com.pingpongx.smb.fee.dal.mapper.CostItemResultMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,6 +22,9 @@ public class CostItemRepository extends FeeBaseRepository<CostItemMapper, CostIt
         return this.list(wrapper);
     }
     public List<CostItemDo> listByCodeList(List<String> codeList){
+        if (codeList==null||codeList.isEmpty()){
+            return new ArrayList<>();
+        }
         AbstractWrapper wrapper = this.lambdaQuery().in(CostItemDo::getCode,codeList).getWrapper();
         return this.list(wrapper);
     }

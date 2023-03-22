@@ -51,7 +51,7 @@ public class AXpB implements BasicExpr, Calculator, Identified {
         if (ret != null) {
             return ret;
         }
-        BigDecimal xVal = new BigDecimal(x.extractor().doExtract(x, context).toString());
+        BigDecimal xVal = new BigDecimal(x.extractor().doExtract(x, context));
         log.info("variable x is " + xVal);
         ret = xVal.multiply(a).add(b);
         log.info("result : " + ret);

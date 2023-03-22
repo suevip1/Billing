@@ -15,7 +15,6 @@ public enum VarType {
 
     Request("Request", RequestVar.class,new JavaReflectionExtractor(),new RequestVarDefFactory()),
     Metric("Metric", MetricVar.class,new RedisMetricExtractor(),new MetricVarDefFactory());
-
     private static Map<Class<? extends VariableDef>, VarType> classMap = new HashMap<>();
     private static Map<String, VarType> typeMap = new HashMap<>();
     String code;
@@ -65,8 +64,8 @@ public enum VarType {
         VarType ret = typeMap.get(type);
         if (ret == null){
             ret = Arrays.stream(VarType.values())
-                    .filter(varType -> varType.getClazz().equals(type))
-                    .findFirst().get();
+                    .filter(varType -> varType.getCode().equals(type))
+                    .findFirst().orElse(null);
             typeMap.put(type,ret);
         }
         return ret;

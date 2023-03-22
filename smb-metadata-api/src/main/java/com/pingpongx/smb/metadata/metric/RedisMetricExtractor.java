@@ -14,7 +14,7 @@ public class RedisMetricExtractor implements Extractor {
      * @return
      */
     @Override
-    public Object doExtract(VariableDef var, Object source) {
+    public String doExtract(VariableDef var, Object source) {
         return null;
     }
 }

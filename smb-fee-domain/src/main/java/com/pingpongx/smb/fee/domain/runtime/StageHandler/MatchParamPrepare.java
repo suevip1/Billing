@@ -62,7 +62,7 @@ public class MatchParamPrepare extends BizFlowNode{
             }
 
             Map<String,String> p = defs.stream().map(def -> VariableFactory.load(def))
-                    .map(v-> Tuple.of(v.getCode(),v.extractor().doExtract(v,request).toString()))
+                    .map(v-> Tuple.of(v.getCode(),v.extractor().doExtract(v,request)))
                     .collect(Collectors.toMap(Tuple2::_1,Tuple2::_2));
             params.putAll(p);
             MatchParamCompleted matchParamCompleted = new MatchParamCompleted(context);

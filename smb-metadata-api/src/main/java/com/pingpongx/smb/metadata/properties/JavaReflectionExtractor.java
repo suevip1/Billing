@@ -19,10 +19,13 @@ public class JavaReflectionExtractor implements Extractor {
      * @return
      */
     @Override
-    public Object doExtract(VariableDef var, Object source) {
+    public String doExtract(VariableDef var, Object source) {
+        if (source == null){
+            return "";
+        }
         String path = var.getPath();
         if (path == null){
-            return source;
+            return source.toString();
         }
         String[] paths = path.split(Split);
         Object current = source;
@@ -33,22 +36,22 @@ public class JavaReflectionExtractor implements Extractor {
             }
             current = getAttr(current,attr);
             if (current == null){
-                return null;
+                return "";
             }
         }
-        return current;
+        return current.toString();
     }
 
     protected Object getAttr(Object data,String attr){
         if (data == null){
-            return null;
+            return "";
         }
         if (data instanceof Map){
             return ((Map<?, ?>) data).get(attr);
         }
         Field f = ReflectionUtils.findField(data.getClass(), attr);
         if (f == null){
-            return null;
+            return "";
         }
         ReflectionUtils.makeAccessible(f);
         return ReflectionUtils.getField(f, data);
