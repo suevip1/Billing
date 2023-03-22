@@ -10,12 +10,14 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.EnableAsync;
 import springfox.documentation.service.ApiInfo;
 
 @SpringBootApplication
 @EnableDiscoveryClient
 @ComponentScan(basePackages = {"com.pingpongx.smb.fee", "com.pingpongx.passwordcallback"})
 @EnableFeignClients(basePackages = {"com.pingpongx.smb.fee"} )
+@EnableAsync
 public class SmbFeeApplication implements BaseApplicationDocable {
 
     @Override
