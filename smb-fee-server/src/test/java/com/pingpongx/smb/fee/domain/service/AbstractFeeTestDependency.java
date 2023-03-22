@@ -10,6 +10,7 @@ import com.pingpongx.smb.fee.api.dtos.cmd.BillingRequest;
 import com.pingpongx.smb.fee.api.dtos.cmd.OrderInfo;
 import com.pingpongx.smb.fee.api.dtos.cmd.PayeeInfo;
 import com.pingpongx.smb.fee.api.dtos.cmd.PayerInfo;
+import com.pingpongx.smb.fee.api.dtos.expr.AXpBDto;
 import com.pingpongx.smb.fee.api.dtos.expr.FixDto;
 
 import java.math.BigDecimal;
@@ -74,6 +75,14 @@ public class AbstractFeeTestDependency extends MockedTest {
         FixDto fixDto = new FixDto();
         fixDto.setFix(1);
         return fixDto;
+    }
+
+    AXpBDto generateAXpBDto() {
+        AXpBDto aXpBDto = new AXpBDto();
+        aXpBDto.setA(0.01);
+        aXpBDto.setB(0);
+        aXpBDto.setVarCode("amount");
+        return aXpBDto;
     }
 
     RuleDto generateMatchRule() {

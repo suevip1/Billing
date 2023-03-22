@@ -33,6 +33,7 @@ public class FeeServiceTest extends AbstractFeeTestDependency {
         JSON.toJSONString(generateBillingRequest());
 
         JSON.parseObject(JSON.toJSONString(generateFixDto()), ExprDto.class);
+        JSON.parseObject(JSON.toJSONString(generateAXpBDto()), ExprDto.class);
 //        feeService.billing(generateBillingRequest());
         generateMatchRule();
 
