@@ -4,6 +4,8 @@ import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONWriter;
 import com.pingpongx.smb.export.RuleConstant;
 import com.pingpongx.smb.export.module.persistance.LeafRuleConf;
+import com.pingpongx.smb.export.module.persistance.Range;
+import com.pingpongx.smb.export.module.persistance.RangeType;
 import com.pingpongx.smb.export.module.persistance.RuleDto;
 import com.pingpongx.smb.fee.MockedTest;
 import com.pingpongx.smb.fee.api.dtos.cmd.BillingRequest;
@@ -12,11 +14,15 @@ import com.pingpongx.smb.fee.api.dtos.cmd.PayeeInfo;
 import com.pingpongx.smb.fee.api.dtos.cmd.PayerInfo;
 import com.pingpongx.smb.fee.api.dtos.expr.AXpBDto;
 import com.pingpongx.smb.fee.api.dtos.expr.FixDto;
+import com.pingpongx.smb.fee.api.dtos.expr.NodeWithContidionDto;
+import com.pingpongx.smb.fee.api.dtos.expr.TierDto;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 public class AbstractFeeTestDependency extends MockedTest {
@@ -83,6 +89,29 @@ public class AbstractFeeTestDependency extends MockedTest {
         aXpBDto.setB("0");
         aXpBDto.setVarCode("amount");
         return aXpBDto;
+    }
+
+    TierDto generateTierDto() {
+        TierDto tierDto = new TierDto();
+        tierDto.setVarCode("amount");
+
+        NodeWithContidionDto node1 = new NodeWithContidionDto();
+        node1.setExpr(generateFixDto());
+        Range r1 = new Range();
+        r1.setRangeType(RangeType.LCRO.name());
+        r1.setRangeStart("0");
+        r1.setRangeEnd("5000");
+        node1.setCondition(r1);
+
+        NodeWithContidionDto node2 = new NodeWithContidionDto();
+        node2.setExpr(generateAXpBDto());
+        Range r2 = new Range();
+        r2.setRangeType(RangeType.LCRC.name());
+        r2.setRangeStart("5000");
+        r2.setRangeEnd(Range.MAX.toString());
+        node2.setCondition(r2);
+        tierDto.setList(Stream.of(node1,node2).collect(Collectors.toList()));
+        return tierDto;
     }
 
     RuleDto generateMatchRule() {
