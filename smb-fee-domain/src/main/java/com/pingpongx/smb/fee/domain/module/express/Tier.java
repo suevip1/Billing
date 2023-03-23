@@ -93,4 +93,12 @@ public class Tier implements TierMap, Calculator {
     public void setList(List<ExprWithCondition> list) {
         this.list = list;
     }
+
+    public VariableDef getRangeVar() {
+        return rangeVar;
+    }
+
+    public void setRangeVar(VariableDef rangeVar) {
+        this.rangeVar = rangeVar;
+    }
 }
