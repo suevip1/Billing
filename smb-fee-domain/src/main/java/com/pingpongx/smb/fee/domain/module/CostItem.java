@@ -24,6 +24,7 @@ public class CostItem implements Serializable {
     List<String> calculateVarKeys;
     CalculateMode mode;
     String collectionCode;
+    String collectionItemCode;
     /***
      * 原币种  ，目标币种
      * Source , Target

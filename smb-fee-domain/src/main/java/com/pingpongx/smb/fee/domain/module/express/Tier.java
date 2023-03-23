@@ -1,6 +1,6 @@
 package com.pingpongx.smb.fee.domain.module.express;
 
-import com.pingpongx.smb.export.module.Rule;
+import com.pingpongx.smb.export.module.persistance.Range;
 import com.pingpongx.smb.fee.api.dtos.expr.ExprDto;
 import com.pingpongx.smb.fee.api.dtos.expr.NodeWithContidionDto;
 import com.pingpongx.smb.fee.api.dtos.expr.TierDto;
@@ -10,13 +10,13 @@ import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Tier implements ExprMap,Calculator{
+public class Tier implements TierMap,Calculator{
 
     List<ExprWithCondition> list = new ArrayList<>();
 
     @Override
-    public Map<Rule, Expr> asMap() {
-        return list.stream().collect(Collectors.toMap(ExprWithCondition::getCondition,ExprWithCondition::getExpress));
+    public Map<Range, Expr> asMap() {
+        return list.stream().collect(Collectors.toMap(ExprWithCondition::getRange,ExprWithCondition::getExpress));
     }
 
     @Override

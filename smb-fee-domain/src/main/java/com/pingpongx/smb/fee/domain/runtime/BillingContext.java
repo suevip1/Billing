@@ -32,6 +32,7 @@ public class BillingContext implements Serializable {
 
     /**
      * key：costItemCode ， val：calculateResult
+     * key: costCollectionCode , val calculateResult
      */
     ConcurrentHashMap<String, BigDecimal> cache = new ConcurrentHashMap<>();
 

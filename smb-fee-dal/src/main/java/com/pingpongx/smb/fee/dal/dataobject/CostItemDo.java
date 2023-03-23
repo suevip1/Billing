@@ -21,6 +21,7 @@ public class CostItemDo extends FeeBaseDo {
     String calculateVarKeys;
     String mode;
     String collectionCode;
+    String collectionItemCode;
     /***
      * 原币种  ，目标币种
      * Source , Target

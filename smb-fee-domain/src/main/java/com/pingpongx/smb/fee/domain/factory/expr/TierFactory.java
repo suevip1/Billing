@@ -30,7 +30,7 @@ public class TierFactory implements IExprFactory{
 
     ExprWithCondition toDomain(NodeWithContidionDto dto){
         TierNode condition = new TierNode();
-        condition.setCondition(Codec.buildRule(dto.getCondition()));
+        condition.setCondition(dto.getCondition());
         condition.setExpr(exprFactory.load(dto.getExpr()));
         return condition;
     }
