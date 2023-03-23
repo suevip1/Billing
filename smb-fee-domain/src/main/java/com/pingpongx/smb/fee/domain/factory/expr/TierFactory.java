@@ -32,6 +32,7 @@ public class TierFactory implements IExprFactory{
         Tier e = new Tier();
         List<ExprWithCondition> list = d.getList().stream().map(n -> toDomain(n)).collect(Collectors.toList());
         e.setList(list);
+        //TODO 分多次请求DB可以集中到一个计费参数准备阶段用in语句批量完成
         ConfiguredVariableDef def = variableDefRepository.getByCode(((TierDto) dto).getVarCode());
         VariableDef defDomain = VariableFactory.load(def);
         e.setRangeVar(defDomain);
