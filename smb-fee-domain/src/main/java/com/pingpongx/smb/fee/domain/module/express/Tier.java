@@ -78,7 +78,7 @@ public class Tier implements TierMap, Calculator {
     @Override
     public BigDecimal getCalculateResult(BillingContext context) {
         SegTree<List<Expr>> segTree = this.asSegTree();
-        String varStr = rangeVar.extractor().doExtract(rangeVar,context);
+        String varStr = rangeVar.extractor().doExtract(rangeVar,context.getRequest());
         BigDecimal var = new BigDecimal(varStr);
         List<Expr> exprs = segTree.valuesOfPoint(var);
         if (exprs.size() == 0){
