@@ -35,6 +35,12 @@ public class Tier implements TierMap, Calculator {
                     Segment.of(node.getRange()),
                     Stream.of(node.getExpress()).collect(Collectors.toList()),
                     (n, o) -> {
+                        if (n==null){
+                            return o;
+                        }
+                        if (o == null){
+                            return n;
+                        }
                         n.addAll(o);
                         return n;
                     }
