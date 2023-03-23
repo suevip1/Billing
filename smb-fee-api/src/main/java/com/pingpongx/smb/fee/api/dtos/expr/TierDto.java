@@ -12,5 +12,6 @@ public class TierDto extends ExprDto {
 
     @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type", visible = true)
     List<NodeWithContidionDto> list;
+    String varCode;
     String type = "Tier";
 }
