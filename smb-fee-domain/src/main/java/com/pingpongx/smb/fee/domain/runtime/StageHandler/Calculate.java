@@ -57,7 +57,7 @@ public class Calculate extends BizFlowNode {
                 BigDecimal rate = context.getRequest().getFxRate().get(fxKey);
                 if (rate == null){
                     BigDecimal one = new BigDecimal(1);
-                    rate = one.divide(context.getRequest().getFxRate().get(fxKeyEx), RoundingMode.HALF_UP);
+                    rate = one.divide(context.getRequest().getFxRate().get(fxKeyEx),9, RoundingMode.HALF_UP);
                 }
                 if (rate == null){
                     throw  new RuntimeException("rate not exists."+fxKey);
