@@ -42,6 +42,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 
 @Api(tags = "计费中心-new")
@@ -92,7 +93,11 @@ public class BillingServiceImpl implements BillingServiceFeign {
         BillingStage stage = context.resume(future);
         springContext.publishEvent(stage);
         //处理同步返回
-        context = future.join();
+        try {
+            context = future.get();
+        }  catch (Exception e){
+            log.error(e.getMessage(),e);
+        }
         Bill resp = context.getBill();
         return resp;
     }
@@ -111,7 +116,11 @@ public class BillingServiceImpl implements BillingServiceFeign {
         BillingRequestReceived stage = (BillingRequestReceived) context.resume(future);
         springContext.publishEvent(stage);
         //处理同步返回
-        context = future.join();
+        try {
+            context = future.get();
+        }  catch (Exception e){
+            log.error(e.getMessage(),e);
+        }
         Bill resp = context.getBill();
         return resp;
     }
