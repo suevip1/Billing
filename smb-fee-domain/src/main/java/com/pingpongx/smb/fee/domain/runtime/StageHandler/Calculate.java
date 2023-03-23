@@ -12,6 +12,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -27,16 +28,9 @@ public class Calculate extends BizFlowNode {
         try {
             List<CostItem> costItemList = context.getMatchedCostItem();
 
-//            Map<String, List<CostItemResult>> itemCollections = costItemList.stream().sorted(Comparator.comparingInt(CostItem::getPriority))
-//                    .map(costItem -> calculateSingle(costItem, context))
-//                    .collect(Collectors.groupingBy(costItemResult -> costItemResult.getItemCode(), Collectors.toList()));
-
-//            itemCollections.entrySet().stream().map()
-
-            List<CostItemResult> result = costItemList.stream().sorted(Comparator.comparingInt(CostItem::getPriority))
-                    .map(costItem -> calculateSingle(costItem, context)).collect(Collectors.toList());
-
-
+            List<CostItemResult> result =  groupByItemCode(costItemList).values().stream().map(list->maxPriorityItems(list)).flatMap(list->list.stream()).map(item->calculateSingle(item,context)).collect(Collectors.toList());
+//            List<CostItemResult> result = costItemList.stream().sorted(Comparator.comparingInt(CostItem::getPriority))
+//                    .map(costItem -> calculateSingle(costItem, context)).collect(Collectors.toList());
             Bill bill = new Bill();
             bill.setFeeResult(result);
             context.setBill(bill);
@@ -56,13 +50,19 @@ public class Calculate extends BizFlowNode {
             String sourceCurrencyCode = context.getRequest().getOrderInfo().getSourceCurrency();
             String targetCurrencyCode = context.getRequest().getOrderInfo().getTargetCurrency();
             String fxKey = sourceCurrencyCode + "_" + targetCurrencyCode;
-            Money fee;
+            String fxKeyEx = targetCurrencyCode + "_" + sourceCurrencyCode;
             if (CurrencyType.Source.equals(item.getCurrencyType())) {
-//                fee = Money.of(CurrencyUnit.of(sourceCurrencyCode), bigDecimal);
                 costItemResult.setCurrency(sourceCurrencyCode);
             } else {
-                bigDecimal = bigDecimal.multiply(context.getRequest().getFxRate().get(fxKey));
-//                fee = Money.of(CurrencyUnit.of(targetCurrencyCode), bigDecimal);
+                BigDecimal rate = context.getRequest().getFxRate().get(fxKey);
+                if (rate == null){
+                    BigDecimal one = new BigDecimal(1);
+                    rate = one.divide(context.getRequest().getFxRate().get(fxKeyEx), RoundingMode.HALF_UP);
+                }
+                if (rate == null){
+                    throw  new RuntimeException("rate not exists."+fxKey);
+                }
+                bigDecimal = bigDecimal.multiply(rate);
                 costItemResult.setCurrency(targetCurrencyCode);
             }
             costItemResult.setAmount(bigDecimal.toString());
