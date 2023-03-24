@@ -12,10 +12,9 @@ import com.pingpongx.smb.fee.api.dtos.cmd.BillingRequest;
 import com.pingpongx.smb.fee.api.dtos.cmd.OrderInfo;
 import com.pingpongx.smb.fee.api.dtos.cmd.PayeeInfo;
 import com.pingpongx.smb.fee.api.dtos.cmd.PayerInfo;
-import com.pingpongx.smb.fee.api.dtos.expr.AXpBDto;
-import com.pingpongx.smb.fee.api.dtos.expr.FixDto;
-import com.pingpongx.smb.fee.api.dtos.expr.NodeWithContidionDto;
-import com.pingpongx.smb.fee.api.dtos.expr.TierDto;
+import com.pingpongx.smb.fee.api.dtos.expr.*;
+import com.pingpongx.smb.fee.domain.module.express.Max;
+import com.pingpongx.smb.fee.domain.module.express.Min;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -89,6 +88,18 @@ public class AbstractFeeTestDependency extends MockedTest {
         aXpBDto.setB("0");
         aXpBDto.setVarCode("amount");
         return aXpBDto;
+    }
+
+    MaxDto generateMaxDto() {
+        MaxDto dto = new MaxDto();
+        dto.setList(Stream.of(generateAXpBDto(),generateFixDto()).collect(Collectors.toList()));
+        return dto;
+    }
+
+    MinDto generateMinDto() {
+        MinDto dto = new MinDto();
+        dto.setList(Stream.of(generateAXpBDto(),generateFixDto()).collect(Collectors.toList()));
+        return dto;
     }
 
     TierDto generateTierDto() {
