@@ -1,5 +1,6 @@
 package com.pingpongx.smb.fee.domain.runtime.StageHandler;
 
+import com.pingpongx.smb.fee.api.dtos.cmd.CouponInfo;
 import com.pingpongx.smb.fee.dal.dataobject.BillingContextDo;
 import com.pingpongx.smb.fee.dal.repository.BillingContextRepository;
 import com.pingpongx.smb.fee.domain.convert.runtime.BillingContextConvert;
@@ -13,6 +14,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CouponBeforeCalculate extends BizFlowNode{
     @EventListener
@@ -20,6 +23,8 @@ public class CouponBeforeCalculate extends BizFlowNode{
         BillingContext context = matchCompleted.getContext();
         try{
             CouponParamUpdated paramUpdated = new CouponParamUpdated(context);
+            List<CouponInfo> couponList = context.getRequest().getCouponList();
+
             applicationContext.publishEvent(paramUpdated);
         }catch (Exception e){
             handleException(context,e);

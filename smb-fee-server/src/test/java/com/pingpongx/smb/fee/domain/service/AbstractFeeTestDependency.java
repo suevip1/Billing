@@ -13,8 +13,6 @@ import com.pingpongx.smb.fee.api.dtos.cmd.OrderInfo;
 import com.pingpongx.smb.fee.api.dtos.cmd.PayeeInfo;
 import com.pingpongx.smb.fee.api.dtos.cmd.PayerInfo;
 import com.pingpongx.smb.fee.api.dtos.expr.*;
-import com.pingpongx.smb.fee.domain.module.express.Max;
-import com.pingpongx.smb.fee.domain.module.express.Min;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -133,6 +131,27 @@ public class AbstractFeeTestDependency extends MockedTest {
         leafRuleConf.setNot(false);
         leafRuleConf.setOperation(RuleConstant.Operations.StrEquals.getSimpleName());
         leafRuleConf.setExpected("true");
+        String test = JSON.toJSONString(leafRuleConf, JSONWriter.Feature.WriteClassName);
+        JSON.parseObject(test, RuleDto.class);
+
+
+        return leafRuleConf;
+    }
+
+    RuleDto matchRule() {
+
+        LeafRuleConf leafRuleConf = new LeafRuleConf();
+        leafRuleConf.setAttr("amount");
+        leafRuleConf.setType("BillingContext");
+        leafRuleConf.setNot(false);
+        leafRuleConf.setOperation(RuleConstant.Operations.NumberRangeIn.getSimpleName());
+
+        Range r1 = new Range();
+        r1.setRangeType(RangeType.LCRO.name());
+        r1.setRangeStart("0");
+        r1.setRangeEnd("50");
+
+        leafRuleConf.setExpected(JSON.toJSONString(r1));
         String test = JSON.toJSONString(leafRuleConf, JSONWriter.Feature.WriteClassName);
         JSON.parseObject(test, RuleDto.class);
 

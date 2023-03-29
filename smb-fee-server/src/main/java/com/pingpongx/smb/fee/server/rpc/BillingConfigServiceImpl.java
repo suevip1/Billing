@@ -3,6 +3,8 @@ package com.pingpongx.smb.fee.server.rpc;
 import com.alibaba.fastjson.JSON;
 import com.pingpongx.flowmore.cloud.base.server.annotation.Internal;
 import com.pingpongx.flowmore.cloud.base.server.constants.RoleRegister;
+import com.pingpongx.smb.export.globle.Engine;
+import com.pingpongx.smb.export.module.persistance.RuleDto;
 import com.pingpongx.smb.fee.api.dtos.cmd.BillingRequest;
 import com.pingpongx.smb.fee.api.dtos.cmd.OrderInfo;
 import com.pingpongx.smb.fee.api.dtos.cmd.PayeeInfo;
@@ -20,6 +22,7 @@ import com.pingpongx.smb.fee.dependency.convert.BillingRequestConvert;
 import com.pingpongx.smb.fee.domain.convert.runtime.BillingContextConvert;
 import com.pingpongx.smb.fee.domain.module.event.BillingRequestReceived;
 import com.pingpongx.smb.fee.domain.module.event.BillingStage;
+import com.pingpongx.smb.fee.domain.rules.Engines;
 import com.pingpongx.smb.fee.domain.runtime.BillingContext;
 import com.pingpongx.smb.metadata.dto.VariableDefDto;
 import io.swagger.annotations.Api;
@@ -50,16 +53,12 @@ import java.util.concurrent.CompletableFuture;
 @RequiredArgsConstructor
 public class BillingConfigServiceImpl implements BillingConfigServiceFeign  {
 
-    private final RepeatRepository repeatRepository;
-    private final BillingRequestRepository billingRequestRepository;
-    private final BillingContextRepository contextRepository;
-    private final TransactionTemplate txTemplate;
-    private final ApplicationContext springContext;
-    private final BillingContextConvert billingContextConvert;
+    private final Engines engines;
+
 
 
     @Override
-    public Bill refresh() {
+    public Bill refresh(String costNode) {
         return null;
     }
 
