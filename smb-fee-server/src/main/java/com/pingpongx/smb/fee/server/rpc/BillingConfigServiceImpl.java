@@ -48,7 +48,7 @@ import java.util.concurrent.CompletableFuture;
 
 @Api(tags = "计费中心-配置")
 @RestController
-@RequestMapping(value = BillingServiceFeign.BASE_PATH)
+@RequestMapping(value = BillingConfigServiceFeign.BASE_PATH)
 @Slf4j
 @RequiredArgsConstructor
 public class BillingConfigServiceImpl implements BillingConfigServiceFeign  {
