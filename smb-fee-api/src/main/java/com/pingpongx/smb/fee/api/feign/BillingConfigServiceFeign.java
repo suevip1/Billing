@@ -28,7 +28,7 @@ public interface BillingConfigServiceFeign {
      * @return
      */
     @GetMapping("/refresh")
-    Bill refresh(@RequestParam String costNode);
+    void refresh(@RequestParam String costNode);
 
 
     @PostMapping("/variable/saveOrUpdate")

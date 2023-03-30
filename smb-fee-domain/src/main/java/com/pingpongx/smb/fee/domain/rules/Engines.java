@@ -4,8 +4,6 @@ import com.alibaba.fastjson2.JSON;
 import com.pingpongx.smb.export.globle.Engine;
 import com.pingpongx.smb.export.module.ConfiguredRangeRule;
 import com.pingpongx.smb.export.module.Rule;
-import com.pingpongx.smb.export.module.operation.RuleOr;
-import com.pingpongx.smb.export.module.persistance.Or;
 import com.pingpongx.smb.export.module.persistance.Range;
 import com.pingpongx.smb.export.module.persistance.RangeType;
 import com.pingpongx.smb.fee.dal.dataobject.CostItemDo;
@@ -16,7 +14,6 @@ import com.pingpongx.smb.fee.domain.factory.CostItemFactory;
 import com.pingpongx.smb.fee.domain.module.CostItem;
 import com.pingpongx.smb.fee.domain.module.CostNode;
 import com.pingpongx.smb.rule.routers.operatiors.NumRangeIn;
-import com.pingpongx.smb.store.Codec;
 import io.vavr.Tuple;
 import io.vavr.Tuple2;
 import lombok.RequiredArgsConstructor;
@@ -68,15 +65,20 @@ public class Engines {
     @PostConstruct
     void init() {
         List<CostNodeDo> nodes = nodeRepository.listAllNode();
-        nodes.stream().forEach(costNodeDo -> initEngine(costNodeDo));
+        nodes.stream().forEach(costNodeDo -> rebuildEngine(costNodeDo));
     }
 
-    private void initEngine(CostNodeDo costNode) {
+
+    public void rebuildEngine(CostNodeDo costNode) {
+        rebuildEngine(costNode.getCode());
+    }
+
+    public void rebuildEngine(String costNodeCode) {
         Engine engine = new Engine();
         Set<String> vars = new HashSet<>();
         //TODO  map extractor.
         engine.extractor = new EngineExtractorAdapt();
-        List<CostItemDo> items = itemRepository.listByNodeCode(costNode.getCode());
+        List<CostItemDo> items = itemRepository.listByNodeCode(costNodeCode);
         items.stream().map(this::tuple).forEach(t -> {
             ConfiguredRangeRule rule = new ConfiguredRangeRule();
             Range range = new Range();
@@ -103,8 +105,8 @@ public class Engines {
                 vars.addAll(t._1().getMatchVarKeys());
             }
         });
-        engineOfNode.put(costNode.getCode(), engine);
-        variables.put(costNode.getCode(), vars);
+        engineOfNode.put(costNodeCode, engine);
+        variables.put(costNodeCode, vars);
     }
 
     private Tuple2<CostItem, Rule> tuple(CostItemDo costItemDo) {

@@ -58,8 +58,8 @@ public class BillingConfigServiceImpl implements BillingConfigServiceFeign  {
 
 
     @Override
-    public Bill refresh(String costNode) {
-        return null;
+    public void refresh(String costNode) {
+        engines.rebuildEngine(costNode);
     }
 
     @Override
