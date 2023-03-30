@@ -76,7 +76,6 @@ public class Engines {
     public void rebuildEngine(String costNodeCode) {
         Engine engine = new Engine();
         Set<String> vars = new HashSet<>();
-        //TODO  map extractor.
         engine.extractor = new EngineExtractorAdapt();
         List<CostItemDo> items = itemRepository.listByNodeCode(costNodeCode);
         items.stream().map(this::tuple).forEach(t -> {
