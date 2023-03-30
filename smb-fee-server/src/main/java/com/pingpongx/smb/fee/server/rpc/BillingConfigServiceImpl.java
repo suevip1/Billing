@@ -57,7 +57,12 @@ public class BillingConfigServiceImpl implements BillingConfigServiceFeign  {
 
 
 
-    @Override
+    @RolesAllowed(RoleRegister.ROLE_COMMON_SERVICE)
+    @Internal
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", value = "service smb-fee@test", required = false, paramType = "header"),
+            @ApiImplicitParam(name = "appId", value = "test@smb-fee", required = false, paramType = "header"),
+    })
     public void refresh(String costNode) {
         engines.rebuildEngine(costNode);
     }
