@@ -3,6 +3,7 @@ package com.pingpongx.smb.fee.dal.repository;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.pingpongx.business.dal.core.BaseRepository;
 import com.pingpongx.smb.fee.common.dto.OrderInfoDTO;
 import com.pingpongx.smb.fee.common.req.FeeConfigRequest;
 import com.pingpongx.smb.fee.dal.dataobject.FeeConfig;
@@ -20,7 +21,7 @@ import java.util.Objects;
  * @createTime 2022年06月28日 14:47:00
  */
 @Repository
-public class FeeConfigRepository extends FeeBaseRepository<FeeConfigMapper, FeeConfig> {
+public class FeeConfigRepository extends BaseRepository<FeeConfigMapper, FeeConfig> {
 
     public static final String ALL = "ALL";
 
