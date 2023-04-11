@@ -3,20 +3,19 @@ package com.pingpongx.smb.fee.domain.service;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONWriter;
 import com.pingpongx.smb.export.RuleConstant;
-import com.pingpongx.smb.export.module.persistance.LeafRuleConf;
-import com.pingpongx.smb.export.module.persistance.Range;
-import com.pingpongx.smb.export.module.persistance.RangeType;
-import com.pingpongx.smb.export.module.persistance.RuleDto;
+import com.pingpongx.smb.export.module.persistance.*;
 import com.pingpongx.smb.fee.MockedTest;
 import com.pingpongx.smb.fee.api.dtos.cmd.BillingRequest;
 import com.pingpongx.smb.fee.api.dtos.cmd.OrderInfo;
 import com.pingpongx.smb.fee.api.dtos.cmd.PayeeInfo;
 import com.pingpongx.smb.fee.api.dtos.cmd.PayerInfo;
 import com.pingpongx.smb.fee.api.dtos.expr.*;
+import org.checkerframework.checker.units.qual.A;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -132,10 +131,11 @@ public class AbstractFeeTestDependency extends MockedTest {
         leafRuleConf.setOperation(RuleConstant.Operations.StrEquals.getSimpleName());
         leafRuleConf.setExpected("true");
         String test = JSON.toJSONString(leafRuleConf, JSONWriter.Feature.WriteClassName);
-        JSON.parseObject(test, RuleDto.class);
-
-
-        return leafRuleConf;
+        And and = new And();
+        List<RuleDto> list = new ArrayList<>();
+        list.add(leafRuleConf);
+        and.setAndRules(list);
+        return and;
     }
 
     RuleDto matchRule() {
