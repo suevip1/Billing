@@ -10,7 +10,11 @@ import java.math.BigDecimal;
 public class Fixed implements BasicExpr,Calculator{
     BigDecimal fix;
 
-
+    public static Fixed of(BigDecimal fix){
+        Fixed ret = new Fixed();
+        ret.setFix(fix);
+        return ret;
+    }
     @Override
     public String identify() {
         StringBuilder builder = new StringBuilder();

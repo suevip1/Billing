@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
@@ -52,7 +53,10 @@ public class MatchParamPrepare extends BizFlowNode{
                 return;
             }
 
-            List<ConfiguredVariableDef> defs = variableDefRepository.getByCode(vars);
+            List<ConfiguredVariableDef> defs = variableDefRepository.getByCodeAndNameSpace(
+                    vars,
+                    Stream.of(context.getNameSpace()).collect(Collectors.toList())
+            );
             if (defs.size()!=vars.size()){
                 Set<String> found = defs.stream().map(def -> def.getCode()).collect(Collectors.toSet());
                 vars.removeAll(found);
@@ -61,7 +65,7 @@ public class MatchParamPrepare extends BizFlowNode{
             }
 
             Map<String,String> p = defs.stream().map(def -> VariableFactory.load(def))
-                    .map(v-> Tuple.of(v.getCode(),v.extractor().doExtract(v,request)))
+                    .map(v-> Tuple.of(v.getCode(),v.extractor().doExtract(v,context)))
                     .collect(Collectors.toMap(Tuple2::_1,Tuple2::_2));
             params.putAll(p);
             MatchParamCompleted matchParamCompleted = new MatchParamCompleted(context);

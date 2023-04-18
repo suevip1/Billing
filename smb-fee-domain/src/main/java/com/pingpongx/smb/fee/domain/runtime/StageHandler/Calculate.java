@@ -1,13 +1,14 @@
 package com.pingpongx.smb.fee.domain.runtime.StageHandler;
 
+import com.pingpongx.business.common.dto.Money;
 import com.pingpongx.smb.fee.api.dtos.resp.Bill;
 import com.pingpongx.smb.fee.api.dtos.resp.CostItemResult;
+import com.pingpongx.smb.fee.domain.convert.ExchangeConvert;
 import com.pingpongx.smb.fee.domain.enums.CurrencyType;
 import com.pingpongx.smb.fee.domain.module.CostItem;
 import com.pingpongx.smb.fee.domain.module.event.CalculateCompleted;
 import com.pingpongx.smb.fee.domain.module.event.CouponParamUpdated;
 import com.pingpongx.smb.fee.domain.runtime.BillingContext;
-import org.joda.money.Money;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +29,11 @@ public class Calculate extends BizFlowNode {
         try {
             List<CostItem> costItemList = context.getMatchedCostItem();
 
-            List<CostItemResult> result =  groupByItemCode(costItemList).values().stream().map(list->maxPriorityItems(list)).flatMap(list->list.stream()).map(item->calculateSingle(item,context)).collect(Collectors.toList());
+            List<CostItemResult> result =  groupByItemCode(costItemList).values().stream()
+                    .map(list->maxPriorityItems(list))
+                    .flatMap(list->list.stream())
+                    .map(item->calculateSingle(item,context))
+                    .collect(Collectors.toList());
 //            List<CostItemResult> result = costItemList.stream().sorted(Comparator.comparingInt(CostItem::getPriority))
 //                    .map(costItem -> calculateSingle(costItem, context)).collect(Collectors.toList());
             Bill bill = new Bill();
@@ -47,25 +52,9 @@ public class Calculate extends BizFlowNode {
         costItemResult.setItemName(item.getDisplayName());
         try {
             BigDecimal bigDecimal = item.getCalculateExpress().fetchCalculator().getCalculateResult(context);
-            String sourceCurrencyCode = context.getRequest().getOrderInfo().getSourceCurrency();
-            String targetCurrencyCode = context.getRequest().getOrderInfo().getTargetCurrency();
-            String fxKey = sourceCurrencyCode + "_" + targetCurrencyCode;
-            String fxKeyEx = targetCurrencyCode + "_" + sourceCurrencyCode;
-            if (CurrencyType.Source.equals(item.getCurrencyType())) {
-                costItemResult.setCurrency(sourceCurrencyCode);
-            } else {
-                BigDecimal rate = context.getRequest().getFxRate().get(fxKey);
-                if (rate == null){
-                    BigDecimal one = new BigDecimal(1);
-                    rate = one.divide(context.getRequest().getFxRate().get(fxKeyEx),9, RoundingMode.HALF_UP);
-                }
-                if (rate == null){
-                    throw  new RuntimeException("rate not exists."+fxKey);
-                }
-                bigDecimal = bigDecimal.multiply(rate);
-                costItemResult.setCurrency(targetCurrencyCode);
-            }
-            costItemResult.setAmount(bigDecimal.toString());
+            Money ret = ExchangeConvert.convert(CurrencyType.Source,item.getCurrencyType(),context,bigDecimal);
+            costItemResult.setCurrency(ret.getCurrency());
+            costItemResult.setAmount(ret.getAmount().toString());
             costItemResult.setSuccess(true);
         } catch (Exception e) {
             costItemResult.setSuccess(false);

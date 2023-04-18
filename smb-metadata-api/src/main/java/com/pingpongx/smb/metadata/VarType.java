@@ -1,8 +1,10 @@
 package com.pingpongx.smb.metadata;
 
+import com.pingpongx.smb.metadata.metric.ContextVarExtractor;
 import com.pingpongx.smb.metadata.metric.MetricVar;
 import com.pingpongx.smb.metadata.metric.MetricVarDefFactory;
 import com.pingpongx.smb.metadata.metric.RedisMetricExtractor;
+import com.pingpongx.smb.metadata.properties.ContextVar;
 import com.pingpongx.smb.metadata.properties.JavaReflectionExtractor;
 import com.pingpongx.smb.metadata.properties.RequestVar;
 import com.pingpongx.smb.metadata.properties.RequestVarDefFactory;
@@ -14,7 +16,8 @@ import java.util.Map;
 public enum VarType {
 
     Request("Request", RequestVar.class,new JavaReflectionExtractor(),new RequestVarDefFactory()),
-    Metric("Metric", MetricVar.class,new RedisMetricExtractor(),new MetricVarDefFactory());
+    Metric("Metric", MetricVar.class,new RedisMetricExtractor(),new MetricVarDefFactory()),
+    Context("Context",ContextVar.class,new ContextVarExtractor(),null);
     private static Map<Class<? extends VariableDef>, VarType> classMap = new HashMap<>();
     private static Map<String, VarType> typeMap = new HashMap<>();
     String code;

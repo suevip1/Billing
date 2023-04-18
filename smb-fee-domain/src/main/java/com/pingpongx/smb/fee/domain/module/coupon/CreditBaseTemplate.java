@@ -1,15 +1,15 @@
 package com.pingpongx.smb.fee.domain.module.coupon;
 
+import com.pingpongx.smb.fee.domain.enums.Direction;
 import com.pingpongx.smb.fee.domain.module.CostItem;
 import com.pingpongx.smb.fee.domain.module.CostNode;
-import com.pingpongx.smb.fee.domain.enums.Direction;
-import com.pingpongx.smb.fee.domain.enums.CalculateMode;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.List;
+
 @Data
-public class CouponCostItemTemplate extends CostItem{
+public class CreditBaseTemplate {
     String code;
     String displayName;
     /***
@@ -17,8 +17,6 @@ public class CouponCostItemTemplate extends CostItem{
      */
     String costItemCode;
 //costItemCode 为空时生效
-//    String matchRule;
-//    List<String> matchVarKeys;
     /***
      * 原币种  ，目标币种
      * Source , Target

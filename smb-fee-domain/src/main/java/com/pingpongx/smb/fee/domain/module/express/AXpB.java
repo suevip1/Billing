@@ -7,6 +7,8 @@ import com.pingpongx.smb.metadata.Identified;
 import com.pingpongx.smb.metadata.VariableDef;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.aspectj.weaver.ast.Var;
+import org.checkerframework.checker.units.qual.A;
 
 import java.math.BigDecimal;
 
@@ -17,6 +19,14 @@ public class AXpB implements BasicExpr, Calculator, Identified {
     BigDecimal b;
 
     VariableDef x;
+
+    public static AXpB of(BigDecimal a, BigDecimal b, VariableDef x){
+        AXpB ret = new AXpB();
+        ret.setA(a);
+        ret.setB(b);
+        ret.setX(x);
+        return ret;
+    }
 
     @Override
     public String identify() {
@@ -51,7 +61,11 @@ public class AXpB implements BasicExpr, Calculator, Identified {
         if (ret != null) {
             return ret;
         }
-        BigDecimal xVal = new BigDecimal(x.extractor().doExtract(x, context.getRequest()));
+        String amount = x.extractor().doExtract(x, context);
+        if (amount == null){
+            throw new RuntimeException("variable amount not defined in namespace:"+context.getNameSpace());
+        }
+        BigDecimal xVal = new BigDecimal(amount);
         log.info("variable x is " + xVal);
         ret = xVal.multiply(a).add(b);
         log.info("result : " + ret);

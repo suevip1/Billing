@@ -16,11 +16,25 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <revision>1.0.1-SNAPSHOT</revision>
-        <RuleEngineVersion>1.0.1-SNAPSHOT</RuleEngineVersion>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.pingpongx.smb</groupId>
+                <artifactId>smb-asset-api</artifactId>
+                <version>2.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.pingpongx.smb</groupId>
+                <artifactId>smb-payment-api</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.pingpongx.smb</groupId>
+                <artifactId>smb-trade-api</artifactId>
+                <version>2.0.0-SNAPSHOT</version>
+            </dependency>
             <dependency>
                 <groupId>com.pingpongx.smb</groupId>
                 <artifactId>smb-fee-dependency</artifactId>
@@ -70,7 +84,7 @@
             <dependency>
                 <groupId>com.pingpongx.smb</groupId>
                 <artifactId>smb-rules</artifactId>
-                <version>${RuleEngineVersion}</version>
+                <version>1.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.alibaba.fastjson2</groupId>

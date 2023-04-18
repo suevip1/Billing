@@ -48,4 +48,8 @@ public class BillingContext implements Serializable {
         }
         return new CalculateCompleted(this);
     }
+
+    public String getNameSpace(){
+        return getRequest().getCostNodeCode()+"_"+getRequest().getSourceApp();
+    }
 }

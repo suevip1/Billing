@@ -11,29 +11,26 @@ public class CouponInfo implements Serializable, Identified {
 
     private static final long serialVersionUID = 8065156876028580972L;
 
-    String couponId;
-    BigDecimal usdCredit;
+    String userCouponId;
+
+    String currency; //source / target
+
+    BigDecimal validValue;
+
     /**
-     * 优惠券类型
+     * 优惠券类型  CouponTypeEnum.xxxx.name()
      */
     String couponType;
     /**
      * 冲销模板id
      */
-    String templateId;
-    /**
-     * Billing , BeforeBilling , AfterBilling
-     */
-    String stage;
-    /**
-     * credit 按额度核销 , count 按次数核销
-     */
-    String writeOffType;
+    String couponId;
+
 
     public String identify() {
         String split = "-";
         StringBuilder builder = new StringBuilder();
-        builder.append(couponId).append(split).append(usdCredit);
+        builder.append(couponId).append(split).append(validValue);
         return builder.toString();
     }
 }

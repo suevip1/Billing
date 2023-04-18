@@ -1,13 +1,12 @@
 package com.pingpongx.smb.fee.api.dtos.resp;
 
+import com.pingpongx.business.common.dto.Money;
 import com.pingpongx.smb.fee.api.dtos.resp.coupon.CouponAction;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.math.BigDecimal;
+import java.util.*;
 
 @Data
 public class Bill implements Serializable {
@@ -22,9 +21,11 @@ public class Bill implements Serializable {
      */
     List<CouponResult> expense = new ArrayList<>();
 
-
     /***
      * 失败原因
      */
     Map<String , String> failedReasons = new HashMap<>();
+
+    Map<String, BigDecimal> fxRate;
+
 }

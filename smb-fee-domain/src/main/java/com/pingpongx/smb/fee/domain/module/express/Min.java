@@ -6,13 +6,18 @@ import com.pingpongx.smb.fee.domain.runtime.BillingContext;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Min implements ExprCollection,Calculator{
     List<Expr> list = new ArrayList<>();
 
-
+    public static Min of(Expr ... exprs){
+        Min min = new Min();
+        min.setList( Arrays.stream(exprs).collect(Collectors.toList()));
+        return min;
+    }
     @Override
     public String identify() {
         return this.getClass().getSimpleName();

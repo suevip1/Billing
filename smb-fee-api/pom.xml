@@ -6,11 +6,14 @@
         <version>${revision}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
     <artifactId>smb-fee-api</artifactId>
 
 
     <dependencies>
+        <dependency>
+            <groupId>com.pingpongx.smb</groupId>
+            <artifactId>smb-trade-api</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -35,11 +38,18 @@
         <dependency>
             <groupId>com.pingpongx.smb</groupId>
             <artifactId>smb-payment-api</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.pingpongx.smb</groupId>
+            <artifactId>smb-trade-api</artifactId>
         </dependency>
         <dependency>
             <groupId>com.pingpongx.smb</groupId>
             <artifactId>smb-metadata-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.pingpongx.smb</groupId>
+            <artifactId>smb-asset-api</artifactId>
         </dependency>
     </dependencies>
 
