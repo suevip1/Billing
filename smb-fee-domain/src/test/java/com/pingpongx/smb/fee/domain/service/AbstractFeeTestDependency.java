@@ -6,6 +6,7 @@ import com.pingpongx.smb.fee.api.dtos.cmd.BillingRequest;
 import com.pingpongx.smb.fee.api.dtos.cmd.OrderInfo;
 import com.pingpongx.smb.fee.api.dtos.cmd.PayeeInfo;
 import com.pingpongx.smb.fee.api.dtos.cmd.PayerInfo;
+import com.pingpongx.smb.fee.domain.enums.FeePayer;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -51,7 +52,7 @@ public class AbstractFeeTestDependency extends MockedTest {
         orderInfo.setTargetCurrency("CNY");
         orderInfo.setSubject("D12038901283102938");
         orderInfo.setSubjectType("DID");
-        orderInfo.setFeePayer("Payee");
+        orderInfo.setFeePayer(FeePayer.OrderPayer.name());
         orderInfo.setBizOrderType("Transfer");
         orderInfo.setBizOrderId("T0192091203121");
         request.setOrderInfo(orderInfo);

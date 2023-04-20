@@ -9,6 +9,7 @@ import com.pingpongx.smb.fee.api.dtos.resp.coupon.CouponAction;
 import com.pingpongx.smb.fee.api.dtos.resp.coupon.CreditDecrease;
 import com.pingpongx.smb.fee.domain.convert.ExchangeConvert;
 import com.pingpongx.smb.fee.domain.enums.CurrencyType;
+import com.pingpongx.smb.fee.domain.enums.FeePayer;
 import com.pingpongx.smb.fee.domain.module.express.AXpB;
 import com.pingpongx.smb.fee.domain.module.express.Expr;
 import com.pingpongx.smb.fee.domain.module.express.Min;
@@ -37,8 +38,8 @@ public class FeeOffHandler implements AfterCalculateHandler {
 
     @Override
     public void couponResultFix(CouponInfo couponInfo, BillingContext context) {
-        CurrencyType feePayer = CurrencyType.valueOf(context.getRequest().getOrderInfo().getFeePayer());
-        Money payerCredit = ExchangeConvert.convert(CurrencyType.valueOf(couponInfo.getCurrency()),feePayer,context,couponInfo.getValidValue());
+        CurrencyType feePayerCurrency = FeePayer.valueOf(context.getRequest().getOrderInfo().getFeePayer()).getCurrencyType();
+        Money payerCredit = ExchangeConvert.convert(CurrencyType.valueOf(couponInfo.getCurrency()),feePayerCurrency,context,couponInfo.getValidValue());
         Money totalFee = BillUtil.getTotalFee(context);
 
         BigDecimal deducted = payerCredit.getAmount().min(totalFee.getAmount());

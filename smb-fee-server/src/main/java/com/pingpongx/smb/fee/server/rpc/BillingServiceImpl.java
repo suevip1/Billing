@@ -18,6 +18,7 @@ import com.pingpongx.smb.fee.dal.repository.BillingRequestRepository;
 import com.pingpongx.smb.fee.dal.repository.RepeatRepository;
 import com.pingpongx.smb.fee.dependency.convert.BillingRequestConvert;
 import com.pingpongx.smb.fee.domain.convert.runtime.BillingContextConvert;
+import com.pingpongx.smb.fee.domain.enums.FeePayer;
 import com.pingpongx.smb.fee.domain.module.event.BillingRequestReceived;
 import com.pingpongx.smb.fee.domain.module.event.BillingStage;
 import com.pingpongx.smb.fee.domain.module.event.CalculateCompleted;
@@ -162,7 +163,7 @@ public class BillingServiceImpl implements BillingServiceFeign {
         orderInfo.setTargetCurrency("CNY");
         orderInfo.setSubject("D12038901283102938");
         orderInfo.setSubjectType("DID");
-        orderInfo.setFeePayer("Payee");
+        orderInfo.setFeePayer(FeePayer.OrderPayee.name());
         orderInfo.setBizOrderType("Transfer");
         orderInfo.setBizOrderId("T0192091203121");
         request.setOrderInfo(orderInfo);
