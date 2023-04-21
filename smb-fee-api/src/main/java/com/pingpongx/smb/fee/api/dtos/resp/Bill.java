@@ -13,7 +13,6 @@ public class Bill implements Serializable {
 
     private static final long serialVersionUID = 8063154680261469672L;
 
-
     List<CostItemResult> feeResult = new ArrayList<>();
 
     /****
@@ -27,5 +26,6 @@ public class Bill implements Serializable {
     Map<String , String> failedReasons = new HashMap<>();
 
     Map<String, BigDecimal> fxRate;
+
 
 }
