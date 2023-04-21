@@ -54,7 +54,7 @@ public class Calculate extends BizFlowNode {
             BigDecimal bigDecimal = item.getCalculateExpress().fetchCalculator().getCalculateResult(context);
             Money ret = ExchangeConvert.convert(CurrencyType.Source,item.getCurrencyType(),context,bigDecimal);
             costItemResult.setCurrency(ret.getCurrency());
-            costItemResult.setAmount(ret.getAmount().toString());
+            costItemResult.setAmount(ret.getAmount());
             costItemResult.setSuccess(true);
         } catch (Exception e) {
             costItemResult.setSuccess(false);

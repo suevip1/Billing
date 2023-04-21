@@ -16,7 +16,7 @@ public class BillUtil {
         CurrencyType feePayerCurrency = FeePayer.valueOf(context.getRequest().getOrderInfo().getFeePayer()).getCurrencyType();
         Bill bill = context.getBill();
         return bill.getFeeResult().stream()
-                .map(r-> ExchangeConvert.convert(getCurrencyType(r,context),feePayerCurrency,context,new BigDecimal(r.getAmount())))
+                .map(r-> ExchangeConvert.convert(getCurrencyType(r,context),feePayerCurrency,context,r.getAmount()))
                 .reduce((m1,m2)->{
                     Money money = new Money();
                     money.setAmount(m1.getAmount().add(m2.getAmount()));

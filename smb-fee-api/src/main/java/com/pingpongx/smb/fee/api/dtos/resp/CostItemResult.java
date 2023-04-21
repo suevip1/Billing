@@ -17,6 +17,6 @@ public class CostItemResult implements Serializable {
     String itemCode;
     String itemName;
     String currency;
-    String amount;
+    BigDecimal amount;
     String failedReason;
 }

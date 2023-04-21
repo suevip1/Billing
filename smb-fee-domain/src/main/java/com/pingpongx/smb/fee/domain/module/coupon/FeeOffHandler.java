@@ -48,7 +48,7 @@ public class FeeOffHandler implements AfterCalculateHandler {
         costItemResult.setItemCode("couponDeducted");
         costItemResult.setCurrency(payerCredit.getCurrency());
         costItemResult.setSuccess(true);
-        costItemResult.setAmount(deducted.multiply(new BigDecimal(-1)).toString());
+        costItemResult.setAmount(deducted.multiply(new BigDecimal(-1)));
 
         context.getBill().getFeeResult().add(costItemResult);
 
