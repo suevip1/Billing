@@ -2,10 +2,7 @@ package com.pingpongx.smb.fee.domain.service;
 
 import com.alibaba.fastjson.JSON;
 import com.pingpongx.smb.fee.MockedTest;
-import com.pingpongx.smb.fee.api.dtos.cmd.BillingRequest;
-import com.pingpongx.smb.fee.api.dtos.cmd.OrderInfo;
-import com.pingpongx.smb.fee.api.dtos.cmd.PayeeInfo;
-import com.pingpongx.smb.fee.api.dtos.cmd.PayerInfo;
+import com.pingpongx.smb.fee.api.dtos.cmd.*;
 import com.pingpongx.smb.fee.domain.enums.FeePayer;
 
 import java.math.BigDecimal;
@@ -23,9 +20,8 @@ public class AbstractFeeTestDependency extends MockedTest {
         request.setBizLine("FM");
         request.setCostNodeCode("ClientTransferStart");
         request.setSourceApp("FMPayout");
-        request.setFxRateId("FX213123123");
-        Map<String, BigDecimal> currencyMap = new HashMap<>();
-        currencyMap.put("CNY_USD", new BigDecimal(0.7));
+        Map<String, RateInfo> currencyMap = new HashMap<>();
+        currencyMap.put("CNY_USD", RateInfo.of("CNY","USD","0.7",123123L));
         request.setFxRate(currencyMap);
 
         OrderInfo orderInfo = new OrderInfo();

@@ -26,8 +26,8 @@ public class ExchangeConvert {
         String fxKey = sourceCurrencyCode + "_" + targetCurrencyCode;
         String fxKeyEx = targetCurrencyCode + "_" + sourceCurrencyCode;
 
-        BigDecimal rate = context.getRequest().getFxRate().get(fxKey);
-        BigDecimal rateEx = context.getRequest().getFxRate().get(fxKeyEx);
+        BigDecimal rate = context.getRequest().getFxRate().get(fxKey).getRate();
+        BigDecimal rateEx = context.getRequest().getFxRate().get(fxKeyEx).getRate();
         Money ret;
         if (rate==null&&rateEx==null){
             throw new RuntimeException("rate not exists."+fxKey);

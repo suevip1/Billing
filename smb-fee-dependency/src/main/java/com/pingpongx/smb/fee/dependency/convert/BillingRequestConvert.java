@@ -1,6 +1,7 @@
 package com.pingpongx.smb.fee.dependency.convert;
 
 import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONWriter;
 import com.pingpongx.smb.fee.api.dtos.cmd.BillingRequest;
 import com.pingpongx.smb.fee.api.dtos.cmd.CouponInfo;
 import com.pingpongx.smb.fee.api.dtos.cmd.OrderInfo;
@@ -15,7 +16,7 @@ public class BillingRequestConvert {
             one.setBizOrderType(request.getOrderInfo().getBizOrderType());
             one.setOrderInfo(JSON.toJSONString(request.getOrderInfo()));
             one.setCouponList(JSON.toJSONString(request.getCouponList()));
-            one.setFxRate(JSON.toJSONString(request.getFxRate()));
+            one.setFxRate(JSON.toJSONString(request.getFxRate(), JSONWriter.Feature.WriteClassName));
             one.setRepeatKey(request.identify());
         });
     }

@@ -33,11 +33,8 @@ public class BillingRequest implements Serializable, Identified {
     /***
      * 汇率列表，目标货种：原币种  目标币种：美元  原币种：美元
      */
-    Map<String, BigDecimal> fxRate;
-    /**
-     * 用于幂等
-     */
-    String fxRateId;
+    Map<String, RateInfo> fxRate;
+
     OrderInfo orderInfo;
     /**
      * 来源系统 B2B FM Dispatch Common
@@ -57,10 +54,9 @@ public class BillingRequest implements Serializable, Identified {
         StringBuilder builder = new StringBuilder();
         builder.append(costNodeCode).append(split);
         builder.append(orderInfo.getBizOrderType()).append(split);
-        builder.append(orderInfo.getBizOrderId()).append(split);
-        builder.append(fxRateId).append(split);
-        String couponRepeat = couponList.stream().map(couponInfo -> couponInfo.identify()).collect(Collectors.joining(","));
-        builder.append(couponRepeat);
+        builder.append(orderInfo.getBizOrderId());
+//        String couponRepeat = couponList.stream().map(couponInfo -> couponInfo.identify()).collect(Collectors.joining(","));
+//        builder.append(couponRepeat);
         return builder.toString();
     }
 
@@ -89,9 +85,6 @@ public class BillingRequest implements Serializable, Identified {
         }
         if (orderInfo.getBizOrderType()==null){
             return "bizOrderType can't be null.";
-        }
-        if (fxRateId==null&&!orderInfo.getTargetCurrency().equals(orderInfo.getSourceCurrency())){
-            return "fxRate is required when target currency not equals source currency.";
         }
         return null;
     }
