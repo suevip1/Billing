@@ -5,8 +5,8 @@ import lombok.Data;
 import java.math.BigDecimal;
 @Data
 public class RateInfo {
-    String sourceCode;
-    String targetCode;
+    String sourceCurrency;
+    String targetCurrency;
     BigDecimal rate;
     Long rateId;
     public static RateInfo of(String from,String target,String rate,Long rateId)
@@ -18,8 +18,8 @@ public class RateInfo {
     {
         RateInfo ret = new RateInfo();
         ret.setRate(rate);
-        ret.setSourceCode(from);
-        ret.setTargetCode(target);
+        ret.setSourceCurrency(from);
+        ret.setTargetCurrency(target);
         ret.setRateId(rateId);
         return ret;
     }
