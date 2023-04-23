@@ -6,6 +6,7 @@ import com.pingpongx.flowmore.cloud.base.server.annotation.Internal;
 import com.pingpongx.flowmore.cloud.base.server.constants.RoleRegister;
 import com.pingpongx.smb.fee.api.dtos.cmd.*;
 import com.pingpongx.smb.fee.api.dtos.resp.Bill;
+import com.pingpongx.smb.fee.api.dtos.resp.BillList;
 import com.pingpongx.smb.fee.api.feign.BillingServiceFeign;
 import com.pingpongx.smb.fee.dal.dataobject.BillingContextDo;
 import com.pingpongx.smb.fee.dal.dataobject.BillingRequestDo;
@@ -98,6 +99,16 @@ public class BillingServiceImpl implements BillingServiceFeign {
         }
         Bill resp = context.getBill();
         return resp;
+    }
+
+    @Override
+    public BillList batchTrial(BatchCmd request) {
+        return null;
+    }
+
+    @Override
+    public BillList batchBilling(BatchCmd request) {
+        return null;
     }
 
     @ApiImplicitParams({
