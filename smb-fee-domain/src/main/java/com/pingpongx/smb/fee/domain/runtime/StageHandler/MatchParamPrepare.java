@@ -72,6 +72,7 @@ public class MatchParamPrepare extends BizFlowNode{
             applicationContext.publishEvent(matchParamCompleted);
         }catch (Exception e){
             handleException(context,e);
+            log.error("error when param prepare.",e);
         }
 
     }

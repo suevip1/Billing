@@ -49,6 +49,7 @@ public class MatchCostItem extends BizFlowNode{
             applicationContext.publishEvent(event);
         }catch (Exception e){
             handleException(context,e);
+            log.error("error when match cost item.",e);
         }
 
     }

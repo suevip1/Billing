@@ -9,6 +9,7 @@ import com.pingpongx.smb.fee.domain.module.CostItem;
 import com.pingpongx.smb.fee.domain.module.event.CalculateCompleted;
 import com.pingpongx.smb.fee.domain.module.event.CouponParamUpdated;
 import com.pingpongx.smb.fee.domain.runtime.BillingContext;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class Calculate extends BizFlowNode {
 
     @EventListener
@@ -43,6 +45,7 @@ public class Calculate extends BizFlowNode {
             applicationContext.publishEvent(calculateCompleted);
         } catch (Exception e) {
             handleException(context, e);
+            log.error("error when calculate.",e);
         }
     }
 
@@ -59,6 +62,7 @@ public class Calculate extends BizFlowNode {
         } catch (Exception e) {
             costItemResult.setSuccess(false);
             costItemResult.setFailedReason(e.toString());
+            log.error("error when calculate.",e);
         }
         return costItemResult;
     }
