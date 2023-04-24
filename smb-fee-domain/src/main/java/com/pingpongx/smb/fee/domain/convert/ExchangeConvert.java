@@ -4,8 +4,10 @@ import com.pingpongx.business.common.dto.Money;
 import com.pingpongx.smb.fee.domain.enums.CurrencyType;
 import com.pingpongx.smb.fee.domain.runtime.BillingContext;
 
+import javax.swing.text.html.Option;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Optional;
 
 
 public class ExchangeConvert {
@@ -26,8 +28,8 @@ public class ExchangeConvert {
         String fxKey = sourceCurrencyCode + "_" + targetCurrencyCode;
         String fxKeyEx = targetCurrencyCode + "_" + sourceCurrencyCode;
 
-        BigDecimal rate = context.getRequest().getFxRate().get(fxKey).getRate();
-        BigDecimal rateEx = context.getRequest().getFxRate().get(fxKeyEx).getRate();
+        BigDecimal rate = Optional.ofNullable(context.getRequest().getFxRate()).map(r->r.get(fxKey)).map(r->r.getRate()).orElse(null);
+        BigDecimal rateEx = Optional.ofNullable(context.getRequest().getFxRate()).map(r->r.get(fxKeyEx)).map(r->r.getRate()).orElse(null);
         Money ret;
         if (rate==null&&rateEx==null){
             throw new RuntimeException("rate not exists."+fxKey);
