@@ -19,6 +19,7 @@ import io.vavr.Tuple;
 import io.vavr.Tuple2;
 import io.vavr.Tuple3;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class CouponBeforeCalculate extends BizFlowNode{
     private final CouponHandlerFactory handlerFactory;
 
@@ -49,6 +51,7 @@ public class CouponBeforeCalculate extends BizFlowNode{
             applicationContext.publishEvent(paramUpdated);
         }catch (Exception e){
             handleException(context,e);
+            log.error("error when couponParamFix",e);
         }
 
     }

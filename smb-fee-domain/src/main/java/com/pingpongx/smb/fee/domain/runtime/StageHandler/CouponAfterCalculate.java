@@ -17,6 +17,7 @@ import com.pingpongx.smb.fee.domain.module.event.Finished;
 import com.pingpongx.smb.fee.domain.runtime.BillingContext;
 import io.vavr.Tuple2;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +27,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class CouponAfterCalculate extends BizFlowNode {
     private final CouponHandlerFactory handlerFactory;
 
@@ -40,6 +42,7 @@ public class CouponAfterCalculate extends BizFlowNode {
             Finished finished = new Finished(context);
             applicationContext.publishEvent(finished);
         }catch (Exception e){
+            log.error("error when couponResultFix.",e);
             handleException(context,e);
         }
 
