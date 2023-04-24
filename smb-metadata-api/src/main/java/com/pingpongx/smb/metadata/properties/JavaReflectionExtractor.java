@@ -30,7 +30,6 @@ public class JavaReflectionExtractor implements Extractor {
         String[] paths = path.split(Split);
         Object current = source;
         current = getAttr(current,"request");
-        current = getAttr(current,"orderInfo");
         for (int i = 0 ; i<paths.length ; i++){
             String attr = paths[i];
             if (StringUtils.isEmpty(attr)){
