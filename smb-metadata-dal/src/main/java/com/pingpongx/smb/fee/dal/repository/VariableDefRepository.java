@@ -24,7 +24,7 @@ public class VariableDefRepository extends MetaBaseRepository<VariableDefMapper,
     public static final String ALL = "ALL";
 
     public List<ConfiguredVariableDef> getByCodeAndNameSpace(Collection<String> req,List<String> namespaces) {
-        LambdaQueryChainWrapper queryChainWrapper = this.lambdaQuery().in(ConfiguredVariableDef::getCode, req);
+        LambdaQueryChainWrapper queryChainWrapper = this.lambdaQuery().in(ConfiguredVariableDef::getCode, req).in(ConfiguredVariableDef::getNameSpace, namespaces);
         return this.list(queryChainWrapper.getWrapper());
     }
     public List<ConfiguredVariableDef> getByCode(Collection<String> req) {
