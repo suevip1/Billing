@@ -1,6 +1,6 @@
 package com.pingpongx.smb.fee.api.dtos.resp;
 
-import com.pingpongx.smb.fee.api.dtos.cmd.CouponInfo;
+import com.pingpongx.smb.fee.api.dtos.cmd.child.CouponInfo;
 import com.pingpongx.smb.fee.api.dtos.resp.coupon.CouponAction;
 import com.pingpongx.smb.fee.api.dtos.resp.coupon.CreditDecrease;
 import lombok.Data;

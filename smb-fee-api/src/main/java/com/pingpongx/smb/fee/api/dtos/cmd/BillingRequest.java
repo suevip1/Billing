@@ -1,13 +1,13 @@
 package com.pingpongx.smb.fee.api.dtos.cmd;
 
+import com.pingpongx.smb.fee.api.dtos.cmd.child.CouponInfo;
+import com.pingpongx.smb.fee.api.dtos.cmd.child.RateInfo;
 import com.pingpongx.smb.metadata.Identified;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Data
 public class BillingRequest implements Serializable, Identified {

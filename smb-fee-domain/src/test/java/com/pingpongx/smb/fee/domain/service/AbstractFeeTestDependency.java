@@ -3,6 +3,9 @@ package com.pingpongx.smb.fee.domain.service;
 import com.alibaba.fastjson.JSON;
 import com.pingpongx.smb.fee.MockedTest;
 import com.pingpongx.smb.fee.api.dtos.cmd.*;
+import com.pingpongx.smb.fee.api.dtos.cmd.child.PayeeInfo;
+import com.pingpongx.smb.fee.api.dtos.cmd.child.PayerInfo;
+import com.pingpongx.smb.fee.api.dtos.cmd.child.RateInfo;
 import com.pingpongx.smb.fee.domain.enums.FeePayer;
 
 import java.math.BigDecimal;

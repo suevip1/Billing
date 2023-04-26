@@ -1,10 +1,12 @@
 package com.pingpongx.smb.fee.server.rpc;
 
 import com.alibaba.fastjson.JSON;
-import com.google.common.collect.Ordering;
 import com.pingpongx.flowmore.cloud.base.server.annotation.Internal;
 import com.pingpongx.flowmore.cloud.base.server.constants.RoleRegister;
 import com.pingpongx.smb.fee.api.dtos.cmd.*;
+import com.pingpongx.smb.fee.api.dtos.cmd.child.PayeeInfo;
+import com.pingpongx.smb.fee.api.dtos.cmd.child.PayerInfo;
+import com.pingpongx.smb.fee.api.dtos.cmd.child.RateInfo;
 import com.pingpongx.smb.fee.api.dtos.resp.Bill;
 import com.pingpongx.smb.fee.api.dtos.resp.BillList;
 import com.pingpongx.smb.fee.api.feign.BillingServiceFeign;
@@ -20,7 +22,6 @@ import com.pingpongx.smb.fee.domain.enums.FeePayer;
 import com.pingpongx.smb.fee.domain.module.Request;
 import com.pingpongx.smb.fee.domain.module.event.BillingRequestReceived;
 import com.pingpongx.smb.fee.domain.module.event.BillingStage;
-import com.pingpongx.smb.fee.domain.module.event.CalculateCompleted;
 import com.pingpongx.smb.fee.domain.runtime.BillingContext;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -32,7 +33,6 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.security.RolesAllowed;
@@ -42,7 +42,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 
 
 @Api(tags = "计费中心-new")
@@ -143,7 +142,7 @@ public class BillingServiceImpl implements BillingServiceFeign {
         request.setCostNodeCode("ClientTransferStart");
         request.setSourceApp("FMPayout");
 
-        Map<String,RateInfo> currencyMap = new HashMap<>();
+        Map<String, RateInfo> currencyMap = new HashMap<>();
         currencyMap.put("CNY_USD", RateInfo.of("CNY","USD","0.7",123123L));
         request.setFxRate(currencyMap);
 

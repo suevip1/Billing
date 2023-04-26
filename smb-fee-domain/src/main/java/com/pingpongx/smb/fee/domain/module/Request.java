@@ -1,10 +1,9 @@
 package com.pingpongx.smb.fee.domain.module;
 
-import com.baomidou.mybatisplus.extension.api.R;
 import com.pingpongx.smb.fee.api.dtos.cmd.BillingRequest;
-import com.pingpongx.smb.fee.api.dtos.cmd.CouponInfo;
+import com.pingpongx.smb.fee.api.dtos.cmd.child.CouponInfo;
 import com.pingpongx.smb.fee.api.dtos.cmd.OrderHolder;
-import com.pingpongx.smb.fee.api.dtos.cmd.RateInfo;
+import com.pingpongx.smb.fee.api.dtos.cmd.child.RateInfo;
 import com.pingpongx.smb.fee.dependency.convert.ConvertUtil;
 import lombok.Data;
 

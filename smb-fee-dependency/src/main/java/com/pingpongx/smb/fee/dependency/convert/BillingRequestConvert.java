@@ -3,8 +3,7 @@ package com.pingpongx.smb.fee.dependency.convert;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONWriter;
 import com.pingpongx.smb.fee.api.dtos.cmd.BillingRequest;
-import com.pingpongx.smb.fee.api.dtos.cmd.CouponInfo;
-import com.pingpongx.smb.fee.api.dtos.cmd.OrderHolder;
+import com.pingpongx.smb.fee.api.dtos.cmd.child.CouponInfo;
 import com.pingpongx.smb.fee.api.dtos.cmd.OrderInfo;
 import com.pingpongx.smb.fee.dal.dataobject.BillingRequestDo;
 
