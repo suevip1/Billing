@@ -24,7 +24,7 @@ public class BillingRequestConvert {
 
     public static BillingRequest toRequest(BillingRequestDo request) {
         return ConvertUtil.to(request, BillingRequest.class, (one) -> {
-            one.setOrderInfo(JSON.parseObject(request.getOrderInfo(), OrderHolder.class));
+            one.setOrderInfo(JSON.parseObject(request.getOrderInfo(), OrderInfo.class));
             one.setCouponList(JSON.parseArray(request.getCouponList(), CouponInfo.class));
             one.setFxRate(JSON.parseObject(request.getFxRate(), Map.class));
         });

@@ -5,6 +5,7 @@ import com.pingpongx.smb.export.module.MatchResult;
 import com.pingpongx.smb.fee.api.dtos.cmd.BillingRequest;
 import com.pingpongx.smb.fee.api.dtos.resp.Bill;
 import com.pingpongx.smb.fee.domain.module.CostItem;
+import com.pingpongx.smb.fee.domain.module.Request;
 import com.pingpongx.smb.fee.domain.module.event.CalculateFailed;
 import com.pingpongx.smb.fee.domain.module.event.MatchCompleted;
 import com.pingpongx.smb.fee.domain.module.event.MatchParamCompleted;
@@ -32,7 +33,7 @@ public class MatchCostItem extends BizFlowNode{
     @EventListener
     void doMatch(MatchParamCompleted requestReceived) {
         BillingContext context = requestReceived.getContext();
-        BillingRequest request = requestReceived.getContext().getRequest();
+        Request request = requestReceived.getContext().getRequest();
         try{
             Engine engine = engines.getEngine(request.getCostNodeCode());
             if (engine == null){

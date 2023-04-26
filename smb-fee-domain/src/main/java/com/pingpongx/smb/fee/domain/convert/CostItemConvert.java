@@ -12,6 +12,7 @@ import com.pingpongx.smb.fee.domain.enums.CalculateMode;
 import com.pingpongx.smb.fee.domain.enums.CurrencyType;
 import com.pingpongx.smb.fee.domain.enums.Direction;
 import com.pingpongx.smb.fee.domain.module.CostItem;
+import com.pingpongx.smb.fee.domain.module.Request;
 import com.pingpongx.smb.fee.domain.module.express.Expr;
 import com.pingpongx.smb.fee.domain.runtime.BillingContext;
 import com.pingpongx.smb.store.Codec;
@@ -43,7 +44,7 @@ public class CostItemConvert {
     public static BillingContext toContext(BillingContextDo dbO) {
         return ConvertUtil.to(dbO, BillingContext.class, (one) -> {
             if (!StringUtils.isBlank(dbO.getRequest())) {
-                one.setRequest(JSON.parseObject(dbO.getRequest(), BillingRequest.class));
+//                one.setRequest(JSON.parseObject(dbO.getRequest(), BillingRequest.class));
             }
             if (!StringUtils.isBlank(dbO.getParams())) {
                 one.setParams(JSON.parseObject(dbO.getParams(), Map.class));

@@ -1,6 +1,7 @@
 package com.pingpongx.smb.fee.domain.convert.runtime;
 
 import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONWriter;
 import com.pingpongx.smb.fee.api.dtos.cmd.BillingRequest;
 import com.pingpongx.smb.fee.api.dtos.resp.Bill;
 import com.pingpongx.smb.fee.dal.dataobject.BillingContextDo;
@@ -9,9 +10,11 @@ import com.pingpongx.smb.fee.dal.repository.CostItemRepository;
 import com.pingpongx.smb.fee.dependency.convert.ConvertUtil;
 import com.pingpongx.smb.fee.domain.factory.CostItemFactory;
 import com.pingpongx.smb.fee.domain.module.CostItem;
+import com.pingpongx.smb.fee.domain.module.Request;
 import com.pingpongx.smb.fee.domain.runtime.BillingContext;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
+import org.bouncycastle.cert.ocsp.Req;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -29,7 +32,7 @@ public class BillingContextConvert {
             one.setBizOrderType(context.getRequest().getOrderInfo().getBizOrderType());
             one.setRequestRepeatKey(context.getRequest().identify());
             if (context.getRequest() != null) {
-                one.setRequest(JSON.toJSONString(context.getRequest()));
+                one.setRequest(JSON.toJSONString(context.getRequest(), JSONWriter.Feature.WriteClassName));
             }
             if (context.getParams() != null) {
                 one.setParams(JSON.toJSONString(context.getParams()));
@@ -48,7 +51,11 @@ public class BillingContextConvert {
         return ConvertUtil.to(dbO, BillingContext.class, (one) -> {
             one.setId(dbO.getId());
             if (!StringUtils.isBlank(dbO.getRequest())) {
-                one.setRequest(JSON.parseObject(dbO.getRequest(), BillingRequest.class));
+                BillingRequest request = JSON.parseObject(dbO.getRequest(), BillingRequest.class);
+                Request req = ConvertUtil.to(request, Request.class,r->{
+                    r.setOrderInfo(request.getOrderInfo());
+                });
+                one.setRequest(req);
             }
             if (!StringUtils.isBlank(dbO.getParams())) {
                 one.setParams(JSON.parseObject(dbO.getParams(), Map.class));

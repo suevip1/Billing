@@ -26,7 +26,6 @@ public class AmountOffHandler implements BeforeCalculateHandler {
     public Tuple3<String, BigDecimal, CouponAction> couponParamFix(CouponInfo couponInfo, BillingContext context) {
         Money sourceCredit = ExchangeConvert.convert(CurrencyType.valueOf(couponInfo.getCurrency()), CurrencyType.Source, context, couponInfo.getValidValue());
         BigDecimal couponValidAmount = sourceCredit.getAmount();
-
         BigDecimal amount = context.getRequest().getOrderInfo().getAmount();
         BigDecimal creditCost = couponValidAmount.min(amount);
         BigDecimal finalAmount = amount.subtract(creditCost);

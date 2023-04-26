@@ -8,6 +8,7 @@ import com.pingpongx.smb.fee.dal.repository.BillingContextRepository;
 import com.pingpongx.smb.fee.dal.repository.VariableDefRepository;
 import com.pingpongx.smb.fee.domain.convert.runtime.BillingContextConvert;
 import com.pingpongx.smb.fee.domain.factory.variable.VariableFactory;
+import com.pingpongx.smb.fee.domain.module.Request;
 import com.pingpongx.smb.fee.domain.module.event.BillingRequestReceived;
 import com.pingpongx.smb.fee.domain.module.event.MatchParamCompleted;
 import com.pingpongx.smb.fee.domain.rules.Engines;
@@ -37,7 +38,7 @@ public class MatchParamPrepare extends BizFlowNode{
     @EventListener
     void paramPrepare(BillingRequestReceived requestReceived) {
         BillingContext context = requestReceived.getContext();
-        BillingRequest request = context.getRequest();
+        Request request = context.getRequest();
         log.info("param prepare start. input:" + JSON.toJSONString(request));
         try{
             if (request.valid() != null){

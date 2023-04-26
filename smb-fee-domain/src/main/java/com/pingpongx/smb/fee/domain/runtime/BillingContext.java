@@ -3,6 +3,7 @@ package com.pingpongx.smb.fee.domain.runtime;
 import com.pingpongx.smb.fee.api.dtos.cmd.BillingRequest;
 import com.pingpongx.smb.fee.api.dtos.resp.Bill;
 import com.pingpongx.smb.fee.domain.module.CostItem;
+import com.pingpongx.smb.fee.domain.module.Request;
 import com.pingpongx.smb.fee.domain.module.event.BillingRequestReceived;
 import com.pingpongx.smb.fee.domain.module.event.BillingStage;
 import com.pingpongx.smb.fee.domain.module.event.CalculateCompleted;
@@ -20,12 +21,9 @@ import java.util.concurrent.ConcurrentHashMap;
 @Data
 public class BillingContext implements Serializable {
     Long id;
-    BillingRequest request;
-
+    Request request;
     Map<String, String> params = new HashMap<>();
-
     List<CostItem> matchedCostItem;
-
     Bill bill;
 
     boolean isTrial;
@@ -50,6 +48,6 @@ public class BillingContext implements Serializable {
     }
 
     public String getNameSpace(){
-        return getRequest().getCostNodeCode()+"_"+getRequest().getSourceApp();
+        return getRequest().getNameSpace();
     }
 }

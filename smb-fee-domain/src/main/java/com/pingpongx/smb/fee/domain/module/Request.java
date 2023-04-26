@@ -1,16 +1,17 @@
-package com.pingpongx.smb.fee.api.dtos.cmd;
+package com.pingpongx.smb.fee.domain.module;
 
-import com.pingpongx.smb.metadata.Identified;
+import com.baomidou.mybatisplus.extension.api.R;
+import com.pingpongx.smb.fee.api.dtos.cmd.BillingRequest;
+import com.pingpongx.smb.fee.api.dtos.cmd.CouponInfo;
+import com.pingpongx.smb.fee.api.dtos.cmd.OrderHolder;
+import com.pingpongx.smb.fee.api.dtos.cmd.RateInfo;
+import com.pingpongx.smb.fee.dependency.convert.ConvertUtil;
 import lombok.Data;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-
 @Data
-public class BillingRequest implements Serializable, Identified {
+public class Request {
 
     private static final long serialVersionUID = 8061568762858026972L;
 
@@ -35,7 +36,7 @@ public class BillingRequest implements Serializable, Identified {
      */
     Map<String, RateInfo> fxRate;
 
-    OrderInfo orderInfo;
+    OrderHolder orderInfo;
     /**
      * 来源系统 B2B FM Dispatch Common
      */
@@ -72,5 +73,13 @@ public class BillingRequest implements Serializable, Identified {
             return "sourceApp info can't be null.";
         }
         return orderInfo.valid();
+    }
+    public  String getNameSpace(){
+        return this.costNodeCode+"_"+this.sourceApp;
+    }
+
+    public static Request from(BillingRequest request){
+        Request ret = ConvertUtil.to(request,Request.class,(r)->r.setOrderInfo(request.getOrderInfo()));
+        return ret;
     }
 }

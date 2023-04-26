@@ -17,6 +17,7 @@ import com.pingpongx.smb.fee.dal.repository.RepeatRepository;
 import com.pingpongx.smb.fee.dependency.convert.BillingRequestConvert;
 import com.pingpongx.smb.fee.domain.convert.runtime.BillingContextConvert;
 import com.pingpongx.smb.fee.domain.enums.FeePayer;
+import com.pingpongx.smb.fee.domain.module.Request;
 import com.pingpongx.smb.fee.domain.module.event.BillingRequestReceived;
 import com.pingpongx.smb.fee.domain.module.event.BillingStage;
 import com.pingpongx.smb.fee.domain.module.event.CalculateCompleted;
@@ -70,9 +71,8 @@ public class BillingServiceImpl implements BillingServiceFeign {
         repeatDo.setCreatedBy("SYSTEM");
         repeatDo.setUpdatedBy("SYSTEM");
         repeatDo.setCreated(new Date(request.getBillingTime()));
-
         BillingContext context = new BillingContext();
-        context.setRequest(request);
+        context.setRequest(Request.from(request));
         context.setTrial(false);
         CompletableFuture<BillingContext> future = new CompletableFuture<>();
         BillingContextDo contextDo = billingContextConvert.toDo(context);
@@ -119,7 +119,7 @@ public class BillingServiceImpl implements BillingServiceFeign {
     @Internal
     public Bill trial(@RequestBody BillingRequest request) {
         BillingContext context = new BillingContext();
-        context.setRequest(request);
+        context.setRequest(Request.from(request));
         context.setTrial(true);
         CompletableFuture<BillingContext> future = new CompletableFuture<>();
         BillingRequestReceived stage = (BillingRequestReceived) context.resume(future);
