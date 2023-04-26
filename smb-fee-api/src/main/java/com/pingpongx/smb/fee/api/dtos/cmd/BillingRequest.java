@@ -35,7 +35,7 @@ public class BillingRequest implements Serializable, Identified {
      */
     Map<String, RateInfo> fxRate;
 
-    OrderInfo orderInfo;
+    OrderHolder orderInfo;
     /**
      * 来源系统 B2B FM Dispatch Common
      */
@@ -53,10 +53,7 @@ public class BillingRequest implements Serializable, Identified {
         String split = ":";
         StringBuilder builder = new StringBuilder();
         builder.append(costNodeCode).append(split);
-        builder.append(orderInfo.getBizOrderType()).append(split);
-        builder.append(orderInfo.getBizOrderId());
-//        String couponRepeat = couponList.stream().map(couponInfo -> couponInfo.identify()).collect(Collectors.joining(","));
-//        builder.append(couponRepeat);
+        builder.append(orderInfo.getIdentify()).append(split);
         return builder.toString();
     }
 
@@ -71,21 +68,9 @@ public class BillingRequest implements Serializable, Identified {
         if (orderInfo ==null){
             return "order info can't be null.";
         }
-        if (orderInfo.getTargetCurrency()==null){
-            return "target currency can't be null.";
+        if (sourceApp ==null){
+            return "sourceApp info can't be null.";
         }
-        if (orderInfo.getSourceCurrency()==null){
-            return "source currency can't be null.";
-        }
-        if (orderInfo.getAmount()==null){
-            return "order amount can't be null.";
-        }
-        if (orderInfo.getBizOrderId()==null){
-            return "bizOrderId can't be null.";
-        }
-        if (orderInfo.getBizOrderType()==null){
-            return "bizOrderType can't be null.";
-        }
-        return null;
+        return orderInfo.valid();
     }
 }

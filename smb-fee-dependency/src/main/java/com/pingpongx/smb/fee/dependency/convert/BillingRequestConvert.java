@@ -4,6 +4,7 @@ import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONWriter;
 import com.pingpongx.smb.fee.api.dtos.cmd.BillingRequest;
 import com.pingpongx.smb.fee.api.dtos.cmd.CouponInfo;
+import com.pingpongx.smb.fee.api.dtos.cmd.OrderHolder;
 import com.pingpongx.smb.fee.api.dtos.cmd.OrderInfo;
 import com.pingpongx.smb.fee.dal.dataobject.BillingRequestDo;
 
@@ -23,7 +24,7 @@ public class BillingRequestConvert {
 
     public static BillingRequest toRequest(BillingRequestDo request) {
         return ConvertUtil.to(request, BillingRequest.class, (one) -> {
-            one.setOrderInfo(JSON.parseObject(request.getOrderInfo(), OrderInfo.class));
+            one.setOrderInfo(JSON.parseObject(request.getOrderInfo(), OrderHolder.class));
             one.setCouponList(JSON.parseArray(request.getCouponList(), CouponInfo.class));
             one.setFxRate(JSON.parseObject(request.getFxRate(), Map.class));
         });

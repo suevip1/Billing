@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 @Data
-public class OrderInfo implements Serializable {
+public class OrderInfo implements OrderHolder {
     private static final long serialVersionUID = 8061568762580326972L;
     /**
      * 币种信息
@@ -55,4 +55,35 @@ public class OrderInfo implements Serializable {
      * 业务标
      */
     private List<String> bizTag;
+
+    @Override
+    public String valid() {
+        if (bizOrderType == null){
+            return "bizOrderType can't be null.";
+        }
+        if (bizOrderId == null){
+            return "bizOrderId can't be null.";
+        }
+        if (payeeInfo == null){
+            return "payeeInfo can't be null.";
+        }
+        if (payerInfo == null){
+            return "payerInfo can't be null.";
+        }
+        if (amount == null){
+            return "amount can't be null.";
+        }
+        if (sourceCurrency == null){
+            return "sourceCurrency can't be null.";
+        }
+        if (targetCurrency == null){
+            return "targetCurrency can't be null.";
+        }
+        return null ;
+    }
+
+    @Override
+    public String getIdentify() {
+        return bizOrderType+"-"+bizOrderId;
+    }
 }
