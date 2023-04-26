@@ -5,6 +5,7 @@ import com.pingpongx.smb.fee.api.dtos.resp.Bill;
 import com.pingpongx.smb.fee.api.dtos.resp.CostItemResult;
 import com.pingpongx.smb.fee.domain.convert.ExchangeConvert;
 import com.pingpongx.smb.fee.domain.enums.CurrencyType;
+import com.pingpongx.smb.fee.domain.enums.FeePayer;
 import com.pingpongx.smb.fee.domain.module.CostItem;
 import com.pingpongx.smb.fee.domain.module.event.CalculateCompleted;
 import com.pingpongx.smb.fee.domain.module.event.CouponParamUpdated;
@@ -55,7 +56,7 @@ public class Calculate extends BizFlowNode {
         costItemResult.setItemName(item.getDisplayName());
         try {
             BigDecimal bigDecimal = item.getCalculateExpress().fetchCalculator().getCalculateResult(context);
-            Money ret = ExchangeConvert.convert(CurrencyType.Source,item.getCurrencyType(),context,bigDecimal);
+            Money ret = ExchangeConvert.convert(item.getCurrencyType(), FeePayer.valueOf(context.getRequest().getOrderInfo().getFeePayer()).getCurrencyType(),context,bigDecimal);
             costItemResult.setCurrency(ret.getCurrency());
             costItemResult.setAmount(ret.getAmount());
             costItemResult.setSuccess(true);

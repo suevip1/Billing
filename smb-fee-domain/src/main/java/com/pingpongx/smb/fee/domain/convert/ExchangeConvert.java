@@ -19,7 +19,9 @@ public class ExchangeConvert {
             ret.setAmount(currentAmount);
             if (currentCurrencyType.equals(CurrencyType.Source)){
                 ret.setCurrency(sourceCurrencyCode);
+                ret.setAmount(currentAmount);
             }else{
+                ret.setCurrency(targetCurrencyCode);
                 ret.setAmount(currentAmount);
             }
             return ret;
