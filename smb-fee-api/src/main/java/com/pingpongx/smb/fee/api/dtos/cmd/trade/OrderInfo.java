@@ -1,7 +1,8 @@
-package com.pingpongx.smb.fee.api.dtos.cmd;
+package com.pingpongx.smb.fee.api.dtos.cmd.trade;
 
-import com.pingpongx.smb.fee.api.dtos.cmd.child.PayeeInfo;
-import com.pingpongx.smb.fee.api.dtos.cmd.child.PayerInfo;
+import com.pingpongx.smb.fee.api.dtos.cmd.OrderHolder;
+import com.pingpongx.smb.fee.api.dtos.cmd.common.PayeeInfo;
+import com.pingpongx.smb.fee.api.dtos.cmd.common.PayerInfo;
 import lombok.Data;
 
 import java.math.BigDecimal;

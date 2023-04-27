@@ -1,13 +1,10 @@
-package com.pingpongx.smb.fee.api.dtos.cmd;
+package com.pingpongx.smb.fee.api.dtos.cmd.coupon;
 
-import com.pingpongx.smb.fee.api.dtos.cmd.child.CouponInfo;
-import com.pingpongx.smb.fee.api.dtos.cmd.child.PayeeInfo;
-import com.pingpongx.smb.fee.api.dtos.cmd.child.PayerInfo;
+import com.pingpongx.smb.fee.api.dtos.cmd.OrderHolder;
+import com.pingpongx.smb.fee.api.dtos.cmd.trade.OrderInfo;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.Map;
 
 @Data
 public class CouponOrderInfo implements OrderHolder {
@@ -17,6 +14,7 @@ public class CouponOrderInfo implements OrderHolder {
     BigDecimal totalFee;
     String totalFeeCurrency;
 
+    String couponType;
     BigDecimal totalValidValue;
     String couponCurrency;
 

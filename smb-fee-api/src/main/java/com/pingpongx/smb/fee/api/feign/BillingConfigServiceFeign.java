@@ -1,8 +1,6 @@
 package com.pingpongx.smb.fee.api.feign;
 
-import com.pingpongx.smb.fee.api.dtos.cmd.BillingRequest;
 import com.pingpongx.smb.fee.api.dtos.resp.Bill;
-import com.pingpongx.smb.fee.api.dtos.resp.CostItemResult;
 import com.pingpongx.smb.fee.common.constants.FeeConstants;
 import com.pingpongx.smb.metadata.dto.VariableDefDto;
 import org.springframework.cloud.openfeign.FeignClient;

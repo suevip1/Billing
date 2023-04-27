@@ -1,17 +1,14 @@
-package com.pingpongx.smb.fee.api.dtos.cmd;
+package com.pingpongx.smb.fee.api.dtos.cmd.common;
 
-import com.pingpongx.smb.fee.api.dtos.cmd.child.CouponInfo;
-import com.pingpongx.smb.fee.api.dtos.cmd.child.RateInfo;
-import com.pingpongx.smb.metadata.Identified;
+import com.pingpongx.smb.fee.api.dtos.cmd.trade.OrderInfo;
 import lombok.Data;
 
-import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
 @Data
-public class BillingRequest implements Serializable, Identified {
-
+public class BaseRequest {
     private static final long serialVersionUID = 8061568762858026972L;
 
     /***

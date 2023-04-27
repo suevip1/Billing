@@ -5,10 +5,11 @@ import com.alibaba.fastjson2.JSONWriter;
 import com.pingpongx.smb.export.RuleConstant;
 import com.pingpongx.smb.export.module.persistance.*;
 import com.pingpongx.smb.fee.MockedTest;
-import com.pingpongx.smb.fee.api.dtos.cmd.*;
-import com.pingpongx.smb.fee.api.dtos.cmd.child.PayeeInfo;
-import com.pingpongx.smb.fee.api.dtos.cmd.child.PayerInfo;
-import com.pingpongx.smb.fee.api.dtos.cmd.child.RateInfo;
+import com.pingpongx.smb.fee.api.dtos.cmd.common.PayeeInfo;
+import com.pingpongx.smb.fee.api.dtos.cmd.common.PayerInfo;
+import com.pingpongx.smb.fee.api.dtos.cmd.common.RateInfo;
+import com.pingpongx.smb.fee.api.dtos.cmd.trade.BillingRequest;
+import com.pingpongx.smb.fee.api.dtos.cmd.trade.OrderInfo;
 import com.pingpongx.smb.fee.api.dtos.expr.*;
 import com.pingpongx.smb.fee.domain.enums.FeePayer;
 

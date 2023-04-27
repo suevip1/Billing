@@ -2,7 +2,7 @@ package com.pingpongx.smb.fee.domain.module.coupon;
 
 import com.pingpongx.business.common.dto.Money;
 import com.pingpongx.smb.asset.api.coupon.enums.CouponTypeEnum;
-import com.pingpongx.smb.fee.api.dtos.cmd.child.CouponInfo;
+import com.pingpongx.smb.fee.api.dtos.cmd.common.CouponInfo;
 import com.pingpongx.smb.fee.api.dtos.resp.CostItemResult;
 import com.pingpongx.smb.fee.api.dtos.resp.CouponResult;
 import com.pingpongx.smb.fee.api.dtos.resp.coupon.CreditDecrease;

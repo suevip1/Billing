@@ -1,17 +1,17 @@
-package com.pingpongx.smb.fee.domain.module;
+package com.pingpongx.smb.fee.api.dtos.cmd.coupon;
 
-import com.pingpongx.smb.fee.api.dtos.cmd.coupon.CouponRequest;
-import com.pingpongx.smb.fee.api.dtos.cmd.trade.BillingRequest;
 import com.pingpongx.smb.fee.api.dtos.cmd.common.CouponInfo;
-import com.pingpongx.smb.fee.api.dtos.cmd.OrderHolder;
 import com.pingpongx.smb.fee.api.dtos.cmd.common.RateInfo;
-import com.pingpongx.smb.fee.dependency.convert.ConvertUtil;
+import com.pingpongx.smb.fee.api.dtos.cmd.coupon.CouponOrderInfo;
+import com.pingpongx.smb.metadata.Identified;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
+
 @Data
-public class Request {
+public class CouponRequest implements Serializable, Identified {
 
     private static final long serialVersionUID = 8061568762858026972L;
 
@@ -36,7 +36,7 @@ public class Request {
      */
     Map<String, RateInfo> fxRate;
 
-    OrderHolder orderInfo;
+    CouponOrderInfo orderInfo;
     /**
      * 来源系统 B2B FM Dispatch Common
      */
@@ -73,18 +73,5 @@ public class Request {
             return "sourceApp info can't be null.";
         }
         return orderInfo.valid();
-    }
-    public  String getNameSpace(){
-        return this.costNodeCode+"_"+this.sourceApp;
-    }
-
-    public static Request from(BillingRequest request){
-        Request ret = ConvertUtil.to(request,Request.class,(r)->r.setOrderInfo(request.getOrderInfo()));
-        return ret;
-    }
-
-    public static Request from(CouponRequest request){
-        Request ret = ConvertUtil.to(request,Request.class,(r)->r.setOrderInfo(request.getOrderInfo()));
-        return ret;
     }
 }

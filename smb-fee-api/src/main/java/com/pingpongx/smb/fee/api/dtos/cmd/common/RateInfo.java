@@ -1,4 +1,4 @@
-package com.pingpongx.smb.fee.api.dtos.cmd.child;
+package com.pingpongx.smb.fee.api.dtos.cmd.common;
 
 import lombok.Data;
 

@@ -3,15 +3,17 @@ package com.pingpongx.smb.fee.server.rpc;
 import com.alibaba.fastjson.JSON;
 import com.pingpongx.flowmore.cloud.base.server.annotation.Internal;
 import com.pingpongx.flowmore.cloud.base.server.constants.RoleRegister;
+import com.pingpongx.smb.fee.api.dtos.cmd.coupon.BatchCmd;
+import com.pingpongx.smb.fee.api.dtos.cmd.coupon.CouponRequest;
+import com.pingpongx.smb.fee.api.dtos.cmd.trade.BillingRequest;
+import com.pingpongx.smb.fee.api.dtos.cmd.trade.OrderInfo;
 import com.pingpongx.smb.fee.api.dtos.cmd.common.PayeeInfo;
 import com.pingpongx.smb.fee.api.dtos.cmd.common.PayerInfo;
 import com.pingpongx.smb.fee.api.dtos.cmd.common.RateInfo;
-import com.pingpongx.smb.fee.api.dtos.cmd.trade.BatchCmd;
-import com.pingpongx.smb.fee.api.dtos.cmd.trade.BillingRequest;
-import com.pingpongx.smb.fee.api.dtos.cmd.trade.OrderInfo;
 import com.pingpongx.smb.fee.api.dtos.resp.Bill;
 import com.pingpongx.smb.fee.api.dtos.resp.BillList;
 import com.pingpongx.smb.fee.api.feign.BillingServiceFeign;
+import com.pingpongx.smb.fee.api.feign.CouponServiceFeign;
 import com.pingpongx.smb.fee.dal.dataobject.BillingContextDo;
 import com.pingpongx.smb.fee.dal.dataobject.BillingRequestDo;
 import com.pingpongx.smb.fee.dal.dataobject.RepeatDo;
@@ -19,6 +21,7 @@ import com.pingpongx.smb.fee.dal.repository.BillingContextRepository;
 import com.pingpongx.smb.fee.dal.repository.BillingRequestRepository;
 import com.pingpongx.smb.fee.dal.repository.RepeatRepository;
 import com.pingpongx.smb.fee.dependency.convert.BillingRequestConvert;
+import com.pingpongx.smb.fee.dependency.convert.CouponRequestConvert;
 import com.pingpongx.smb.fee.domain.convert.runtime.BillingContextConvert;
 import com.pingpongx.smb.fee.domain.enums.FeePayer;
 import com.pingpongx.smb.fee.domain.module.Request;
@@ -51,7 +54,7 @@ import java.util.concurrent.CompletableFuture;
 @RequestMapping(value = BillingServiceFeign.BASE_PATH)
 @Slf4j
 @RequiredArgsConstructor
-public class BillingServiceImpl implements BillingServiceFeign {
+public class CouponServiceImpl implements CouponServiceFeign {
 
     private final RepeatRepository repeatRepository;
     private final BillingRequestRepository billingRequestRepository;
@@ -67,7 +70,7 @@ public class BillingServiceImpl implements BillingServiceFeign {
             @ApiImplicitParam(name = "Authorization", value = "service smb-fee@test", required = false, paramType = "header"),
             @ApiImplicitParam(name = "appId", value = "test@smb-fee", required = false, paramType = "header"),
     })
-    public Bill billing(@RequestBody BillingRequest request) {
+    public Bill billing(@RequestBody CouponRequest request) {
         RepeatDo repeatDo = RepeatDo.builder().repeatKey(request.identify()).scope(request.getClass().getName()).build();
         repeatDo.setCreatedBy("SYSTEM");
         repeatDo.setUpdatedBy("SYSTEM");
@@ -77,7 +80,7 @@ public class BillingServiceImpl implements BillingServiceFeign {
         context.setTrial(false);
         CompletableFuture<BillingContext> future = new CompletableFuture<>();
         BillingContextDo contextDo = billingContextConvert.toDo(context);
-        BillingRequestDo requestDo = BillingRequestConvert.toDo(request);
+        BillingRequestDo requestDo = CouponRequestConvert.toDo(request);
         try {
             Long id = txTemplate.execute(transactionStatus -> {
                 repeatRepository.save(repeatDo);
@@ -118,7 +121,7 @@ public class BillingServiceImpl implements BillingServiceFeign {
     })
     @RolesAllowed(RoleRegister.ROLE_COMMON_SERVICE)
     @Internal
-    public Bill trial(@RequestBody BillingRequest request) {
+    public Bill trial(@RequestBody CouponRequest request) {
         BillingContext context = new BillingContext();
         context.setRequest(Request.from(request));
         context.setTrial(true);
@@ -133,56 +136,6 @@ public class BillingServiceImpl implements BillingServiceFeign {
         }
         Bill resp = context.getBill();
         return resp;
-    }
-
-    public static void main (String args[]){
-        BillingRequest request = new BillingRequest();
-        request.setBillingTime(System.currentTimeMillis());
-
-        request.setCouponList(new ArrayList<>());
-        request.setBizLine("FM");
-        request.setCostNodeCode("ClientTransferStart");
-        request.setSourceApp("FMPayout");
-
-        Map<String, RateInfo> currencyMap = new HashMap<>();
-        currencyMap.put("CNY_USD", RateInfo.of("CNY","USD","0.7",123123L));
-        request.setFxRate(currencyMap);
-
-        OrderInfo orderInfo = new OrderInfo();
-        orderInfo.setBizOrderId("TestBizOrderId");
-        orderInfo.setBizOrderType("B2B");
-
-        PayeeInfo payeeInfo = new PayeeInfo();
-        payeeInfo.setPayeeAccountNo("X1000101010100101");
-        payeeInfo.setPayeeName("被付款方名");
-        payeeInfo.setBankName("硅谷破产银行");
-        payeeInfo.setClientIdType("DID");
-        payeeInfo.setClientId("D1230912380912830");
-        orderInfo.setPayeeInfo(payeeInfo);
-        PayerInfo payerInfo = new PayerInfo();
-        payerInfo.setClientId("D12038901283102938");
-        payerInfo.setClientIdType("DID");
-        payerInfo.setPayerName("付款方名");
-        payerInfo.setCertificateNumber("大壮");
-        payerInfo.setReservedPhone("15015011501");
-        orderInfo.setPayerInfo(payerInfo);
-
-        orderInfo.setAmount(new BigDecimal("11111"));
-        orderInfo.setSourceCurrency("USD");
-        orderInfo.setTargetCurrency("CNY");
-        orderInfo.setSubject("D12038901283102938");
-        orderInfo.setSubjectType("DID");
-        orderInfo.setFeePayer(FeePayer.OrderPayee.name());
-        orderInfo.setBizOrderType("Transfer");
-        orderInfo.setBizOrderId("T0192091203121");
-        request.setOrderInfo(orderInfo);
-        request.setSubject(orderInfo.getSubject());
-        request.setSubjectType(orderInfo.getSubjectType());
-        String jsonStr = JSON.toJSONString(request);
-        log.info(jsonStr);
-        BillingRequest parsed = JSON.parseObject(jsonStr,BillingRequest.class);
-//{"billingTime":1678930994261,"bizLine":"FM","costNodeCode":"ClientTransferStart","couponList":[],"fxRate":{"CNY_USD":0.6999999999999999555910790149937383830547332763671875},"fxRateId":"FX213123123","orderInfo":{"amount":11111,"bizOrderId":"T0192091203121","bizOrderType":"Transfer","feePayer":"Payee","payeeInfo":{"bankName":"硅谷破产银行","clientId":"D1230912380912830","clientIdType":"DID","payeeAccountNo":"X1000101010100101","payeeName":"被付款方名"},"payerInfo":{"certificateNumber":"大壮","clientId":"D12038901283102938","clientIdType":"DID","payerName":"付款方名","reservedPhone":"15015011501"},"sourceCurrency":"USD","subject":"D12038901283102938","subjectType":"DID","targetCurrency":"CNY"},"sourceApp":"FMPayout","subject":"D12038901283102938","subjectType":"DID"}
-
     }
 
 

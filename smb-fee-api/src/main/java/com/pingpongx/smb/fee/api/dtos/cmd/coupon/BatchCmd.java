@@ -1,11 +1,11 @@
-package com.pingpongx.smb.fee.api.dtos.cmd;
+package com.pingpongx.smb.fee.api.dtos.cmd.coupon;
 
+import com.pingpongx.smb.fee.api.dtos.cmd.trade.BillingRequest;
 import com.pingpongx.smb.metadata.Identified;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
 
 @Data
 public class BatchCmd implements Serializable, Identified {
@@ -14,7 +14,7 @@ public class BatchCmd implements Serializable, Identified {
 
     String batchNo;
 
-    List<BillingRequest> requests;
+    List<CouponRequest> requests;
 
     @Override
     public String identify() {

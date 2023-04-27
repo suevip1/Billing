@@ -2,7 +2,7 @@ package com.pingpongx.smb.fee.domain.convert.runtime;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONWriter;
-import com.pingpongx.smb.fee.api.dtos.cmd.BillingRequest;
+import com.pingpongx.smb.fee.api.dtos.cmd.trade.BillingRequest;
 import com.pingpongx.smb.fee.api.dtos.resp.Bill;
 import com.pingpongx.smb.fee.dal.dataobject.BillingContextDo;
 import com.pingpongx.smb.fee.dal.dataobject.CostItemDo;
@@ -14,7 +14,6 @@ import com.pingpongx.smb.fee.domain.module.Request;
 import com.pingpongx.smb.fee.domain.runtime.BillingContext;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
-import org.bouncycastle.cert.ocsp.Req;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -51,6 +50,7 @@ public class BillingContextConvert {
         return ConvertUtil.to(dbO, BillingContext.class, (one) -> {
             one.setId(dbO.getId());
             if (!StringUtils.isBlank(dbO.getRequest())) {
+                //TODO:
                 BillingRequest request = JSON.parseObject(dbO.getRequest(), BillingRequest.class);
                 Request req = ConvertUtil.to(request, Request.class,r->{
                     r.setOrderInfo(request.getOrderInfo());
