@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @FeignClient(value = FeeConstants.APP_NAME, path = BillingServiceFeign.BASE_PATH)
 public interface BillingServiceFeign {
 
-    String BASE_PATH = FeeConstants.RPC_PATH_V1 + "/smb-fee";
+    String BASE_PATH = FeeConstants.RPC_PATH_V1 + "/smb-fee/trade";
 
     /**
      * 获取费率

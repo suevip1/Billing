@@ -1,5 +1,6 @@
 package com.pingpongx.smb.fee.api.dtos.cmd.trade;
 
+import com.pingpongx.smb.fee.api.dtos.cmd.BaseRequest;
 import com.pingpongx.smb.fee.api.dtos.cmd.common.CouponInfo;
 import com.pingpongx.smb.fee.api.dtos.cmd.common.RateInfo;
 import com.pingpongx.smb.metadata.Identified;
@@ -10,67 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 @Data
-public class BillingRequest implements Serializable, Identified {
+public class BillingRequest extends BaseRequest<OrderInfo> {
 
-    private static final long serialVersionUID = 8061568762858026972L;
-
-    /***
-     * 计费时间
-     */
-    Long billingTime;
-    /***
-     * 计费节点
-     */
-    String costNodeCode;
-    /***
-     * Did buClientId 具体数据
-     */
-    String subject;
-    /***
-     * Did / accid / Nid / buClientId
-     */
-    String subjectType;
-    /***
-     * 汇率列表，目标货种：原币种  目标币种：美元  原币种：美元
-     */
-    Map<String, RateInfo> fxRate;
-
-    OrderInfo orderInfo;
-    /**
-     * 来源系统 B2B FM Dispatch Common
-     */
-    String bizLine;
-    /**
-     * 来源应用
-     */
-    String sourceApp;
-    /**
-     * 优惠券
-     */
-    List<CouponInfo> couponList;
-
-    public String identify() {
-        String split = ":";
-        StringBuilder builder = new StringBuilder();
-        builder.append(costNodeCode).append(split);
-        builder.append(orderInfo.getIdentify()).append(split);
-        return builder.toString();
-    }
-
-
-    public String valid(){
-        if (this.costNodeCode == null){
-            return "cost node code can't be null.";
-        }
-        if (this.billingTime == null){
-            return "billingTime can't be null.";
-        }
-        if (orderInfo ==null){
-            return "order info can't be null.";
-        }
-        if (sourceApp ==null){
-            return "sourceApp info can't be null.";
-        }
-        return orderInfo.valid();
-    }
 }

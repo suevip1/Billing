@@ -2,6 +2,7 @@ package com.pingpongx.smb.fee.domain.convert.runtime;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONWriter;
+import com.pingpongx.smb.fee.api.dtos.cmd.BaseRequest;
 import com.pingpongx.smb.fee.api.dtos.cmd.trade.BillingRequest;
 import com.pingpongx.smb.fee.api.dtos.resp.Bill;
 import com.pingpongx.smb.fee.dal.dataobject.BillingContextDo;
@@ -51,7 +52,7 @@ public class BillingContextConvert {
             one.setId(dbO.getId());
             if (!StringUtils.isBlank(dbO.getRequest())) {
                 //TODO:
-                BillingRequest request = JSON.parseObject(dbO.getRequest(), BillingRequest.class);
+                BaseRequest request = JSON.parseObject(dbO.getRequest(), BaseRequest.class);
                 Request req = ConvertUtil.to(request, Request.class,r->{
                     r.setOrderInfo(request.getOrderInfo());
                 });

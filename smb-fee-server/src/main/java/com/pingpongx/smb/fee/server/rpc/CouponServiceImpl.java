@@ -51,7 +51,7 @@ import java.util.concurrent.CompletableFuture;
 
 @Api(tags = "计费中心-new")
 @RestController
-@RequestMapping(value = BillingServiceFeign.BASE_PATH)
+@RequestMapping(value = CouponServiceImpl.BASE_PATH)
 @Slf4j
 @RequiredArgsConstructor
 public class CouponServiceImpl implements CouponServiceFeign {
