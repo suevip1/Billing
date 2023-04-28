@@ -65,12 +65,6 @@ public class OrderInfo implements OrderHolder {
         if (bizOrderId == null){
             return "bizOrderId can't be null.";
         }
-        if (payeeInfo == null){
-            return "payeeInfo can't be null.";
-        }
-        if (payerInfo == null){
-            return "payerInfo can't be null.";
-        }
         if (amount == null){
             return "amount can't be null.";
         }

@@ -23,17 +23,20 @@ public class CouponOrderInfo implements OrderHolder {
         if (orderInfo.valid() != null){
             return orderInfo.valid();
         }
-        if (orderInfo.valid() != null){
-            return orderInfo.valid();
+        if (totalFee == null){
+            return "totalFee can't be null.";
         }
-        if (orderInfo.valid() != null){
-            return orderInfo.valid();
+        if (totalFeeCurrency == null){
+            return "totalFeeCurrency can't be null.";
         }
-        if (orderInfo.valid() != null){
-            return orderInfo.valid();
+        if (couponType == null){
+            return "couponType can't be null.";
         }
-        if (orderInfo.valid() != null){
-            return orderInfo.valid();
+        if (totalValidValue == null){
+            return "totalValidValue can't be null.";
+        }
+        if (couponCurrency == null){
+            return "couponCurrency can't be null.";
         }
 
         return null ;
