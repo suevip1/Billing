@@ -32,6 +32,9 @@ public class CouponBeforeCalculate extends BizFlowNode{
         try{
             CouponParamUpdated paramUpdated = new CouponParamUpdated(context);
             List<CouponInfo> couponList = context.getRequest().getCouponList();
+            if (couponList == null){
+                applicationContext.publishEvent(paramUpdated);
+            }
             couponList.stream().filter(c-> needProcess(c))
                     .map(couponInfo -> Tuple.of(couponInfo,((BeforeCalculateHandler)handlerFactory.getCouponHandler(couponInfo.getCouponType())).couponParamFix(couponInfo,context)))
                     .forEach(t->{
