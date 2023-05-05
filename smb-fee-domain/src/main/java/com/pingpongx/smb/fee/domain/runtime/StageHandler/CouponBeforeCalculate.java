@@ -19,13 +19,13 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.List;
 
-@Service
+//@Service
 @RequiredArgsConstructor
 @Slf4j
 public class CouponBeforeCalculate extends BizFlowNode{
     private final CouponHandlerFactory handlerFactory;
 
-    @EventListener
+//    @EventListener
     void couponParamFix(MatchCompleted matchCompleted) {
         BillingContext context = matchCompleted.getContext();
         context.getRequest().getCouponList();
