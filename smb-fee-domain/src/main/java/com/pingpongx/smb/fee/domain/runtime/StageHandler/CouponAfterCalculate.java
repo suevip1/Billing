@@ -12,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -21,7 +23,13 @@ public class CouponAfterCalculate extends BizFlowNode {
     @EventListener
     void couponResultFix(CalculateCompleted calculateCompleted) {
         BillingContext context = calculateCompleted.getContext();
-        context.getRequest().getCouponList().stream().filter(this::needProcess).forEach(couponInfo -> {
+        List<CouponInfo> couponInfos = context.getRequest().getCouponList();
+        if (couponInfos == null){
+            Finished finished = new Finished(context);
+            applicationContext.publishEvent(finished);
+            return;
+        }
+        couponInfos.stream().filter(this::needProcess).forEach(couponInfo -> {
             AfterCalculateHandler handler = (AfterCalculateHandler)handlerFactory.getCouponHandler(couponInfo.getCouponType());
             handler.couponResultFix(couponInfo,context);
         });

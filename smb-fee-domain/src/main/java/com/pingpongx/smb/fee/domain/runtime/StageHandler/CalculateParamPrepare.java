@@ -38,7 +38,7 @@ public class CalculateParamPrepare extends BizFlowNode{
         log.info("calculate param prepare start. input:" + JSON.toJSONString(request));
         try{
             Set<String> vars = context.getMatchedCostItem().stream()
-                    .flatMap(i->i.getMatchVarKeys().stream())
+                    .flatMap(i->i.getCalculateVarKeys().stream())
                     .collect(Collectors.toSet());
             Map<String,String> params = context.getParams();
             if (vars.isEmpty()){
