@@ -7,6 +7,7 @@ import com.pingpongx.smb.fee.domain.convert.ExchangeConvert;
 import com.pingpongx.smb.fee.domain.enums.FeePayer;
 import com.pingpongx.smb.fee.domain.module.CostItem;
 import com.pingpongx.smb.fee.domain.module.event.CalculateCompleted;
+import com.pingpongx.smb.fee.domain.module.event.CalculateParamCompleted;
 import com.pingpongx.smb.fee.domain.module.event.MatchCompleted;
 import com.pingpongx.smb.fee.domain.runtime.BillingContext;
 import lombok.extern.slf4j.Slf4j;
@@ -24,11 +25,10 @@ import java.util.stream.Collectors;
 public class Calculate extends BizFlowNode {
 
     @EventListener
-    void calculate(MatchCompleted matchCompleted) {
-        BillingContext context = matchCompleted.getContext();
+    void calculate(CalculateParamCompleted calculateParamCompleted) {
+        BillingContext context = calculateParamCompleted.getContext();
         try {
             List<CostItem> costItemList = context.getMatchedCostItem();
-
             List<CostItemResult> result = groupByItemCode(costItemList).values().stream()
                     .map(list -> maxPriorityItems(list))
                     .flatMap(list -> list.stream())

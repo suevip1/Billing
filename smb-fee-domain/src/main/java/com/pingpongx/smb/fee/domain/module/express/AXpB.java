@@ -18,9 +18,9 @@ public class AXpB implements BasicExpr, Calculator, Identified {
     BigDecimal a;
     BigDecimal b;
 
-    VariableDef x;
+    String x;
 
-    public static AXpB of(BigDecimal a, BigDecimal b, VariableDef x){
+    public static AXpB of(BigDecimal a, BigDecimal b, String x){
         AXpB ret = new AXpB();
         ret.setA(a);
         ret.setB(b);
@@ -31,7 +31,7 @@ public class AXpB implements BasicExpr, Calculator, Identified {
     @Override
     public String identify() {
         StringBuilder builder = new StringBuilder();
-        builder.append(a).append("*").append(x.getCode()).append("+").append(b);
+        builder.append(a).append("*").append(x).append("+").append(b);
         return builder.toString();
     }
 
@@ -50,7 +50,7 @@ public class AXpB implements BasicExpr, Calculator, Identified {
         AXpBDto dto = new AXpBDto();
         dto.setA(a.toString());
         dto.setB(b.toString());
-        dto.setVarCode(x.getCode());
+        dto.setVarCode(x);
         return dto;
     }
 
@@ -61,7 +61,7 @@ public class AXpB implements BasicExpr, Calculator, Identified {
         if (ret != null) {
             return ret;
         }
-        String amount = x.extractor().doExtract(x, context);
+        String amount = context.getParams().get(x);
         if (amount == null){
             throw new RuntimeException("variable amount not defined in namespace:"+context.getNameSpace());
         }

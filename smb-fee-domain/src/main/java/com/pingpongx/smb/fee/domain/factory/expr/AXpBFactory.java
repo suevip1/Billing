@@ -16,17 +16,13 @@ import java.math.BigDecimal;
 @Component("AXpB")
 @RequiredArgsConstructor
 public class AXpBFactory implements IExprFactory {
-    private final VariableDefRepository variableDefRepository;
-
     @Override
     public Expr load(ExprDto d) {
         AXpBDto dto = (AXpBDto) d;
         AXpB aXpB = new AXpB();
         aXpB.setA(new BigDecimal(dto.getA()));
         aXpB.setB(new BigDecimal(dto.getB()));
-        ConfiguredVariableDef def = variableDefRepository.getByCode(dto.getVarCode());
-        VariableDef defDomain = VariableFactory.load(def);
-        aXpB.setX(defDomain);
+        aXpB.setX(((AXpBDto) d).getVarCode());
         return aXpB;
     }
 }

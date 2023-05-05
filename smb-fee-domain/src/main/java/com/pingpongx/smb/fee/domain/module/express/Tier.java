@@ -20,7 +20,7 @@ import java.util.stream.Stream;
 public class Tier implements TierMap, Calculator {
 
     List<ExprWithCondition> list = new ArrayList<>();
-    VariableDef rangeVar;
+    String rangeVar;
 
     @Override
     public Map<Range, Expr> asMap() {
@@ -71,16 +71,16 @@ public class Tier implements TierMap, Calculator {
         List<NodeWithContidionDto> nodeList = list.stream()
                 .map(n -> n.toDto()).collect(Collectors.toList());
         tierDto.setList(nodeList);
-        tierDto.setVarCode(this.rangeVar.getCode());
+        tierDto.setVarCode(this.rangeVar);
         return tierDto;
     }
 
     @Override
     public BigDecimal getCalculateResult(BillingContext context) {
         SegTree<List<Expr>> segTree = this.asSegTree();
-        String varStr = rangeVar.extractor().doExtract(rangeVar,context);
+        String varStr = context.getParams().get(rangeVar);
         if (varStr == null){
-            throw new RuntimeException("variable "+rangeVar.getCode()+" not defined in namespace:"+context.getNameSpace());
+            throw new RuntimeException("variable "+rangeVar+" not defined in namespace:"+context.getNameSpace());
         }
         BigDecimal var = new BigDecimal(varStr);
         List<Expr> exprs = segTree.valuesOfPoint(var);
@@ -97,11 +97,11 @@ public class Tier implements TierMap, Calculator {
         this.list = list;
     }
 
-    public VariableDef getRangeVar() {
+    public String getRangeVar() {
         return rangeVar;
     }
 
-    public void setRangeVar(VariableDef rangeVar) {
+    public void setRangeVar(String rangeVar) {
         this.rangeVar = rangeVar;
     }
 }
