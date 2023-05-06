@@ -1,4 +1,4 @@
-package com.pingpongx.smb.fee.domain.enums;
+package com.pingpongx.smb.fee.api.enums;
 
 public enum CurrencyType {
     Source,Target;

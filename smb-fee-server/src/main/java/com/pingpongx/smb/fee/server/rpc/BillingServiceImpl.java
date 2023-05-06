@@ -20,7 +20,7 @@ import com.pingpongx.smb.fee.dal.repository.BillingRequestRepository;
 import com.pingpongx.smb.fee.dal.repository.RepeatRepository;
 import com.pingpongx.smb.fee.dependency.convert.BillingRequestConvert;
 import com.pingpongx.smb.fee.domain.convert.runtime.BillingContextConvert;
-import com.pingpongx.smb.fee.domain.enums.FeePayer;
+import com.pingpongx.smb.fee.api.enums.FeePayer;
 import com.pingpongx.smb.fee.domain.module.Request;
 import com.pingpongx.smb.fee.domain.module.event.BillingRequestReceived;
 import com.pingpongx.smb.fee.domain.module.event.BillingStage;

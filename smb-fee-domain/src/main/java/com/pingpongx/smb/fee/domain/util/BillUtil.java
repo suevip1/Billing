@@ -4,12 +4,9 @@ import com.pingpongx.business.common.dto.Money;
 import com.pingpongx.smb.fee.api.dtos.resp.Bill;
 import com.pingpongx.smb.fee.api.dtos.resp.CostItemResult;
 import com.pingpongx.smb.fee.domain.convert.ExchangeConvert;
-import com.pingpongx.smb.fee.domain.enums.CurrencyType;
-import com.pingpongx.smb.fee.domain.enums.FeePayer;
+import com.pingpongx.smb.fee.api.enums.CurrencyType;
+import com.pingpongx.smb.fee.api.enums.FeePayer;
 import com.pingpongx.smb.fee.domain.runtime.BillingContext;
-
-import java.math.BigDecimal;
-import java.util.Currency;
 
 public class BillUtil {
     public static Money getTotalFee( BillingContext context){

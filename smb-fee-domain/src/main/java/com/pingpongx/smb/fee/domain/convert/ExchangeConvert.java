@@ -1,10 +1,9 @@
 package com.pingpongx.smb.fee.domain.convert;
 
 import com.pingpongx.business.common.dto.Money;
-import com.pingpongx.smb.fee.domain.enums.CurrencyType;
+import com.pingpongx.smb.fee.api.enums.CurrencyType;
 import com.pingpongx.smb.fee.domain.runtime.BillingContext;
 
-import javax.swing.text.html.Option;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Optional;

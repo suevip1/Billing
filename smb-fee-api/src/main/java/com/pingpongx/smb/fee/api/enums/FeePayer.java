@@ -1,4 +1,6 @@
-package com.pingpongx.smb.fee.domain.enums;
+package com.pingpongx.smb.fee.api.enums;
+
+import com.pingpongx.smb.fee.api.enums.CurrencyType;
 
 public enum FeePayer {
     OrderPayer(CurrencyType.Source),OrderPayee(CurrencyType.Target);

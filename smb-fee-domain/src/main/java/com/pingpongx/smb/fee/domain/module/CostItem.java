@@ -1,17 +1,14 @@
 package com.pingpongx.smb.fee.domain.module;
 
-import com.pingpongx.smb.export.module.ConfiguredRule;
 import com.pingpongx.smb.export.module.Rule;
-import com.pingpongx.smb.fee.domain.enums.CalculateMode;
-import com.pingpongx.smb.fee.domain.enums.CurrencyType;
-import com.pingpongx.smb.fee.domain.enums.Direction;
-import com.pingpongx.smb.fee.domain.enums.ItemType;
+import com.pingpongx.smb.fee.api.enums.CalculateMode;
+import com.pingpongx.smb.fee.api.enums.CurrencyType;
+import com.pingpongx.smb.fee.api.enums.Direction;
+import com.pingpongx.smb.fee.api.enums.ItemType;
 import com.pingpongx.smb.fee.domain.module.express.Expr;
-import io.swagger.models.auth.In;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Data

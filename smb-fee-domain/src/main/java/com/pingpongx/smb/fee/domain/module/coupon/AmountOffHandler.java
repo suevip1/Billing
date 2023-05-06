@@ -6,7 +6,7 @@ import com.pingpongx.smb.fee.api.dtos.cmd.common.CouponInfo;
 import com.pingpongx.smb.fee.api.dtos.resp.coupon.CouponAction;
 import com.pingpongx.smb.fee.api.dtos.resp.coupon.CreditDecrease;
 import com.pingpongx.smb.fee.domain.convert.ExchangeConvert;
-import com.pingpongx.smb.fee.domain.enums.CurrencyType;
+import com.pingpongx.smb.fee.api.enums.CurrencyType;
 import com.pingpongx.smb.fee.domain.runtime.BillingContext;
 import io.vavr.Tuple;
 import io.vavr.Tuple3;

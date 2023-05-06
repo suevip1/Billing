@@ -11,7 +11,7 @@ import com.pingpongx.smb.fee.api.dtos.cmd.common.RateInfo;
 import com.pingpongx.smb.fee.api.dtos.cmd.trade.BillingRequest;
 import com.pingpongx.smb.fee.api.dtos.cmd.trade.OrderInfo;
 import com.pingpongx.smb.fee.api.dtos.expr.*;
-import com.pingpongx.smb.fee.domain.enums.FeePayer;
+import com.pingpongx.smb.fee.api.enums.FeePayer;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
