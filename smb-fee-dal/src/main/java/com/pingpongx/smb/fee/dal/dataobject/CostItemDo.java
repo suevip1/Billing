@@ -29,6 +29,7 @@ public class CostItemDo extends FeeBaseDo {
     String currencyType;
     Integer priority;
     String inOrOut;
+    String  itemType;
     Long startTime;
     Long endTime;
 

@@ -5,6 +5,7 @@ import com.pingpongx.smb.export.module.Rule;
 import com.pingpongx.smb.fee.domain.enums.CalculateMode;
 import com.pingpongx.smb.fee.domain.enums.CurrencyType;
 import com.pingpongx.smb.fee.domain.enums.Direction;
+import com.pingpongx.smb.fee.domain.enums.ItemType;
 import com.pingpongx.smb.fee.domain.module.express.Expr;
 import io.swagger.models.auth.In;
 import lombok.Data;
@@ -32,6 +33,7 @@ public class CostItem implements Serializable {
     CurrencyType currencyType;
     Integer priority;
     Direction inOrOut;
+    ItemType itemType;
     Long startTime;
     Long endTime;
 

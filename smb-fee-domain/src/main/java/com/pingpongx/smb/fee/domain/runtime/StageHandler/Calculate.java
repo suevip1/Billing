@@ -5,6 +5,7 @@ import com.pingpongx.smb.fee.api.dtos.resp.Bill;
 import com.pingpongx.smb.fee.api.dtos.resp.CostItemResult;
 import com.pingpongx.smb.fee.domain.convert.ExchangeConvert;
 import com.pingpongx.smb.fee.domain.enums.FeePayer;
+import com.pingpongx.smb.fee.domain.enums.ItemType;
 import com.pingpongx.smb.fee.domain.module.CostItem;
 import com.pingpongx.smb.fee.domain.module.event.CalculateCompleted;
 import com.pingpongx.smb.fee.domain.module.event.CalculateParamCompleted;
@@ -18,6 +19,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -57,6 +59,7 @@ public class Calculate extends BizFlowNode {
             costItemResult.setCurrency(ret.getCurrency());
             costItemResult.setAmount(ret.getAmount());
             costItemResult.setSuccess(true);
+            costItemResult.setItemType(Optional.of(item).map(i->i.getItemType()).map(t->t.name()).orElse(ItemType.Fee.name()));
         } catch (Exception e) {
             costItemResult.setSuccess(false);
             costItemResult.setFailedReason(e.toString());

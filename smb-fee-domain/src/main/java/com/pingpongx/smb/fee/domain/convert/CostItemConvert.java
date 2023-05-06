@@ -25,6 +25,7 @@ public class CostItemConvert {
             one.setCalculateVarKeys(JSON.toJSONString(item.getCalculateVarKeys()));
             one.setMode(item.getMode().name());
             one.setCurrencyType(item.getCurrencyType().name());
+            one.setItemType(item.getItemType().name());
             one.setInOrOut(item.getInOrOut().name());
             one.setStartTimeDisplay(LocalDateTime.ofEpochSecond(item.getStartTime(),0, ZoneOffset.UTC));
             one.setEndTimeDisplay(LocalDateTime.ofEpochSecond(item.getEndTime(),0, ZoneOffset.UTC));

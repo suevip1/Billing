@@ -1,8 +1,8 @@
 package com.pingpongx.smb.fee.domain.enums;
 
-public enum Direction {
+public enum ItemType {
     /***
      *
      */
-    In,Out
+    Fee,CouponValue
 }
