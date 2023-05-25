@@ -1,6 +1,6 @@
 package com.pingpongx.smb.fee.domain.module;
 
-import com.pingpongx.smb.fee.domain.enums.BizLine;
+import com.pingpongx.smb.component.enums.BuEnum;
 import lombok.Builder;
 import lombok.Data;
 
@@ -9,7 +9,7 @@ import lombok.Data;
 public class Contract {
     String code;
     String displayName;
-    BizLine bizLine;
+    BuEnum bizLine;
     Long priority;
 
 }

@@ -1,5 +1,6 @@
 package com.pingpongx.smb.fee.api.dtos.cmd.common;
 
+import com.pingpongx.smb.component.enums.BuEnum;
 import com.pingpongx.smb.fee.api.dtos.cmd.trade.OrderInfo;
 import lombok.Data;
 
@@ -25,6 +26,7 @@ public class BaseRequest {
     String subject;
     /***
      * Did / accid / Nid / buClientId
+     * @see com.pingpongx.smb.fee.api.enums.SubjectType
      */
     String subjectType;
     /***
@@ -34,7 +36,7 @@ public class BaseRequest {
 
     OrderInfo orderInfo;
     /**
-     * 来源系统 B2B FM Dispatch Common
+     * @see BuEnum
      */
     String bizLine;
     /**
