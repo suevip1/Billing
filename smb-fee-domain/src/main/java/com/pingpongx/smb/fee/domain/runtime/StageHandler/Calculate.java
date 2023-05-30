@@ -9,6 +9,8 @@ import com.pingpongx.smb.fee.api.enums.ItemType;
 import com.pingpongx.smb.fee.domain.module.CostItem;
 import com.pingpongx.smb.fee.domain.module.event.CalculateCompleted;
 import com.pingpongx.smb.fee.domain.module.event.CalculateParamCompleted;
+import com.pingpongx.smb.fee.domain.module.express.AXpB;
+import com.pingpongx.smb.fee.domain.module.express.Expr;
 import com.pingpongx.smb.fee.domain.runtime.BillingContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
@@ -52,6 +54,10 @@ public class Calculate extends BizFlowNode {
         CostItemResult costItemResult = new CostItemResult();
         costItemResult.setItemCode(item.getCode());
         costItemResult.setItemName(item.getDisplayName());
+        Expr expr = item.getCalculateExpress();
+        if (expr instanceof AXpB){
+            costItemResult.setRate(((AXpB) expr).getA());
+        }
         try {
             BigDecimal bigDecimal = item.getCalculateExpress().fetchCalculator().getCalculateResult(context);
             Money ret = ExchangeConvert.convert(item.getCurrencyType(), FeePayer.valueOf(context.getRequest().getOrderInfo().getFeePayer()).getCurrencyType(), context, bigDecimal);
