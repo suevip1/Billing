@@ -33,10 +33,6 @@
         </dependency>
         <dependency>
             <groupId>com.pingpongx.smb</groupId>
-            <artifactId>smb-rules</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.pingpongx.smb</groupId>
             <artifactId>smb-payment-api</artifactId>
         </dependency>
         <dependency>

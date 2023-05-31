@@ -78,8 +78,7 @@ public class OrderInfo implements OrderHolder {
     }
 
     @Override
-    public String getIdentify() {
+    public String identify() {
         return bizOrderType+"-"+bizOrderId;
     }
-
 }

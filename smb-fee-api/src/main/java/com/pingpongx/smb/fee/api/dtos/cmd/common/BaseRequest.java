@@ -4,7 +4,6 @@ import com.pingpongx.smb.component.enums.BuEnum;
 import com.pingpongx.smb.fee.api.dtos.cmd.trade.OrderInfo;
 import lombok.Data;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -52,7 +51,7 @@ public class BaseRequest {
         String split = ":";
         StringBuilder builder = new StringBuilder();
         builder.append(costNodeCode).append(split);
-        builder.append(orderInfo.getIdentify()).append(split);
+        builder.append(orderInfo.identify()).append(split);
         return builder.toString();
     }
 

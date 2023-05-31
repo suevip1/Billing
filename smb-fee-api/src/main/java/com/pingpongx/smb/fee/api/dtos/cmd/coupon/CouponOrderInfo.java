@@ -73,8 +73,7 @@ public class CouponOrderInfo implements OrderHolder {
     }
 
     @Override
-    public String getIdentify() {
+    public String identify() {
         return orderInfo.getBizOrderType()+"-"+orderInfo.getBizOrderId();
     }
-
 }

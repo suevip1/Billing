@@ -54,7 +54,7 @@ public abstract class BaseRequest<Order extends OrderHolder> implements Serializ
         String split = ":";
         StringBuilder builder = new StringBuilder();
         builder.append(costNodeCode).append(split);
-        builder.append(orderInfo.getIdentify()).append(split);
+        builder.append(orderInfo.identify()).append(split);
         return builder.toString();
     }
 

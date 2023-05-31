@@ -1,10 +1,11 @@
 package com.pingpongx.smb.fee.api.dtos.cmd;
 
-import com.pingpongx.smb.export.module.Identified;
+
+import com.pingpongx.smb.metadata.Identified;
 
 import java.math.BigDecimal;
 
-public interface OrderHolder extends Identified<String> {
+public interface OrderHolder extends Identified {
     String valid();
 
     String getBizOrderId();
