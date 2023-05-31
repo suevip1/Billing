@@ -18,6 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
@@ -57,7 +58,7 @@ public class CostItemFactory {
             Direction direction = Direction.valueOf(costItemDo.getInOrOut());
             costItem.setInOrOut(direction);
         }
-        costItem.setItemType(ItemType.valueOf(costItemDo.getItemType()));
+        costItem.setItemType(Optional.of(costItemDo).map(i->i.getItemType()).map(t->ItemType.valueOf(t)).orElse(ItemType.Fee));
         costItem.setStartTime(costItemDo.getStartTime());
         costItem.setEndTime(costItemDo.getEndTime());
         costItem.setDisplayName(costItemDo.getDisplayName());
