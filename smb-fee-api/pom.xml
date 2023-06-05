@@ -51,6 +51,10 @@
             <groupId>com.pingpongx.smb</groupId>
             <artifactId>smb-asset-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.pingpongx.smb</groupId>
+            <artifactId>smb-rules</artifactId>
+        </dependency>
     </dependencies>
 
     <properties>

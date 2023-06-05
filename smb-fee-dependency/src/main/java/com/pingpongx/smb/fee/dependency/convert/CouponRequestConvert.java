@@ -17,7 +17,6 @@ public class CouponRequestConvert {
             one.setBizOrderId(request.getOrderInfo().getBizOrderId());
             one.setBizOrderType(request.getOrderInfo().getBizOrderType());
             one.setOrderInfo(JSON.toJSONString(request.getOrderInfo()));
-            one.setCouponList(JSON.toJSONString(request.getCouponList()));
             one.setFxRate(JSON.toJSONString(request.getFxRate(), JSONWriter.Feature.WriteClassName));
             one.setRepeatKey(request.identify());
         });
@@ -26,7 +25,6 @@ public class CouponRequestConvert {
     public static CouponRequest toRequest(BillingRequestDo request) {
         return ConvertUtil.to(request, CouponRequest.class, (one) -> {
             one.setOrderInfo(JSON.parseObject(request.getOrderInfo(), CouponOrderInfo.class));
-            one.setCouponList(JSON.parseArray(request.getCouponList(), CouponInfo.class));
             one.setFxRate(JSON.parseObject(request.getFxRate(), Map.class));
         });
     }

@@ -138,8 +138,6 @@ public class BillingServiceImpl implements BillingServiceFeign {
     public static void main (String args[]){
         BillingRequest request = new BillingRequest();
         request.setBillingTime(System.currentTimeMillis());
-
-        request.setCouponList(new ArrayList<>());
         request.setBizLine("FM");
         request.setCostNodeCode("ClientTransferStart");
         request.setSourceApp("FMPayout");
