@@ -45,10 +45,6 @@ public abstract class BaseRequest<Order extends OrderHolder> implements Serializ
      * 来源应用
      */
     String sourceApp;
-    /**
-     * 优惠券
-     */
-    List<CouponInfo> couponList;
 
     public String identify() {
         String split = ":";
