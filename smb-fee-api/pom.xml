@@ -11,6 +11,10 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.alibaba.fastjson2</groupId>
+            <artifactId>fastjson2</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.pingpongx.smb</groupId>
             <artifactId>smb-trade-api</artifactId>
         </dependency>
