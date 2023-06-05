@@ -2,6 +2,7 @@ package com.pingpongx.smb.fee.domain.module.express;
 
 import com.pingpongx.smb.fee.api.dtos.expr.ExprDto;
 import com.pingpongx.smb.fee.api.dtos.expr.MinDto;
+import com.pingpongx.smb.fee.api.dtos.expr.SumDto;
 import com.pingpongx.smb.fee.domain.runtime.BillingContext;
 
 import java.math.BigDecimal;
@@ -10,11 +11,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Min implements ExprCollection,Calculator{
+public class Sum implements ExprCollection,Calculator{
     List<Expr> list = new ArrayList<>();
 
-    public static Min of(Expr ... exprs){
-        Min min = new Min();
+    public static Sum of(Expr ... exprs){
+        Sum min = new Sum();
         min.setList( Arrays.stream(exprs).collect(Collectors.toList()));
         return min;
     }
@@ -30,12 +31,12 @@ public class Min implements ExprCollection,Calculator{
 
     @Override
     public String getType() {
-        return "Min";
+        return "Sum";
     }
 
     @Override
     public ExprDto toDto() {
-        MinDto minDto = new MinDto();
+        SumDto minDto = new SumDto();
         List<ExprDto> dtoList = list.stream().map(expr -> expr.toDto()).collect(Collectors.toList());
         minDto.setList(dtoList);
         return minDto;
@@ -52,8 +53,10 @@ public class Min implements ExprCollection,Calculator{
         if (ret !=null ){
             return ret;
         }
-        ret = list.stream().map(expr -> expr.fetchCalculator().getCalculateResult(context)).min(BigDecimal::compareTo)
-                .orElseThrow(()-> new RuntimeException("Min value calculate error. list is empty."));
+        ret = list.stream()
+                .map(expr -> expr.fetchCalculator().getCalculateResult(context))
+                .reduce((n1,n2)->n1.add(n2))
+                .orElse(BigDecimal.ZERO);
         context.getCache().put(this.identify(),ret);
         return ret;
     }

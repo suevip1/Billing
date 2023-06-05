@@ -1,6 +1,6 @@
 package com.pingpongx.smb.fee.server.rpc;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import com.pingpongx.flowmore.cloud.base.server.annotation.Internal;
 import com.pingpongx.flowmore.cloud.base.server.constants.RoleRegister;
 import com.pingpongx.smb.fee.api.dtos.cmd.common.PayeeInfo;
@@ -11,6 +11,7 @@ import com.pingpongx.smb.fee.api.dtos.cmd.trade.BillingRequest;
 import com.pingpongx.smb.fee.api.dtos.cmd.trade.OrderInfo;
 import com.pingpongx.smb.fee.api.dtos.resp.Bill;
 import com.pingpongx.smb.fee.api.dtos.resp.BillList;
+import com.pingpongx.smb.fee.api.enums.FeePayer;
 import com.pingpongx.smb.fee.api.feign.BillingServiceFeign;
 import com.pingpongx.smb.fee.dal.dataobject.BillingContextDo;
 import com.pingpongx.smb.fee.dal.dataobject.BillingRequestDo;
@@ -20,10 +21,13 @@ import com.pingpongx.smb.fee.dal.repository.BillingRequestRepository;
 import com.pingpongx.smb.fee.dal.repository.RepeatRepository;
 import com.pingpongx.smb.fee.dependency.convert.BillingRequestConvert;
 import com.pingpongx.smb.fee.domain.convert.runtime.BillingContextConvert;
-import com.pingpongx.smb.fee.api.enums.FeePayer;
 import com.pingpongx.smb.fee.domain.module.Request;
 import com.pingpongx.smb.fee.domain.module.event.BillingRequestReceived;
 import com.pingpongx.smb.fee.domain.module.event.BillingStage;
+import com.pingpongx.smb.fee.domain.module.express.AXpB;
+import com.pingpongx.smb.fee.domain.module.express.Expr;
+import com.pingpongx.smb.fee.domain.module.express.Min;
+import com.pingpongx.smb.fee.domain.module.express.Sum;
 import com.pingpongx.smb.fee.domain.runtime.BillingContext;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -39,10 +43,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.security.RolesAllowed;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
 
@@ -60,6 +61,83 @@ public class BillingServiceImpl implements BillingServiceFeign {
     private final ApplicationContext springContext;
     private final BillingContextConvert billingContextConvert;
 
+    public static void main(String args[]) {
+        AXpB val = new AXpB();
+        val.setA(BigDecimal.ONE);
+        val.setX("val");
+        val.setB(BigDecimal.ZERO);
+
+        AXpB fee = new AXpB();
+        fee.setA(BigDecimal.ONE);
+        fee.setX("totalFee");
+        fee.setB(BigDecimal.ZERO);
+
+        AXpB amount = new AXpB();
+        amount.setA(BigDecimal.ONE);
+        amount.setX("amount");
+        amount.setB(BigDecimal.ZERO);
+
+
+        List<Expr> sumList = new ArrayList<>();
+        sumList.add(fee);
+        sumList.add(amount);
+        Sum sum = new Sum();
+        sum.setList(sumList);
+
+        List<Expr> minList = new ArrayList<>();
+        minList.add(val);
+        minList.add(sum);
+        Min expr = new Min();
+        expr.setList(minList);
+
+        String text = JSON.toJSONString(expr.toDto());
+
+        BillingRequest request = new BillingRequest();
+        request.setBillingTime(System.currentTimeMillis());
+        request.setBizLine("FM");
+        request.setCostNodeCode("ClientTransferStart");
+        request.setSourceApp("FMPayout");
+
+        Map<String, RateInfo> currencyMap = new HashMap<>();
+        currencyMap.put("CNY_USD", RateInfo.of("CNY", "USD", "0.7", 123123L));
+        request.setFxRate(currencyMap);
+
+        OrderInfo orderInfo = new OrderInfo();
+        orderInfo.setBizOrderId("TestBizOrderId");
+        orderInfo.setBizOrderType("B2B");
+
+        PayeeInfo payeeInfo = new PayeeInfo();
+        payeeInfo.setPayeeAccountNo("X1000101010100101");
+        payeeInfo.setPayeeName("被付款方名");
+        payeeInfo.setBankName("硅谷破产银行");
+        payeeInfo.setClientIdType("DID");
+        payeeInfo.setClientId("D1230912380912830");
+        orderInfo.setPayeeInfo(payeeInfo);
+        PayerInfo payerInfo = new PayerInfo();
+        payerInfo.setClientId("D12038901283102938");
+        payerInfo.setClientIdType("DID");
+        payerInfo.setPayerName("付款方名");
+        payerInfo.setCertificateNumber("大壮");
+        payerInfo.setReservedPhone("15015011501");
+        orderInfo.setPayerInfo(payerInfo);
+
+        orderInfo.setAmount(new BigDecimal("11111"));
+        orderInfo.setSourceCurrency("USD");
+        orderInfo.setTargetCurrency("CNY");
+        orderInfo.setSubject("D12038901283102938");
+        orderInfo.setSubjectType("DID");
+        orderInfo.setFeePayer(FeePayer.OrderPayee.name());
+        orderInfo.setBizOrderType("Transfer");
+        orderInfo.setBizOrderId("T0192091203121");
+        request.setOrderInfo(orderInfo);
+        request.setSubject(orderInfo.getSubject());
+        request.setSubjectType(orderInfo.getSubjectType());
+        String jsonStr = JSON.toJSONString(request);
+        log.info(jsonStr);
+        BillingRequest parsed = JSON.parseObject(jsonStr, BillingRequest.class);
+//{"billingTime":1678930994261,"bizLine":"FM","costNodeCode":"ClientTransferStart","couponList":[],"fxRate":{"CNY_USD":0.6999999999999999555910790149937383830547332763671875},"fxRateId":"FX213123123","orderInfo":{"amount":11111,"bizOrderId":"T0192091203121","bizOrderType":"Transfer","feePayer":"Payee","payeeInfo":{"bankName":"硅谷破产银行","clientId":"D1230912380912830","clientIdType":"DID","payeeAccountNo":"X1000101010100101","payeeName":"被付款方名"},"payerInfo":{"certificateNumber":"大壮","clientId":"D12038901283102938","clientIdType":"DID","payerName":"付款方名","reservedPhone":"15015011501"},"sourceCurrency":"USD","subject":"D12038901283102938","subjectType":"DID","targetCurrency":"CNY"},"sourceApp":"FMPayout","subject":"D12038901283102938","subjectType":"DID"}
+
+    }
 
     @RolesAllowed(RoleRegister.ROLE_COMMON_SERVICE)
     @Internal
@@ -95,8 +173,8 @@ public class BillingServiceImpl implements BillingServiceFeign {
         //处理同步返回
         try {
             context = future.get();
-        }  catch (Exception e){
-            log.error(e.getMessage(),e);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
         }
         Bill resp = context.getBill();
         return resp;
@@ -128,59 +206,11 @@ public class BillingServiceImpl implements BillingServiceFeign {
         //处理同步返回
         try {
             context = future.get();
-        }  catch (Exception e){
-            log.error(e.getMessage(),e);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
         }
         Bill resp = context.getBill();
         return resp;
-    }
-
-    public static void main (String args[]){
-        BillingRequest request = new BillingRequest();
-        request.setBillingTime(System.currentTimeMillis());
-        request.setBizLine("FM");
-        request.setCostNodeCode("ClientTransferStart");
-        request.setSourceApp("FMPayout");
-
-        Map<String, RateInfo> currencyMap = new HashMap<>();
-        currencyMap.put("CNY_USD", RateInfo.of("CNY","USD","0.7",123123L));
-        request.setFxRate(currencyMap);
-
-        OrderInfo orderInfo = new OrderInfo();
-        orderInfo.setBizOrderId("TestBizOrderId");
-        orderInfo.setBizOrderType("B2B");
-
-        PayeeInfo payeeInfo = new PayeeInfo();
-        payeeInfo.setPayeeAccountNo("X1000101010100101");
-        payeeInfo.setPayeeName("被付款方名");
-        payeeInfo.setBankName("硅谷破产银行");
-        payeeInfo.setClientIdType("DID");
-        payeeInfo.setClientId("D1230912380912830");
-        orderInfo.setPayeeInfo(payeeInfo);
-        PayerInfo payerInfo = new PayerInfo();
-        payerInfo.setClientId("D12038901283102938");
-        payerInfo.setClientIdType("DID");
-        payerInfo.setPayerName("付款方名");
-        payerInfo.setCertificateNumber("大壮");
-        payerInfo.setReservedPhone("15015011501");
-        orderInfo.setPayerInfo(payerInfo);
-
-        orderInfo.setAmount(new BigDecimal("11111"));
-        orderInfo.setSourceCurrency("USD");
-        orderInfo.setTargetCurrency("CNY");
-        orderInfo.setSubject("D12038901283102938");
-        orderInfo.setSubjectType("DID");
-        orderInfo.setFeePayer(FeePayer.OrderPayee.name());
-        orderInfo.setBizOrderType("Transfer");
-        orderInfo.setBizOrderId("T0192091203121");
-        request.setOrderInfo(orderInfo);
-        request.setSubject(orderInfo.getSubject());
-        request.setSubjectType(orderInfo.getSubjectType());
-        String jsonStr = JSON.toJSONString(request);
-        log.info(jsonStr);
-        BillingRequest parsed = JSON.parseObject(jsonStr,BillingRequest.class);
-//{"billingTime":1678930994261,"bizLine":"FM","costNodeCode":"ClientTransferStart","couponList":[],"fxRate":{"CNY_USD":0.6999999999999999555910790149937383830547332763671875},"fxRateId":"FX213123123","orderInfo":{"amount":11111,"bizOrderId":"T0192091203121","bizOrderType":"Transfer","feePayer":"Payee","payeeInfo":{"bankName":"硅谷破产银行","clientId":"D1230912380912830","clientIdType":"DID","payeeAccountNo":"X1000101010100101","payeeName":"被付款方名"},"payerInfo":{"certificateNumber":"大壮","clientId":"D12038901283102938","clientIdType":"DID","payerName":"付款方名","reservedPhone":"15015011501"},"sourceCurrency":"USD","subject":"D12038901283102938","subjectType":"DID","targetCurrency":"CNY"},"sourceApp":"FMPayout","subject":"D12038901283102938","subjectType":"DID"}
-
     }
 
 
