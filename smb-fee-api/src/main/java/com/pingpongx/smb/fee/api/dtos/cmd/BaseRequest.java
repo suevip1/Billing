@@ -1,15 +1,12 @@
 package com.pingpongx.smb.fee.api.dtos.cmd;
 
-import com.pingpongx.smb.fee.api.dtos.cmd.common.CouponInfo;
 import com.pingpongx.smb.fee.api.dtos.cmd.common.RateInfo;
-import com.pingpongx.smb.fee.api.dtos.cmd.trade.OrderInfo;
 import com.pingpongx.smb.metadata.Identified;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.List;
 import java.util.Map;
+
 @Data
 public abstract class BaseRequest<Order extends OrderHolder> implements Serializable, Identified {
 
@@ -55,17 +52,17 @@ public abstract class BaseRequest<Order extends OrderHolder> implements Serializ
     }
 
 
-    public String valid(){
-        if (this.costNodeCode == null){
+    public String valid() {
+        if (this.costNodeCode == null) {
             return "cost node code can't be null.";
         }
-        if (this.billingTime == null){
+        if (this.billingTime == null) {
             return "billingTime can't be null.";
         }
-        if (orderInfo ==null){
+        if (orderInfo == null) {
             return "order info can't be null.";
         }
-        if (sourceApp ==null){
+        if (sourceApp == null) {
             return "sourceApp info can't be null.";
         }
         return orderInfo.valid();
