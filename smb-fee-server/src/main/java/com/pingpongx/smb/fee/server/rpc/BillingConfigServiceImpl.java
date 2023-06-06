@@ -23,9 +23,7 @@ import javax.annotation.security.RolesAllowed;
 @Slf4j
 @RequiredArgsConstructor
 public class BillingConfigServiceImpl implements BillingConfigServiceFeign {
-
     private final Engines engines;
-
 
     @RolesAllowed(RoleRegister.ROLE_COMMON_SERVICE)
     @Internal
