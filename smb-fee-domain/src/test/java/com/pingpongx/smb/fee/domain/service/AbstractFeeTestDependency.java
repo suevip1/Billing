@@ -19,8 +19,6 @@ public class AbstractFeeTestDependency extends MockedTest {
     public BillingRequest generateBillingRequest() {
         BillingRequest request = new BillingRequest();
         request.setBillingTime(System.currentTimeMillis());
-
-        request.setCouponList(new ArrayList<>());
         request.setBizLine("FM");
         request.setCostNodeCode("ClientTransferStart");
         request.setSourceApp("FMPayout");
