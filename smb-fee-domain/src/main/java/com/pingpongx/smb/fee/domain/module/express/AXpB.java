@@ -62,7 +62,7 @@ public class AXpB implements BasicExpr, Calculator, Identified {
             return ret;
         }
         String amount = context.getParams().get(x);
-        if (amount == null){
+        if (amount == null||amount.isEmpty()){
             throw new RuntimeException("variable amount not defined in namespace:"+context.getNameSpace());
         }
         BigDecimal xVal = new BigDecimal(amount);
